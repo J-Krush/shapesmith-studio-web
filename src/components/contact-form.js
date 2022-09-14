@@ -34,7 +34,7 @@ function ContactForm(props) {
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact-form", name: formName, email: formEmail, message: formMessage })
+            body: encode({ "form-name": "contact-form", name: formName, email: formEmail, message: formMessage, 'g-recaptcha': '6Le9ivwhAAAAAKqsN1f4kX4rKyEkZDw-V2S0vGMD' })
         })
             .then(() => alert("Success!"))
             .catch(error => alert(error));
