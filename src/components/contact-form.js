@@ -18,6 +18,18 @@ function ContactForm(props) {
     const handleSubmit = e => {
         e.preventDefault();
 
+        // const recaptcha_box_checked = grecaptcha.getResponse() ? true : false;
+
+        // console.log('recaptcha response: ', grecaptcha.getResponse());
+      
+        // if (recaptcha_box_checked) {
+        //   // Calling the function submit_form after recaptcha box is checked
+        // //   submit_form()
+        //   alert("CAPTCHA success!")
+        // } else {
+        //   alert("CAPTCHA failed please try again");
+        // }
+
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -32,7 +44,7 @@ function ContactForm(props) {
             name="contact-form"
             method="post"
             data-netlify="true"
-            data-netlify-recaptcha="true"
+            // data-netlify-recaptcha="true"
             // data-netlify-honeypot="bot-field"
             className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
@@ -72,7 +84,7 @@ function ContactForm(props) {
                     onChange={(t) => setFormMessage(t)}
                 />
 
-                <div data-netlify-recaptcha="true"></div>
+                {/* <div data-netlify-recaptcha="true"></div> */}
 
             </div>
 
