@@ -46,6 +46,7 @@ function ContactForm(props) {
     };
 
     return (
+        <>
         <form 
             name="contact-form"
             method="post"
@@ -112,9 +113,16 @@ function ContactForm(props) {
                 >
                     Send
                 </button>
+
+                <input type="submit">SUBMIT</input>
                 
             </div>
         </form>
+
+        {/* <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+        </script> */}
+        </>
     )
 }
 

@@ -26,7 +26,14 @@
     -->
     <title>Shapesmith Studio</title>
 
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6Le9ivwhAAAAAKqsN1f4kX4rKyEkZDw-V2S0vGMD'
+        });
+      };
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -45,6 +52,9 @@
       <br/>
       <input type="submit" value="Submit">
     </form>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
