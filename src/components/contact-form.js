@@ -59,7 +59,7 @@ function ContactForm(props) {
                 <input
                     className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     id="emailaddress"
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     name="email"
                     onChange={(t) => setFormEmail(t)}
