@@ -1,12 +1,32 @@
 
 function ContactForm(props) {
 
+
     const { onSubmit, onCancel } = props;
 
+    // constructor(props) {
+    //     super(props);
+    //     this.state = { name: "", email: "", message: "" };
+    // }
+    
+    // handleSubmit = e => {
+    //     fetch("/", {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    //         body: encode({ "form-name": "contact", ...this.state })
+    //     })
+    //         .then(() => alert("Success!"))
+    //         .catch(error => alert(error));
+
+    //     e.preventDefault();
+    // };
+
     return (
-        <form name="contact-form" className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4" netlify>
+        <form name="contact-form" data-netlify="true" method="post" data-netlify-honeypot="bot-field" className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
 
+                <input type="hidden" name="form-name" value="contact-form" />
+                
                 <label className="block text-blue-300 py-2 font-bold mb-2">
                     Inquiries and Custom Work
                 </label>
