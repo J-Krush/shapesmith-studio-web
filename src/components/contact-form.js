@@ -37,8 +37,7 @@ function ContactForm(props) {
                 "form-name": "contact-form",
                 name: formName,
                 email: formEmail,
-                message: formMessage,
-                'g-recaptcha': '6Le9ivwhAAAAAKqsN1f4kX4rKyEkZDw-V2S0vGMD'
+                message: formMessage
             })
         })
             .then(() => alert("Success!"))
@@ -51,7 +50,8 @@ function ContactForm(props) {
             name="contact-form"
             method="post"
             data-netlify="true"
-            data-netlify-recaptcha="true"
+            netlify-honeypot="bot-field"
+            data-netlify-honeypot="bot-field"
             className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
 
@@ -64,6 +64,14 @@ function ContactForm(props) {
                 {/* <label className="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" for="grid-first-name">
                     First Name
                 </label> */}
+                <input
+                    className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                    id="bot-field"
+                    type="text"
+                    placeholder="Don't fill this out if you're human"
+                    name="bot-field"
+                />
+
                 <input
                     className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     id="name"
@@ -90,7 +98,7 @@ function ContactForm(props) {
                     onChange={(t) => setFormMessage(t)}
                 />
 
-                <div data-netlify-recaptcha="true"></div>
+                {/* <div data-netlify-recaptcha="true"></div> */}
 
             </div>
 
@@ -116,10 +124,6 @@ function ContactForm(props) {
                 
             </div>
         </form>
-
-        {/* <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-            async defer>
-        </script> */}
         </>
     )
 }
