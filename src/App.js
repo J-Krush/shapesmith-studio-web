@@ -1,38 +1,10 @@
 import businessName from './assets/shapesmith-studio-gradient-trans-bg.png';
-// import instagramIcon from './assets/instagram-icon.svg';
-// import mailIcon from './assets/mail-icon.svg';
-
-
-import instagramIcon from './assets/Instagram_logo.png';
-import mailIcon from './assets/computer-email-icon.png';
+import instagramIcon from './assets/Instagram_logo_small.png';
+import mailIcon from './assets/computer-email-icon-small.png';
 
 import './App.css';
 import ContactForm from './components/contact-form';
 import { useState } from 'react';
-
-  // const StaticMenu = () => {
-  //   const homeSection = useScrollSection('home');
-  //   const aboutSection = useScrollSection('about');
-  
-  //   return (
-  //     <ul>
-  //       <li onClick={homeSection.onClick} selected={homeSection.selected}>
-  //         Home
-  //       </li>
-  //       <li onClick={aboutSection.onClick} selected={aboutSection.selected}>
-  //         About
-  //       </li>
-  //     </ul>
-  //   );
-  // };
-  
-  // const App = () => (
-  //   <ScrollingProvider>
-  //     <StaticMenu />
-  //     <Section id="home">MY HOME</Section>
-  //     <Section id="about">ABOUT ME</Section>
-  //   </ScrollingProvider>
-  // );
 
 
 function App() {
