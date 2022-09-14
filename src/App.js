@@ -96,7 +96,10 @@ function App() {
                       <div className="relative w-full max-w-lg mx-auto bg-trans rounded-md shadow-lg">
                         
                         <ContactForm 
-                          onSubmit={() => setShowContactModal(false)}
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            setShowContactModal(false);
+                          }}
                           onCancel={() => setShowContactModal(false)}
                         />
                           
