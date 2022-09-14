@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import grecaptcha from 'grecaptcha';
 
 function ContactForm(props) {
 
@@ -46,7 +45,6 @@ function ContactForm(props) {
             method="post"
             data-netlify="true"
             data-netlify-recaptcha="true"
-            // data-netlify-honeypot="bot-field"
             className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
 
