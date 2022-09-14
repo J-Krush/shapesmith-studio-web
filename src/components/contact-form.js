@@ -4,7 +4,7 @@ function ContactForm(props) {
     const { onSubmit, onCancel } = props;
 
     return (
-        <form className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4" netlify="true">
+        <form name="contact-form" className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4" netlify>
             <div className="mb-4">
 
                 <label className="block text-blue-300 py-2 font-bold mb-2">
