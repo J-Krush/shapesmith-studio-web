@@ -113,8 +113,6 @@ function ContactForm(props) {
                 >
                     Send
                 </button>
-
-                <input type="submit">SUBMIT</input>
                 
             </div>
         </form>
