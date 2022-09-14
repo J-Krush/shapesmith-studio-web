@@ -1,25 +1,31 @@
+import { useState } from 'react';
 
 function ContactForm(props) {
 
-
     const { onSubmit, onCancel } = props;
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = { name: "", email: "", message: "" };
-    // }
-    
-    // handleSubmit = e => {
-    //     fetch("/", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //         body: encode({ "form-name": "contact", ...this.state })
-    //     })
-    //         .then(() => alert("Success!"))
-    //         .catch(error => alert(error));
+    const [formName, setFormName] = useState("");
+    const [formEmail, setFormEmail] = useState("");
+    const [formMessage, setFormMessage] = useState("");
 
-    //     e.preventDefault();
-    // };
+
+    const encode = (data) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
+    
+    const handleSubmit = e => {
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({ "form-name": "contact", name: formName, email: formEmail, message: formMessage })
+        })
+            .then(() => alert("Success!"))
+            .catch(error => alert(error));
+
+        e.preventDefault();
+    };
 
     return (
         <form name="contact-form" data-netlify="true" method="post" data-netlify-honeypot="bot-field" className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
@@ -40,6 +46,7 @@ function ContactForm(props) {
                     type="text"
                     placeholder="Name"
                     name="name"
+                    onChange={(t) => setFormName(t)}
                 />
 
                 <input
@@ -48,6 +55,7 @@ function ContactForm(props) {
                     type="text"
                     placeholder="Email"
                     name="email"
+                    onChange={(t) => setFormEmail(t)}
                 />
 
                 <textarea 
@@ -55,6 +63,7 @@ function ContactForm(props) {
                     id="message"
                     placeholder="Message" 
                     name="message"
+                    onChange={(t) => setFormMessage(t)}
                 />
 
 
@@ -72,7 +81,10 @@ function ContactForm(props) {
                 <button
                     className="bg-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     type="submit"
-                    onClick={onSubmit}
+                    onClick={() => {
+                        handleSubmit();
+                        onSubmit();
+                    }}
                 >
                     Send
                 </button>
