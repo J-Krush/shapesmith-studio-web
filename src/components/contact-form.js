@@ -18,18 +18,6 @@ function ContactForm(props) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        // const recaptcha_box_checked = grecaptcha.getResponse() ? true : false;
-
-        // console.log('recaptcha response: ', grecaptcha.getResponse());
-      
-        // if (recaptcha_box_checked) {
-        //   // Calling the function submit_form after recaptcha box is checked
-        // //   submit_form()
-        //   alert("CAPTCHA success!")
-        // } else {
-        //   alert("CAPTCHA failed please try again");
-        // }
-
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -58,13 +46,10 @@ function ContactForm(props) {
 
                 <input type="hidden" name="form-name" value="contact-form" />
                 
-                <label className="block text-blue-300 py-2 font-bold mb-2">
+                <label className="block text-2xl text-blue-300 py-2 font-bold mb-8">
                     Inquiries and Custom Work
                 </label>
-                
-                {/* <label className="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" for="grid-first-name">
-                    First Name
-                </label> */}
+
                 <input
                     className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     id="bot-field"
@@ -99,9 +84,6 @@ function ContactForm(props) {
                     name="message"
                     onChange={(t) => setFormMessage(t)}
                 />
-
-                {/* <div data-netlify-recaptcha="true"></div> */}
-
             </div>
 
             <div className="flex items-center justify-between pt-4">

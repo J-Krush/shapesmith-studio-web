@@ -2961,11 +2961,6 @@ case-sensitive-paths-webpack-plugin@^2.4.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
   integrity sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==
 
-centra@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/centra/-/centra-1.0.1.tgz#88d164906779c43adc25ffc175585bcbcc168d55"
-  integrity sha512-NyC/mxn9vTH9GXFuybc91nftdWdJUhv7HYRuXaJWQkpzpXghRBEr7WlP7wAxtHb0SrePpuJO127gJsWD+xOZrg==
-
 chalk@^2.0.0, chalk@^2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -4616,13 +4611,6 @@ grapheme-splitter@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
-
-grecaptcha@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/grecaptcha/-/grecaptcha-1.0.3.tgz#4634b1626efb3b922a1d527f2046d325bd4d4aa0"
-  integrity sha512-L0yHm3V+p82zBVCqPA7gbBxf+Hvf8nxQ+h3XtVmwEWXQf7pzAQzaSsf6eTUiV/ZoZd0R4+3d7ToEHIVwWHLOzQ==
-  dependencies:
-    centra "^1.0.1"
 
 gzip-size@^6.0.0:
   version "6.0.0"
@@ -7381,13 +7369,6 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
-react-scroll-section@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-scroll-section/-/react-scroll-section-3.1.0.tgz#f05083f2f939a3caaae687899e476c3be6465ebf"
-  integrity sha512-OXylRAMLS7cxSBEGhA8jhZR5+6vF5G8n7z2N48xij8B43NiJXChMVdeWi2B1di5yfoh7rJ63tnpphxrLxB3UlA==
-  dependencies:
-    smoothscroll-polyfill "^0.4.4"
-
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
@@ -7855,11 +7836,6 @@ slash@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-4.0.0.tgz#2422372176c4c6c5addb5e2ada885af984b396a7"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
-
-smoothscroll-polyfill@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
-  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
 
 sockjs@^0.3.24:
   version "0.3.24"
