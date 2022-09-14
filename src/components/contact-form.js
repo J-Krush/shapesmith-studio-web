@@ -16,6 +16,8 @@ function ContactForm(props) {
     }
     
     const handleSubmit = e => {
+        e.preventDefault();
+
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -23,12 +25,17 @@ function ContactForm(props) {
         })
             .then(() => alert("Success!"))
             .catch(error => alert(error));
-
-        e.preventDefault();
     };
 
     return (
-        <form name="contact-form" data-netlify="true" method="post" data-netlify-honeypot="bot-field" className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+        <form 
+            name="contact-form"
+            method="post"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field" 
+            data-netlify-recaptcha="true"
+            // data-netlify-honeypot="bot-field"
+            className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
 
                 <input type="hidden" name="form-name" value="contact-form" />
@@ -66,6 +73,7 @@ function ContactForm(props) {
                     onChange={(t) => setFormMessage(t)}
                 />
 
+                <div data-netlify-recaptcha="true"></div>
 
             </div>
 
