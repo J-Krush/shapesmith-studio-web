@@ -44,7 +44,7 @@ function ContactForm(props) {
             name="contact-form"
             method="post"
             data-netlify="true"
-            // data-netlify-recaptcha="true"
+            data-netlify-recaptcha="true"
             // data-netlify-honeypot="bot-field"
             className="bg-gray-900 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
@@ -84,7 +84,7 @@ function ContactForm(props) {
                     onChange={(t) => setFormMessage(t)}
                 />
 
-                {/* <div data-netlify-recaptcha="true"></div> */}
+                <div data-netlify-recaptcha="true"></div>
 
             </div>
 
