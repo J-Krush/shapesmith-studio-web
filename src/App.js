@@ -28,12 +28,11 @@ function App() {
               </div>
 
               
-              <div className="bg-[#FFE632] opacity-75 w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+              <div className="bg-[#FFE632] opacity-75 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
                 
                 <h1 className="text-xl font-bold font-poppins text-gray-800 pb-4">Connect With Us</h1>
 
                 <div className="flex flex-row justify-center items-center space-x-14">
-
                   <div className="flex flex-col justify-center items-center">
                     <a
                       href="https://www.instagram.com/shapesmith.studio/"
@@ -52,7 +51,6 @@ function App() {
                     <p className="font-medium font-poppins text-gray-800">Inquiries</p>
                   </div>
                 </div>
-
               </div>
 
 
