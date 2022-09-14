@@ -7,7 +7,7 @@ function ContactForm(props) {
     const [formName, setFormName] = useState("");
     const [formEmail, setFormEmail] = useState("");
     const [formMessage, setFormMessage] = useState("");
-
+    const [formBotField, setFormBotField] = useState("");   
 
     const encode = (data) => {
         return Object.keys(data)
@@ -37,7 +37,8 @@ function ContactForm(props) {
                 "form-name": "contact-form",
                 name: formName,
                 email: formEmail,
-                message: formMessage
+                message: formMessage,
+                "bot-field": formBotField
             })
         })
             .then(() => alert("Success!"))
@@ -70,6 +71,7 @@ function ContactForm(props) {
                     type="text"
                     placeholder="Don't fill this out if you're human"
                     name="bot-field"
+                    onChange={(t) => setFormBotField(t)}
                 />
 
                 <input
