@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import grecaptcha from 'grecaptcha';
+// import grecaptcha from 'grecaptcha';
 
 function ContactForm(props) {
 
@@ -19,17 +19,17 @@ function ContactForm(props) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        const recaptcha_box_checked = grecaptcha.getResponse() ? true : false;
+        // const recaptcha_box_checked = grecaptcha.getResponse() ? true : false;
 
-        console.log('recaptcha response: ', grecaptcha.getResponse());
+        // console.log('recaptcha response: ', grecaptcha.getResponse());
       
-        if (recaptcha_box_checked) {
-          // Calling the function submit_form after recaptcha box is checked
-        //   submit_form()
-          alert("CAPTCHA success!")
-        } else {
-          alert("CAPTCHA failed please try again");
-        }
+        // if (recaptcha_box_checked) {
+        //   // Calling the function submit_form after recaptcha box is checked
+        // //   submit_form()
+        //   alert("CAPTCHA success!")
+        // } else {
+        //   alert("CAPTCHA failed please try again");
+        // }
 
         fetch("/", {
             method: "POST",
