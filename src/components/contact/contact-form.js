@@ -7,7 +7,7 @@ function ContactForm(props) {
     const [formName, setFormName] = useState("");
     const [formEmail, setFormEmail] = useState("");
     const [formMessage, setFormMessage] = useState("");
-    const [formBotField, setFormBotField] = useState("");   
+    const [formBotField, setFormBotField] = useState("");
 
     const encode = (data) => {
         return Object.keys(data)
