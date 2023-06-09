@@ -25,15 +25,20 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	darkMode: 'class',
 	theme: {
+		
+
 		extend: {
 			colors: {
 				'primary-light': '#F7F8FC',
 				'secondary-light': '#FFFFFF',
 				'ternary-light': '#f6f7f8',
 
-				'primary-dark': '#0D2438',
+				'primary-dark': '#291c30ff',
 				'secondary-dark': '#102D44',
 				'ternary-dark': '#1E3851',
+
+				'accent': '#e73a4f',
+				'accent-highlight': '#b72c3e',
 			},
 			container: {
 				padding: {
