@@ -3,6 +3,7 @@ import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import HireMeModal from '../HireMeModal';
+import ContactForm from '../contact/contact-form';
 import logoLight from '../../images/horizontal-logo-light.png';
 import logoDark from '../../images/horizontal-logo.png';
 import { motion } from 'framer-motion';
@@ -10,7 +11,7 @@ import Button from '../reusable/Button';
 
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
-	const [showModal, setShowModal] = useState(false);
+	const [showContactModal, setShowContactModal] = useState(false);
 	const [activeTheme, setTheme] = useThemeSwitcher();
 
 	function toggleMenu() {
@@ -22,16 +23,16 @@ const AppHeader = () => {
 	}
 
 	function showHireMeModal() {
-		if (!showModal) {
+		if (!showContactModal) {
 			document
 				.getElementsByTagName('html')[0]
 				.classList.add('overflow-y-hidden');
-			setShowModal(true);
+			setShowContactModal(true);
 		} else {
 			document
 				.getElementsByTagName('html')[0]
 				.classList.remove('overflow-y-hidden');
-			setShowModal(false);
+			setShowContactModal(false);
 		}
 	}
 
@@ -103,7 +104,7 @@ const AppHeader = () => {
 				<div
 					className={
 						showMenu
-							? 'block m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none'
+							? 'font-semibold block m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none'
 							: 'hidden'
 					}
 				>
@@ -131,7 +132,7 @@ const AppHeader = () => {
 					<div className="border-t-2 pt-3 sm:pt-0 sm:border-t-0 border-primary-light dark:border-secondary-dark">
 						<span
 							onClick={showHireMeModal}
-							className="font-general-medium sm:hidden block text-left text-md bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-sm px-4 py-2 mt-2 duration-300 w-24"
+							className="font-semibold sm:hidden block text-left text-md bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-sm px-4 py-2 mt-2 duration-300 w-24"
 							aria-label="Hire Me Button"
 						>
 							<Button title="Hire Me" />
@@ -140,7 +141,7 @@ const AppHeader = () => {
 				</div>
 
 				{/* Header links large screen */}
-				<div className="font-general-medium hidden m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none">
+				<div className="font-semibold hidden m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none">
 					<Link
 						to="/projects"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
@@ -169,7 +170,7 @@ const AppHeader = () => {
 					<div className="hidden md:flex">
 						<span
 							onClick={showHireMeModal}
-							className="text-md font-general-medium bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
+							className="text-md font-semibold bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
 							aria-label="Hire Me Button"
 						>
 							<Button title="Hire Me" />
@@ -192,13 +193,13 @@ const AppHeader = () => {
 			</div>
 			{/* Hire me modal */}
 			<div>
-				{showModal ? (
+				{showContactModal ? (
 					<HireMeModal
 						onClose={showHireMeModal}
 						onRequest={showHireMeModal}
 					/>
 				) : null}
-				{showModal ? showHireMeModal : null}
+				{showContactModal ? showHireMeModal : null}
 			</div>
 		</motion.nav>
 	);

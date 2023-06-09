@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiX } from 'react-icons/fi';
 import Button from './reusable/Button';
@@ -9,7 +10,38 @@ const selectOptions = [
 	'Branding',
 ];
 
-const HireMeModal = ({ onClose, onRequest }) => {
+const HireMeModal = ({ onClose, onSubmit }) => {
+
+	const [formName, setFormName] = useState("");
+    const [formEmail, setFormEmail] = useState("");
+    const [formMessage, setFormMessage] = useState("");
+    const [formBotField, setFormBotField] = useState("");
+
+	const encode = (data) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
+    
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({ 
+                "form-name": "contact-form",
+                name: formName,
+                email: formEmail,
+                message: formMessage,
+                "bot-field": formBotField
+            })
+        })
+            .then(() => alert("Success!"))
+            .catch(error => alert(error));
+    };
+
+
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -42,7 +74,7 @@ const HireMeModal = ({ onClose, onRequest }) => {
 								}}
 								className="max-w-xl m-4 text-left"
 							>
-								<div className="">
+								{/* <div className="">
 									<input
 										className="w-full px-5 py-2 border dark:border-secondary-dark rounded-md text-md bg-secondary-light dark:bg-ternary-dark text-primary-dark dark:text-ternary-light"
 										id="name"
@@ -113,10 +145,75 @@ const HireMeModal = ({ onClose, onRequest }) => {
 									>
 										<Button title="Send Request" />
 									</span>
-								</div>
+								</div> */}
+								 <div className="mb-4">
+
+									<input type="hidden" name="form-name" value="contact-form" />
+
+									<label className="block text-2xl text-blue-300 py-2 font-bold mb-8">
+										Inquiries and Custom Work
+									</label>
+
+									<input
+										className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+										id="bot-field"
+										type="text"
+										placeholder="Don't fill this out if you're human"
+										name="bot-field"
+										onChange={(t) => setFormBotField(t)}
+									/>
+
+									<input
+										className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+										id="name"
+										type="text"
+										placeholder="Name"
+										name="name"
+										onChange={(t) => setFormName(t)}
+									/>
+
+									<input
+										className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+										id="emailaddress"
+										type="email"
+										placeholder="Email"
+										name="email"
+										onChange={(t) => setFormEmail(t)}
+									/>
+
+									<textarea 
+										className="shadow appearance-none border rounded w-full p-3 mb-12 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+										id="message"
+										placeholder="Message" 
+										name="message"
+										onChange={(t) => setFormMessage(t)}
+									/>
+									</div>
+
+									<div className="flex items-center justify-between pt-4">
+									<button
+									className="hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+									type="button"
+									onClick={onClose}
+									>
+										Cancel
+									</button>
+
+									<button
+										className="bg-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+										type="submit"
+										onClick={() => {
+											handleSubmit();
+											onSubmit();
+										}}
+									>
+										Send
+									</button>
+
+									</div>
 							</form>
 						</div>
-						<div className="modal-footer mt-2 sm:mt-0 py-5 px-8 border0-t text-right">
+						{/* <div className="modal-footer mt-2 sm:mt-0 py-5 px-8 border0-t text-right">
 							<span
 								onClick={onClose}
 								type="button"
@@ -129,7 +226,7 @@ const HireMeModal = ({ onClose, onRequest }) => {
 							>
 								<Button title="Close" />
 							</span>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</main>
