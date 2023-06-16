@@ -1,3 +1,5 @@
+import { capabilitiesTitle } from "../../data/projects";
+
 const selectOptions = [
 	'Web Application',
 	'Mobile Application',
@@ -27,8 +29,8 @@ const ProjectsFilter = ({ setSelectProject }) => {
                 dark:text-ternary-light
             "
 		>
-			<option value={setSelectProject} className="text-sm sm:text-md">
-				All Projects
+			<option value={setSelectProject} className="capitalize text-sm sm:text-md">
+				All {capabilitiesTitle}
 			</option>
 
 			{selectOptions.map((option) => (

@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiX } from 'react-icons/fi';
-import Button from './reusable/Button';
-
-const selectOptions = [
-	'Web Application',
-	'Mobile Application',
-	'UI/UX Design',
-	'Branding',
-];
 
 const HireMeModal = ({ onClose, onSubmit }) => {
 
