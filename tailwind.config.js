@@ -32,12 +32,14 @@ module.exports = {
 				'primary-light': '#F7F8FC',
 				'secondary-light': '#FFFFFF',
 				'ternary-light': '#f6f7f8',
+				'secondary-section-light': '#d1d1d1ff',
 
-				'primary-dark': '#291c30ff',
+				'primary-dark': '#291c30',
 				'secondary-dark': '#102D44',
 				'ternary-dark': '#1E3851',
+				'secondary-section-dark': '#594a60',
 
-				'accent': '#e73a4f',
+				'accent': '#FFD63E',
 				'accent-highlight': '#b72c3e',
 			},
 			container: {
