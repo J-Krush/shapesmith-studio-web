@@ -6,6 +6,8 @@ import AppFooter from './components/shared/AppFooter';
 import AppHeader from './components/shared/AppHeader';
 import './css/App.css';
 import UseScrollToTop from './hooks/useScrollToTop';
+import { capabilitiesTitle } from '../src/data/projects';
+import Materials from './pages/Materials';
 
 // import './App.css';
 
@@ -14,6 +16,7 @@ const Contact = lazy(() => import('./pages/Contact.jsx'));
 const Home = lazy(() => import('./pages/Home'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
+
 
 
 function App() {
@@ -26,10 +29,14 @@ function App() {
 					<Suspense fallback={""}>
 						<Routes>
 							<Route path="/" element={<Home />} />
-							<Route path="projects" element={<Projects />} />
+							<Route path={`/${capabilitiesTitle}`} element={<Projects />} />
 							<Route
-								path="projects/single-project"
+								path={`/${capabilitiesTitle}/:capability`}
 								element={<ProjectSingle />}
+							/>
+							<Route
+								path="/materials"
+								element={<Materials />}
 							/>
 
 							<Route path="about" element={<About />} />
