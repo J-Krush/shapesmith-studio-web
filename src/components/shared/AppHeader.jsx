@@ -3,11 +3,12 @@ import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import HireMeModal from '../HireMeModal';
-import ContactForm from '../contact/contact-form';
+// import ContactForm from '../contact/contact-form';
 import logoLight from '../../images/horizontal-logo-light.png';
 import logoDark from '../../images/horizontal-logo.png';
 import { motion } from 'framer-motion';
 import Button from '../reusable/Button';
+import { capabilitiesTitle } from '../../data/projects';
 
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
@@ -109,11 +110,18 @@ const AppHeader = () => {
 					}
 				>
 					<Link
-						to="/projects"
-						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label="Projects"
+						to={`/${capabilitiesTitle}`}
+						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
+						aria-label={capabilitiesTitle}
 					>
-						Projects
+						{capabilitiesTitle}
+					</Link>
+					<Link
+						to="/materials"
+						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
+						aria-label="Materials"
+					>
+						Materials
 					</Link>
 					<Link
 						to="/about"
@@ -143,11 +151,18 @@ const AppHeader = () => {
 				{/* Header links large screen */}
 				<div className="font-semibold hidden m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none">
 					<Link
-						to="/projects"
-						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label="Projects"
+						to={`/${capabilitiesTitle}`}
+						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
+						aria-label={capabilitiesTitle}
 					>
-						Projects
+						{capabilitiesTitle}
+					</Link>
+					<Link
+						to="/materials"
+						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
+						aria-label="Materials"
+					>
+						Materials
 					</Link>
 					<Link
 						to="/about"
