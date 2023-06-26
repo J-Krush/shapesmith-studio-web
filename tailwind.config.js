@@ -32,15 +32,19 @@ module.exports = {
 				'primary-light': '#F7F8FC',
 				'secondary-light': '#FFFFFF',
 				'ternary-light': '#f6f7f8',
+
 				'secondary-section-light': '#d1d1d1ff',
+				
 
 				'primary-dark': '#291c30',
 				'secondary-dark': '#102D44',
 				'ternary-dark': '#1E3851',
-				'secondary-section-dark': '#594a60',
 
-				'accent': '#FFD63E',
-				'accent-highlight': '#b72c3e',
+				'secondary-section-dark': '#594a60',
+				'ternary-section-dark': '#94989c',
+
+				'accent': '#348bd8',
+				'accent-highlight': '#3c6eb1',
 			},
 			container: {
 				padding: {
