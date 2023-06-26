@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import HireMeModal from '../HireMeModal';
 // import ContactForm from '../contact/contact-form';
-import logoLight from '../../images/horizontal-logo-light.png';
-import logoDark from '../../images/horizontal-logo.png';
+import logoLight from '../../images/logo-flower-of-life-light.png';
+import logoDark from '../../images/logo-flower-of-life-dark.png';
 import { motion } from 'framer-motion';
 import Button from '../reusable/Button';
 import { capabilitiesTitle } from '../../data/projects';
@@ -49,19 +49,11 @@ const AppHeader = () => {
 				<div className="flex justify-between items-center px-4 sm:px-0">
 					<div>
 						<Link to="/">
-							{activeTheme === 'dark' ? (
-								<img
-									src={logoDark}
-									className="w-36"
-									alt="Dark Logo"
-								/>
-							) : (
-								<img
-									src={logoLight}
-									className="w-36"
-									alt="Dark Logo"
-								/>
-							)}
+							<img
+								src={activeTheme === 'dark' ? logoLight : logoDark}
+								className="w-12"
+								alt="Logo Flower"
+							/>
 						</Link>
 					</div>
 
@@ -126,26 +118,20 @@ const AppHeader = () => {
 					<Link
 						to="/about"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
-						aria-label="About Me"
+						aria-label="About"
 					>
-						About Me
+						About
 					</Link>
-					<Link
-						to="/contact"
-						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
-						aria-label="Contact"
+					<span
+						className="block text-center text-md font-semibold bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300 cursor-pointer"
 					>
-						Contact
-					</Link>
-					<div className="border-t-2 pt-3 sm:pt-0 sm:border-t-0 border-primary-light dark:border-secondary-dark">
-						<span
-							onClick={showHireMeModal}
-							className="font-semibold sm:hidden block text-left text-md bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-sm px-4 py-2 mt-2 duration-300 w-24"
-							aria-label="Hire Me Button"
+						<Link
+							to="/contact"
+							aria-label="contact-us"
 						>
-							<Button title="Hire Me" />
-						</span>
-					</div>
+							Contact
+						</Link>
+					</span>
 				</div>
 
 				{/* Header links large screen */}
@@ -167,28 +153,31 @@ const AppHeader = () => {
 					<Link
 						to="/about"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label="About Me"
+						aria-label="About"
 					>
-						About Me
-					</Link>
-					<Link
-						to="/contact"
-						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label="Contact"
-					>
-						Contact
+						About
 					</Link>
 				</div>
 
 				{/* Header right section buttons */}
 				<div className="hidden sm:flex justify-between items-center flex-col md:flex-row">
 					<div className="hidden md:flex">
-						<span
+						{/* <span
 							onClick={showHireMeModal}
-							className="text-md font-semibold bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
+							className="text-md font-semibold bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm rounded-md px-5 py-2.5 duration-300"
 							aria-label="Hire Me Button"
 						>
 							<Button title="Hire Me" />
+						</span> */}
+						<span
+							className="block text-center text-md font-semibold bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300 cursor-pointer"
+						>
+							<Link
+								to="/contact"
+								aria-label="contact-us"
+							>
+								Contact
+							</Link>
 						</span>
 					</div>
 
