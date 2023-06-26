@@ -19,7 +19,7 @@ const ProjectSingle = ({ title, category, image, linkTo }) => {
 						<div>
 							<img
 								src={image}
-								className="rounded-xl border-none"
+								className="aspect-square object-cover rounded-xl border-none"
 								alt={title}
 							/>
 						</div>
