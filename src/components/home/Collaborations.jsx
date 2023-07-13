@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import effigyBuild from '../../images/effigy-1.jpg';
+import { Effigy1 } from '../../data/images';
+import { getImageUrl } from '../../utilities/helpers';
 
 const Collaborations = () => {
 
@@ -28,7 +29,7 @@ const Collaborations = () => {
 								to="/contact"
 								aria-label="contact-us"
 							>
-								Let's Work Together
+								Let's Work Together!
 							</Link>
 						</span>
 					</div>
@@ -36,7 +37,7 @@ const Collaborations = () => {
 					<div className="flex items-center sm:p-0 sm:mt-0">
 						<img
 							className="rounded-lg ml-6"
-							src={effigyBuild}
+							src={getImageUrl(Effigy1)}
 							alt="Effigy build"
 						/>
 					</div>

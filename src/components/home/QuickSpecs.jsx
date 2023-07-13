@@ -1,5 +1,5 @@
-import BedSize from '../../images/bed-size.png';
-import OversizedPiece from '../../images/oversized-piece.jpg';
+import { LaserBedSize, OversizedPiece } from '../../data/images';
+import { getImageUrl } from '../../utilities/helpers';
 
 const QuickInfo = () => {
 
@@ -14,13 +14,20 @@ const QuickInfo = () => {
 					</div>
 					
 					<div className='flex md:flex-row sm:flex-col md:items-center mb-12'>
-						<p className="flex-1 font-general-medium text-lg text-ternary-dark dark:text-ternary-light">
-							Our 130W laser has a bed size of 51.2" x 35.4" (130 x 90 cm). 
-							This means we have the capacity to handle a wide range of projects, whether you're seeking intricate details on a small-scale masterpiece or tackling larger-than-life creations.
-						</p>
+						<div className="flex-1 font-general-medium text-lg text-ternary-dark dark:text-ternary-light">
+						 	
+							<p>
+								Our 130W laser has a bed size of 51.2" x 35.4" (130 x 90 cm). 
+								This means we have the capacity to handle a wide range of projects, whether you're seeking intricate details on a small-scale masterpiece or tackling larger-than-life creations.
+							</p>
+
+							<p className='mt-8'> 
+								The beauty of vector files is that they can be scaled up or down without any loss in quality, unlike a photograph which becomes pixelated and blurry.
+							</p>
+						</div>
 						<div className='flex-1 m-4 p-6 sm:p-10 bg-[#eeeeee] dark:bg-[#eeeeee] rounded-xl shadow-xl text-center'>
 							<img
-								src={BedSize}
+								src={getImageUrl(LaserBedSize)}
 								alt="Bed Size"
 							/>
 						</div>
@@ -32,7 +39,7 @@ const QuickInfo = () => {
 					<div className='flex-1 m-4'>
 							<img
 								className='rounded-xl shadow-xl'
-								src={OversizedPiece}
+								src={getImageUrl(OversizedPiece)}
 								alt="Oversized Piece"
 							/>
 						</div>

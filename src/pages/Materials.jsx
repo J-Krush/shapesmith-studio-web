@@ -1,6 +1,7 @@
 
 import { materialsData } from "../data/materials";
 import MaterialSingle from "../materials/MaterialSingle";
+import { getImageUrl } from "../utilities/helpers";
 
 const Materials = () => {
 
@@ -32,10 +33,11 @@ const Materials = () => {
                 {materialsData.map((material) => (
 						<MaterialSingle
 							title={material.title}
-							image={material.img}
+							image={getImageUrl(material.img)}
 							key={material.id}
                             description={material.description}
                             materialThickness={material.materialThickness}
+                            processes={material.processes}
                             disclaimer={material.disclaimer}
 						/>
 					))}

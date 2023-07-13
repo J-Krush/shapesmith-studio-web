@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import SingleProjectContext from '../../context/SingleProjectContext';
+import { getImageUrl } from '../../utilities/helpers';
 
 const ProjectGallery = () => {
 	const { singleProjectData } = useContext(SingleProjectContext);
@@ -28,11 +29,11 @@ const ProjectGallery = () => {
 							<div className="flex w-1/3 flex-wrap" key={project.id}>
 								<div className="w-full p-1 md:p-2">
 									<img
-										src={project.img}
+										src={getImageUrl(project.img)}
 										className="rounded-xl cursor-pointer shadow-lg sm:shadow-none"
 										alt={project.title}
 										key={project.id}
-										onClick={() => showModal(project.img)}
+										onClick={() => showModal(getImageUrl(project.img))}
 									/>
 								</div>
 							</div>

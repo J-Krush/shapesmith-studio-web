@@ -1,7 +1,5 @@
-// import ProjectSingle from './ProjectSingle';
-import designImage from '../../images/inkscape-screenshot.png';
-import cuttingImage from '../../images/laser-cutting-metatron.png';
-import fabricateImage from '../../images/metatron-assembly.png';
+import { InkscapeScreenshot, MetatronCutting, MetatronAssembly } from '../../data/images';
+import { getImageUrl } from '../../utilities/helpers';
 
 const OurProcess = () => {
 
@@ -32,7 +30,7 @@ const OurProcess = () => {
 				<div className="grid grid-cols-1 md:grid-cols-3 mt-6 gap-10 mb-24">
 					<div className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
 						<img
-							src={designImage}
+							src={getImageUrl(InkscapeScreenshot)}
 							className='rounded-t-xl'
 							alt="Design Process"
 						/>
@@ -44,7 +42,7 @@ const OurProcess = () => {
 
 							We take your vision and bring it to life using the power of digital design. Sketches or pictures of similar work are helpful here.
 							We meticulously craft clean, detailed vector files, ensuring that every element is perfectly captured. 
-							Vector files are created by programs like Adobe Illustrator or 
+							<b>Vector files</b> are created by programs like Adobe Illustrator or 
 							
 							<a
 							href="https://inkscape.org/"
@@ -56,7 +54,7 @@ const OurProcess = () => {
 					</div>
 					<div className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
 						<img
-							src={cuttingImage}
+							src={getImageUrl(MetatronCutting)}
 							className="rounded-t-xl border-none"
 							alt="Cutting Process"
 						/>
@@ -64,14 +62,14 @@ const OurProcess = () => {
 							Cut
 						</p>
 						<p className="font-general-medium text-lg mb-8 mx-8 text-ternary-dark dark:text-ternary-light">
-							Our 130W laser cutter takes center stage, unleashing its magic to cut, etch, and engrave your design with incredible precision. 
+							Our laser cutter takes center stage, unleashing its magic to cut, etch, and engrave your design with incredible precision. 
 							From wood to acrylic, leather to fabric, our laser works its wonders on a range of materials, turning them into the building blocks of your masterpiece. 
 
 						</p>
 					</div>
 					<div className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
 							<img
-								src={fabricateImage}
+								src={getImageUrl(MetatronAssembly)}
 								className="rounded-t-xl border-none"
 								alt="Fabricate Process"
 							/>
