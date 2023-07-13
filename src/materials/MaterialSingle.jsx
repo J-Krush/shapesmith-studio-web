@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
+import { FiTag, FiAlertTriangle, FiInfo, FiPower, FiScissors, FiTool,FiZap, FiArrowUp } from 'react-icons/fi';
 
-const MaterialSingle = ({ title, image, description, altImages, materialThickness, disclaimer }) => {
+const MaterialSingle = ({ title, image, description, altImages, materialThickness, processes, disclaimer }) => {
 
 	return (
 		<motion.div
@@ -23,12 +24,21 @@ const MaterialSingle = ({ title, image, description, altImages, materialThicknes
 			</div>
 
 			<div className="w-full sm:w-3/4 text-left">
-				<p className="font-display font-medium text-xl md:text-xl text-ternary-dark dark:text-ternary-light mb-2">
+				<p className="font-display font-medium text-2xl text-ternary-dark dark:text-ternary-light mb-4">
 					{title}
 				</p>
-				<p className="font-display font-regular italic text-m text-ternary-dark dark:text-ternary-light mb-2">
-					{materialThickness}
-				</p>
+				<div className="flex items-center mb-4">
+					<FiZap className="text-lg text-ternary-dark dark:text-ternary-light" />
+					<span className="font-general-regular ml-2 leading-none text-primary-dark dark:text-primary-light">
+						{processes}
+					</span>
+				</div>
+				<div className="flex items-center mb-4">
+					<FiScissors className="text-lg text-ternary-dark dark:text-ternary-light" />
+					<span className="font-display font-regular italic text-m ml-2 text-ternary-dark dark:text-ternary-light">
+						{materialThickness}
+					</span>
+				</div>
 				<p className="font-display font-regular text-m text-ternary-dark dark:text-ternary-light mb-2">
 					{description}
 				</p>
