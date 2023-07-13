@@ -1,15 +1,17 @@
-import Plywood1 from '../images/bloom-layers-side-2.jpg';
-import Acrylic1 from '../images/materials/acrylic-1.jpeg';
-import Hardwood1 from '../images/materials/hardwood-1.jpeg';
-import MDF1 from '../images/materials/mdf-1.png';
-import Leather1 from '../images/materials/leather-1.jpeg';
-import Metal1 from '../images/materials/metal-1.jpeg';
+import { 
+    PlywoodMaterial, 
+    AcrylicMaterial, 
+    HardwoodMaterial, 
+    MDFMaterial, 
+    LeatherMaterial, 
+    MetalMaterial 
+} from './images';
 
 export const materialsData = [
     {
         id: 'plywood',
 		title: 'Plywood',
-		img: Plywood1,
+		img: PlywoodMaterial,
         altImages: [
             {
                 img: '',
@@ -19,7 +21,7 @@ export const materialsData = [
         description: `Plywood, known for its strength and durability, is a versatile material that lends itself beautifully to a wide range of applications. 
             Composed of multiple layers of wood veneers bonded together, plywood offers stability and resilience while retaining the natural beauty and character of wood. 
             Whether it's the rich warmth of oak, the refined elegance of walnut, or the contemporary appeal of birch, our carefully selected plywood materials provide a canvas for extraordinary designs.`,
-        materialThickness: `Up to 3/4" (18mm)`,
+        materialThickness: `Cut up to 3/4" (18mm)`,
         processes: `Cut, engrave, etch`,
         disclaimer: `There can be a lot of variation in the types of wood and glue used. 
             Some glues smolder, not allowing a full cut through the wood, and cause the edges to char and fall apart. 
@@ -29,7 +31,7 @@ export const materialsData = [
     {
         id: 'acrylic',
 		title: 'Acrylic',
-		img: Acrylic1,
+		img: AcrylicMaterial,
         altImages: [
             {
                 img: '',
@@ -40,14 +42,14 @@ export const materialsData = [
         Whether you seek a sleek and modern aesthetic or a bold and vibrant statement, acrylic provides a pristine canvas that beautifully showcases your vision.
         There are many different colors available!
         `,
-        materialThickness: `Up to 13/16" (20mm)`,
+        materialThickness: `Cut up to 13/16" (20mm)`,
         processes: `Cut, engrave, etch`,
         disclaimer: ``,
     },
     {
         id: 'hardwood',
 		title: 'Hardwood',
-		img: Hardwood1,
+		img: HardwoodMaterial,
         altImages: [
             {
                 img: '',
@@ -56,14 +58,14 @@ export const materialsData = [
         ],
         description: `Hardwood, with its inherent strength, unique grain patterns, and rich colors, is a material that exudes natural beauty and character. 
         Each piece of hardwood tells a story, showcasing the majesty of nature captured in its textures and hues.`,
-        materialThickness: `Dependent on type of wood, typically up to 5/8" (15mm)`,
+        materialThickness: `Cut up to 5/8" (15mm)`,
         processes: `Cut, engrave, etch`,
         disclaimer: ``,
     },
     {
         id: 'mdf',
 		title: 'MDF',
-		img: MDF1,
+		img: MDFMaterial,
         altImages: [
             {
                 img: '',
@@ -74,7 +76,7 @@ export const materialsData = [
         Its dense and uniform composition makes it an excellent choice for a wide range of applications. 
         MDF provides a smooth and consistent surface, allowing for intricate detailing and precise cutting. 
         Whether you're envisioning intricate wall art, customized signage, or intricately designed furniture, MDF serves as a sturdy foundation for your creative projects.`,
-        materialThickness: `Up to 3/8" (10mm)`,
+        materialThickness: `Cut up to 3/8" (10mm)`,
         processes: `Cut, engrave`,
         disclaimer: ``,
     },
@@ -95,15 +97,18 @@ export const materialsData = [
     {
         id: 'leather',
 		title: 'Leather',
-		img: Leather1,
+		img: LeatherMaterial,
         altImages: [
             {
                 img: '',
                 alt: '',
             }
         ],
-        description: ``,
-        materialThickness: `Up to 1/8" (3mm)`,
+        description: `Leather offers exceptional versatility, lending itself to a myriad of applications and designs. From fashion accessories and footwear to upholstery, leather adds a touch of elegance and elevates the aesthetics of any creation. 
+        Its durability ensures longevity, as leather products develop a beautiful patina over time, becoming even more exquisite with age.
+        Moreover, leather possesses a unique quality that allows for intricate laser cutting. Leather can be precisely etched, engraved, or cut with exceptional detail. 
+        This capability enhances the artistic possibilities, allowing for the creation of intricate patterns, personalized designs, or finely rendered embellishments that truly elevate the beauty of leather.`,
+        materialThickness: `Cut up to 1/8" (3mm)`,
         processes: `Cut, engrave, etch`,
         disclaimer: ``,
     },
@@ -124,17 +129,21 @@ export const materialsData = [
     {
         id: 'metal',
 		title: 'Metal',
-		img: Metal1,
+		img: MetalMaterial,
         altImages: [
             {
                 img: '',
                 alt: '',
             }
         ],
-        description: ``,
-        materialThickness: ``,
+        description: `We often get questions about working with metal. Our laser cutter is not capable of cutting metal, but we can mark the surface, which is similar to engraving.
+        QR codes and product IDs are great examples of things that can be marked on metal. 
+
+        If you require metal cutting (plasma cutting), we work with Xometry to provide those services. 
+        `,
+        materialThickness: `Cutting not available`,
         processes: `Etch/Mark`,
-        disclaimer: ``,
+        disclaimer: `Hello?`,
     }
 
 ]
