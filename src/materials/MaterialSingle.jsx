@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiTag, FiAlertTriangle, FiInfo, FiPower, FiScissors, FiTool,FiZap, FiArrowUp } from 'react-icons/fi';
+import { FiScissors, FiZap } from 'react-icons/fi';
 
 const MaterialSingle = ({ title, image, description, altImages, materialThickness, processes, disclaimer }) => {
 

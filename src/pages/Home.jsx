@@ -5,7 +5,6 @@ import { ProjectsProvider } from '../context/ProjectsContext';
 import Collaborations from '../components/home/Collaborations';
 import QuickInfo from '../components/home/QuickInfo';
 import QuickSpecs from '../components/home/QuickSpecs';
-import HowLasersWork from '../components/home/HowLasersWork';
 
 const Home = () => {
 	return (
@@ -23,8 +22,6 @@ const Home = () => {
 			<OurProcess />
 
 			<QuickSpecs />
-
-			{/* <HowLasersWork /> */}
 
 			<Collaborations />
 

@@ -1,4 +1,3 @@
-import BedSize from '../../images/bed-size.png';
 
 const HowLasersWork = () => {
 

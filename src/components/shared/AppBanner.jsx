@@ -2,12 +2,8 @@ import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import { motion } from 'framer-motion';
 
 import heroLight from '../../assets/bloom-layers-top.jpg';
-import brandLight from '../../assets/horizontal-brand-bold.png';
-import brandDark from '../../assets/horizontal-brand-bold-accent.png';
 
 import brandMultiFont from '../../assets/brand-horizontal-multi-font.png';
-
-import logoDark from '../../assets/logo-flower-of-life-dark.png';
 
 const AppBanner = () => {
 	const [activeTheme] = useThemeSwitcher();

@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
+import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import useThemeSwitcher from '../../hooks/useThemeSwitcher';
+// import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import { motion } from 'framer-motion';
 
 import { capabilitiesTitle } from '../../data/projects';
-import logoLight from '../../assets/logo-flower-of-life-light.png';
+// import logoLight from '../../assets/logo-flower-of-life-light.png';
 import logoDark from '../../assets/logo-flower-of-life-dark.png';
 
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
-	const [activeTheme, setTheme] = useThemeSwitcher();
+	// const [activeTheme, setTheme] = useThemeSwitcher();
 
 	function toggleMenu() {
 		if (!showMenu) {
@@ -33,7 +33,8 @@ const AppHeader = () => {
 					<div>
 						<Link to="/">
 							<img
-								src={activeTheme === 'dark' ? logoLight : logoDark}
+								// src={activeTheme === 'dark' ? logoLight : logoDark}
+								src={logoDark}
 								className="w-12"
 								alt="Logo Flower"
 							/>

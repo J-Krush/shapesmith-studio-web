@@ -1,20 +1,3 @@
-// Import images
-// import LayeredWallArt from '../images/cat-layers-top.jpg';
-// import FoxLayers from '../images/fox-layers-top.jpg';
-// import TigerEyes from '../images/tiger-eyes-layers-top.jpg';
-// import Waves from '../images/waves-layers-top-2.jpg';
-// import Sunrise from '../images/sunrise.jpg';
-// import MetatronTop from '../images/metatron-finished-1.jpg';
-// import MetatronSide from '../images/metatron-finished-2.jpg';
-// import BloomSide1 from '../images/bloom-layers-side-1.jpg';
-// import BloomSide2 from '../images/bloom-layers-side-2.jpg';
-// import Jewelry from '../images/earrings-geometric-close-up.jpg';
-// import EarringsBatch from '../images/earrings-batch-3.jpg';
-// import Furniture from '../images/headboard-installed.jpg';
-// import SlicedArt from '../images/skull-sliced-1.jpg';
-// import SignageArt from '../images/inward-arts-signs.jpg';
-// import Venmo from '../images/venmo-1.jpg';
-
 import { 
 	CatTop, 
 	DavilleCampSign,
@@ -35,9 +18,6 @@ import {
 	VenmoSign,
 
  } from './images';
-
-import BloomSide1 from '../images/bloom-layers-side-1.jpg';
-import BloomSide2 from '../images/bloom-layers-side-2.jpg';
 
 export const capabilitiesTitle = 'styles';
 
