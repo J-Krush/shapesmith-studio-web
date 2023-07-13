@@ -1,10 +1,13 @@
 import useThemeSwitcher from '../../hooks/useThemeSwitcher';
-// import heroLight from '../../images/placeholder-hero.png';
-// import heroDark from '../../images/placeholder-hero.png';
-import heroLight from '../../images/bloom-layers-top.jpg';
 import { motion } from 'framer-motion';
-import logoLight from '../../images/horizontal-brand-bold.png';
-import logoDark from '../../images/horizontal-brand-bold-accent.png';
+
+import heroLight from '../../assets/bloom-layers-top.jpg';
+import brandLight from '../../assets/horizontal-brand-bold.png';
+import brandDark from '../../assets/horizontal-brand-bold-accent.png';
+
+import brandMultiFont from '../../assets/brand-horizontal-multi-font.png';
+
+import logoDark from '../../assets/logo-flower-of-life-dark.png';
 
 const AppBanner = () => {
 	const [activeTheme] = useThemeSwitcher();
@@ -12,7 +15,9 @@ const AppBanner = () => {
 	console.log('activeTheme: ', activeTheme);
 
 	return (
-		<div className="container mx-auto h-full">
+		<div 
+			className="container mx-auto h-full"
+		>
 			<motion.section
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
@@ -22,9 +27,10 @@ const AppBanner = () => {
 				<div className="w-2/3 text-left">
 					<motion.div>
 						<img
-							src={activeTheme === 'dark' ? logoLight : logoDark}
+							// src={activeTheme === 'dark' ? brandLight : brandDark}
+							src={brandMultiFont}
 							className="mb-12"
-							alt="Logo Brand"
+							alt="Brand"
 						/>
 					</motion.div>
 					<motion.h1
