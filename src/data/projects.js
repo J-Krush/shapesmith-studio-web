@@ -1,24 +1,43 @@
 // Import images
-import LayeredWallArt from '../images/cat-layers-top.jpg';
-import FoxLayers from '../images/fox-layers-top.jpg';
+// import LayeredWallArt from '../images/cat-layers-top.jpg';
+// import FoxLayers from '../images/fox-layers-top.jpg';
+// import TigerEyes from '../images/tiger-eyes-layers-top.jpg';
+// import Waves from '../images/waves-layers-top-2.jpg';
+// import Sunrise from '../images/sunrise.jpg';
+// import MetatronTop from '../images/metatron-finished-1.jpg';
+// import MetatronSide from '../images/metatron-finished-2.jpg';
+// import BloomSide1 from '../images/bloom-layers-side-1.jpg';
+// import BloomSide2 from '../images/bloom-layers-side-2.jpg';
+// import Jewelry from '../images/earrings-geometric-close-up.jpg';
+// import EarringsBatch from '../images/earrings-batch-3.jpg';
+// import Furniture from '../images/headboard-installed.jpg';
+// import SlicedArt from '../images/skull-sliced-1.jpg';
+// import SignageArt from '../images/inward-arts-signs.jpg';
+// import Venmo from '../images/venmo-1.jpg';
 
-import TigerEyes from '../images/tiger-eyes-layers-top.jpg';
-import Waves from '../images/waves-layers-top-2.jpg';
-import Sunrise from '../images/sunrise.jpg';
-import MetatronTop from '../images/metatron-finished-1.jpg';
-import MetatronSide from '../images/metatron-finished-2.jpg';
+import { 
+	CatTop, 
+	DavilleCampSign,
+	DavilleDJ,
+	FoxTop, 
+	TigerEyesTop, 
+	WavesTop, 
+	SunriseTop, 
+	MetatronFinished1, 
+	MetatronFinished2, 
+	EarringsGeometric, 
+	EarringsBatch3, 
+	HeadboardInstalled, 
+	SkullSliced, 
+	InwardArtsSigns, 
+	LadiesSign, 
+	WelcomeToTheShire, 
+	VenmoSign,
+
+ } from './images';
+
 import BloomSide1 from '../images/bloom-layers-side-1.jpg';
 import BloomSide2 from '../images/bloom-layers-side-2.jpg';
-
-import Jewelry from '../images/earrings-geometric-close-up.jpg';
-import EarringsBatch from '../images/earrings-batch-3.jpg';
-
-import Furniture from '../images/headboard-installed.jpg';
-
-import SlicedArt from '../images/skull-sliced-1.jpg';
-import SignageArt from '../images/inward-arts-signs.jpg';
-
-import Venmo from '../images/venmo-1.jpg';
 
 export const capabilitiesTitle = 'styles';
 
@@ -26,7 +45,7 @@ export const capabilitiesData = [
 	{
 		id: 'layered-wall-art',
 		title: 'Layered Wall Art',
-		img: LayeredWallArt,
+		img: CatTop,
 		slug: `/${capabilitiesTitle}/layered-wall-art`,
 		ProjectHeader: {
 			title: 'Multi-layered Wall Art',
@@ -36,42 +55,42 @@ export const capabilitiesData = [
 			{
 				id: 1,
 				title: 'Sunrise',
-				img: Sunrise,
+				img: SunriseTop,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
 			{
 				id: 2,
 				title: 'Fox Layered',
-				img: FoxLayers,
+				img: FoxTop,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
 			{
 				id: 3,
 				title: 'Tiger Eyes Layered',
-				img: TigerEyes,
+				img: TigerEyesTop,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
 			{
 				id: 4,
 				title: 'Waves Layered',
-				img: Waves,
+				img: WavesTop,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
 			{
 				id: 5,
 				title: 'Metatron Top',
-				img: MetatronTop,
+				img: MetatronFinished1,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
 			{
 				id: 6,
 				title: 'Metatron Side',
-				img: MetatronSide,
+				img: MetatronFinished2,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
@@ -99,21 +118,21 @@ export const capabilitiesData = [
 	},
 	{
 		id: '3d-slices',
-		title: '3D Model Slicing',
-		img: SlicedArt,
+		title: 'Sliced 3D Models',
+		img: SkullSliced,
 		slug: `/${capabilitiesTitle}/3d-slices`,
 		ProjectHeader: {
-			title: '3D Model Slicing',
+			title: 'Sliced 3D Models',
 			tags: 'Unknown',
 		},
 		ProjectImages: [
-			{
-				id: 1,
-				title: 'Sunrise',
-				img: Sunrise,
-				isOriginalDesign: false,
-				linkToDesign: '',
-			},
+			// {
+			// 	id: 1,
+			// 	title: 'Sunrise',
+			// 	img: SunriseTop,
+			// 	isOriginalDesign: false,
+			// 	linkToDesign: '',
+			// },
 		],
 		ProjectInfo: {
 			ConsiderationsTitle: 'Considerations',
@@ -132,7 +151,7 @@ export const capabilitiesData = [
 	{
 		id: 'signage',
 		title: 'Signage',
-		img: SignageArt,
+		img: InwardArtsSigns,
 		slug: `/${capabilitiesTitle}/signage`,
 		ProjectHeader: {
 			title: 'Signage and Branding',
@@ -141,11 +160,25 @@ export const capabilitiesData = [
 		ProjectImages: [
 			{
 				id: 1,
-				title: 'Sunrise',
-				img: Sunrise,
-				isOriginalDesign: false,
+				title: 'Ladies Sign',
+				img: LadiesSign,
+				isOriginalDesign: true,
 				linkToDesign: '',
 			},
+			{ 
+				id: 2,
+				title: 'Welcome to the Shire',
+				img: WelcomeToTheShire,
+				isOriginalDesign: true,
+				linkToDesign: '',
+			},
+			{
+				id: 3,
+				title: 'Daville Camp Sign',
+				img: DavilleCampSign,
+				isOriginalDesign: true,
+				linkToDesign: '',
+			}
 		],
 		ProjectInfo: {
 			ConsiderationsTitle: 'Considerations',
@@ -164,7 +197,7 @@ export const capabilitiesData = [
 	{
 		id: 'jewelry',
 		title: 'Jewelry',
-		img: Jewelry,
+		img: EarringsGeometric,
 		slug: `/${capabilitiesTitle}/jewelry`,
 		ProjectHeader: {
 			title: 'Jewelry',
@@ -174,7 +207,7 @@ export const capabilitiesData = [
 			{
 				id: 1,
 				title: 'Earrings Batch',
-				img: EarringsBatch,
+				img: EarringsBatch3,
 				isOriginalDesign: false,
 				linkToDesign: '',
 			},
@@ -193,35 +226,28 @@ export const capabilitiesData = [
 	},
 	{
 		id: 'furniture',
-		title: 'Furniture & Detailing',
-		img: Furniture,
+		title: 'Furniture & Large Pieces',
+		img: HeadboardInstalled,
 		slug: `/${capabilitiesTitle}/furniture`,
 		ProjectHeader: {
-			title: 'Furniture & Detailing',
+			title: 'Furniture & Large Pieces',
 			tags: 'Unknown',
 		},
 		ProjectImages: [
 			{
 				id: 1,
 				title: 'Headboard Installed',
-				img: Furniture,
+				img: HeadboardInstalled,
 				isOriginalDesign: true,
 				linkToDesign: '',
 			},
 			{
 				id: 2,
-				title: 'Tiger Eyes Layered',
-				img: TigerEyes,
-				isOriginalDesign: false,
+				title: 'Daville DJ Booth',
+				img: DavilleDJ,
+				isOriginalDesign: true,
 				linkToDesign: '',
-			},
-			{
-				id: 3,
-				title: 'Waves Layered',
-				img: Waves,
-				isOriginalDesign: false,
-				linkToDesign: '',
-			},
+			}
 		],
 		ProjectInfo: {
 			ConsiderationsTitle: 'Considerations',
@@ -237,7 +263,7 @@ export const capabilitiesData = [
 	{
 		id: 'merchandise',
 		title: 'Merchandise & Party Favors',
-		img: Venmo,
+		img: VenmoSign,
 		slug: `/${capabilitiesTitle}/merchandise`,
 		ProjectHeader: {
 			title: 'Merchandise, Party Favors & Wedding Gifts',
