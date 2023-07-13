@@ -17,14 +17,14 @@ const ContactForm = () => {
     }
     
     const handleSubmit = e => {
-        e.preventDefault();
+        // e.preventDefault(); 
 
 		console.log('handle submit');
 		console.log('name: ', formName);
 		console.log('email: ', formEmail);
 		console.log('message: ', formMessage);
 
-        fetch("/", {
+        fetch("https://shapesmith.studio/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: encode({ 
