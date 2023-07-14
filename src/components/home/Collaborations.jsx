@@ -8,7 +8,7 @@ const Collaborations = () => {
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10 bg-secondary-section-light dark:bg-secondary-section-dark">
 			<div className="container mx-auto">
 				
-				<div className="grid grid-cols-2 mt-24 mb-24">
+				<div className="flex flex-col md:flex-row mt-24 mb-24">
 					<div className="text-left">
 						<p className="font-display font-bold text-2xl sm:text-4xl mb-6 text-ternary-dark dark:text-ternary-light">
 							We love collaborations!
@@ -23,7 +23,7 @@ const Collaborations = () => {
 						</p> */}
 
 						<span
-							className="block text-center text-md font-semibold mt-8 mx-8 bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300 cursor-pointer"
+							className="block text-center text-md font-semibold md:mb-8 mt-8 bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300 cursor-pointer"
 						>
 							<Link
 								to="/contact"
@@ -36,7 +36,7 @@ const Collaborations = () => {
 
 					<div className="flex items-center sm:p-0 sm:mt-0">
 						<img
-							className="rounded-lg ml-6"
+							className="rounded-lg md:ml-6"
 							src={getImageUrl(Effigy1)}
 							alt="Effigy build"
 						/>

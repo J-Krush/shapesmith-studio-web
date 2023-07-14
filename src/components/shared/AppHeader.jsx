@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 // import useThemeSwitcher from '../../hooks/useThemeSwitcher';
@@ -89,20 +89,15 @@ const AppHeader = () => {
 						to={'/'}
 						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
 						aria-label='home'
+						onClick={() => setShowMenu(false)}
 					>
 						Home
 					</Link>
-					{/* <Link
-						to={`/shop`}
-						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label='shop'
-					>
-						Shop (Coming Soon)
-					</Link> */}
 					<Link
 						to={`/${capabilitiesTitle}`}
-						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
+						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:border-t-0 border-primary-light dark:border-secondary-dark"
 						aria-label={capabilitiesTitle}
+						onClick={() => setShowMenu(false)}
 					>
 						{capabilitiesTitle}
 					</Link>
@@ -110,13 +105,15 @@ const AppHeader = () => {
 						to="/materials"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
 						aria-label="Materials"
+						onClick={() => setShowMenu(false)}
 					>
 						Materials
 					</Link>
 					<Link
 						to="/about"
-						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
+						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-4 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
 						aria-label="About"
+						onClick={() => setShowMenu(false)}
 					>
 						About
 					</Link>
@@ -126,6 +123,7 @@ const AppHeader = () => {
 						<Link
 							to="/contact"
 							aria-label="contact-us"
+							onClick={() => setShowMenu(false)}
 						>
 							Contact
 						</Link>
@@ -172,8 +170,8 @@ const AppHeader = () => {
 				</div>
 
 				{/* Header right section buttons */}
-				<div className="hidden sm:flex justify-between items-center flex-col md:flex-row">
-					<div className="hidden md:flex">
+				<div className="hidden sm:visible sm:flex justify-between items-center flex-col md:flex-row">
+					<div className="md:flex">
 						<span
 							className="block text-center text-md font-semibold bg-accent hover:bg-accent-highlight text-white shadow-sm rounded-md px-5 py-2.5 duration-300 cursor-pointer"
 						>

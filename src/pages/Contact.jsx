@@ -13,11 +13,17 @@ const Contact = () => {
 				duration: 0.5,
 				delay: 0.1,
 			}}
-			className="container mx-auto flex flex-col-reverse lg:flex-row py-5 lg:py-10 lg:mt-10 h-screen"
+			// className="container mx-auto flex flex-col-reverse lg:flex-row py-5 lg:py-10 lg:mt-10 h-screen"
+			className="flex flex-col sm:justify-between sm:flex-row"
 		>
-			<ContactForm />
 
-			<div className="w-full lg:w-1/2">
+{/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 mx-12 sm:mx-0 sm:gap-10"> */}
+			<div className="flex-1">
+				<ContactForm />
+			</div>
+			
+
+			<div className="flex-1">
 				<ContactDetails />
 				<SocialLinks />
 			</div>

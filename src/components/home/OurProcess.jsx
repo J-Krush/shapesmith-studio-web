@@ -7,7 +7,7 @@ const OurProcess = () => {
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10 bg-secondary-section-light dark:bg-secondary-section-dark">
 			<div className="container mx-auto">
 				<div>
-					<p className="font-display font-bold text-4xl sm:text-4xl text-center mt-24 mb-6 text-ternary-dark dark:text-ternary-light">
+					<p className="font-display font-bold text-4xl sm:text-4xl sm:text-left md:text-center mt-24 mb-6 text-ternary-dark dark:text-ternary-light">
 						Creation Process
 					</p>
 

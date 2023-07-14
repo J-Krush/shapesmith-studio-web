@@ -1,4 +1,3 @@
-import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import { motion } from 'framer-motion';
 
 import heroLight from '../../assets/bloom-layers-top.jpg';
@@ -6,9 +5,9 @@ import heroLight from '../../assets/bloom-layers-top.jpg';
 import brandMultiFont from '../../assets/brand-horizontal-multi-font.png';
 
 const AppBanner = () => {
-	const [activeTheme] = useThemeSwitcher();
+	// const [activeTheme] = useThemeSwitcher();
 
-	console.log('activeTheme: ', activeTheme);
+	// console.log('activeTheme: ', activeTheme);
 
 	return (
 		<div 
@@ -20,7 +19,7 @@ const AppBanner = () => {
 				transition={{ ease: 'easeInOut', duration: 0.9, delay: 0.2 }}
 				className="flex flex-col sm:justify-between items-center sm:flex-row mt-12 md:mt-2 mb-24"
 			>
-				<div className="w-2/3 text-left">
+				<div className="w-2/3 text-left sm:mr-8">
 					<motion.div>
 						<img
 							// src={activeTheme === 'dark' ? brandLight : brandDark}

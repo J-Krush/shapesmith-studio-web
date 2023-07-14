@@ -11,7 +11,7 @@ const ProjectsGrid = () => {
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10">
 			<div className="container mx-auto sm:mx-50">
 				<div>
-					<p className="capitalize font-display font-bold text-4xl text-center mb-6 text-ternary-dark dark:text-ternary-light">
+					<p className="capitalize font-display font-bold text-4xl md:text-center sm:text-left mb-6 text-ternary-dark dark:text-ternary-light">
 						Laser Cutting {capabilitiesTitle}
 					</p>
 					<p className="font-general-medium text-xl font-regular text-m mb-12 text-ternary-dark dark:text-ternary-light">
