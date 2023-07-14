@@ -23,6 +23,8 @@ const ContactForm = () => {
 		console.log('name: ', formName);
 		console.log('email: ', formEmail);
 		console.log('message: ', formMessage);
+		
+		e.preventDefault();
 
         fetch("https://shapesmith.studio/", {
             method: "POST",
@@ -46,7 +48,7 @@ const ContactForm = () => {
 				alert(error)
 			});
 
-		e.preventDefault();
+			
     };
 
 	return (
@@ -151,9 +153,7 @@ const ContactForm = () => {
 							className="font-general-medium w-40 px-4 py-2.5 text-white text-center font-medium tracking-wider bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900 rounded-lg mt-6 duration-500"
 							type="submit"
 							aria-label="Send Message"
-							onClick={() => {
-								handleSubmit();
-							}}
+							onClick={handleSubmit}
 						>
 							Send
 						</button>
