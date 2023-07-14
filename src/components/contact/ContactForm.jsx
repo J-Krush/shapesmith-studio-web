@@ -45,6 +45,8 @@ const ContactForm = () => {
 				console.log('error: ', error);
 				alert(error)
 			});
+
+		e.preventDefault();
     };
 
 	return (
@@ -89,7 +91,7 @@ const ContactForm = () => {
 							placeholderText="Don't fill this out if you're human."
 							ariaLabelName="Bot"
 							required={false}
-							onChange={(t) => setFormBotField(t)}
+							onChange={(e) => setFormBotField(e.target.value)}
 						/>
 
 						<FormInput
@@ -101,7 +103,7 @@ const ContactForm = () => {
 							placeholderText="Your Name"
 							ariaLabelName="Name"
 							required={true}
-							onChange={(t) => setFormName(t)}
+							onChange={(e) => setFormName(e.target.value)}
 						/>
 						<FormInput
 							inputLabel="Email"
@@ -112,7 +114,7 @@ const ContactForm = () => {
 							placeholderText="Your email"
 							ariaLabelName="Email"
 							required={true}
-							onChange={(t) => setFormEmail(t)}
+							onChange={(e) => setFormEmail(e.target.value)}
 						/>
 						<FormInput
 							inputLabel="Subject"
@@ -123,7 +125,7 @@ const ContactForm = () => {
 							placeholderText="Subject"
 							ariaLabelName="Subject"
 							required={false}
-							onChange={(t) => setFormSubject(t)}
+							onChange={(e) => setFormSubject(e.target.value)}
 						/>
 
 						<div className="mt-6">
@@ -141,7 +143,7 @@ const ContactForm = () => {
 								rows="6"
 								aria-label="Message"
 								required={true}
-								onChange={(t) => setFormMessage(t)}
+								onChange={(e) => setFormMessage(e.target.value)}
 							></textarea>
 						</div>
 
