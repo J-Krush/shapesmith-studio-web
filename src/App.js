@@ -19,7 +19,13 @@ const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
 
 
 
+
 function App() {
+
+	const root = window.document.documentElement;
+	root.classList.add('dark');
+	localStorage.setItem('theme', 'dark');
+
 	return (
 		<AnimatePresence>
 			<div className=" bg-secondary-light dark:bg-primary-dark transition duration-300">
