@@ -27,7 +27,7 @@ const ContactDetails = () => {
 					{contacts.map((contact) => {
 
 						return (
-							<div>{
+							<div key={contact.id}>{
 								contact.link ? 
 								<a href={contact.link}>
 									<ContactItem contact={contact}/>
