@@ -1,9 +1,38 @@
-
-import { materialsData } from "../data/materials";
+import { useEffect, useState } from 'react';
+import sanityClient from '../utilities/sanityClient';
 import MaterialSingle from "../materials/MaterialSingle";
-import { getImageUrl } from "../utilities/helpers";
 
 const Materials = () => {
+
+    const [materials, setMaterials] = useState([]);
+
+	useEffect(() => {
+		sanityClient.fetch(
+			`*[_type == "material"]{
+				_id,
+                order,
+				title,
+                processes,
+                cuttingSpecs,
+                description,
+                disclaimer,
+				listImage{
+					altText,
+					asset->{
+						_id,
+						url,
+					},
+				}                
+			  }
+			  `
+		)
+		.then((data) => {
+			console.log('material data fetched: ', data);
+			setMaterials(data);
+		})
+		.catch(console.error);
+	}, []);
+
 
 	return (
         <section className="py-5 sm:py-10 mt-5 sm:mt-10">
@@ -30,13 +59,15 @@ const Materials = () => {
                     </div>
                 </div>
 
-                {materialsData.map((material) => (
+                {materials
+                .sort((a,b) => a.order < b.order ? -1 : 1)
+                .map((material) => (
 						<MaterialSingle
 							title={material.title}
-							image={getImageUrl(material.img)}
-							key={material.id}
+							image={material.listImage.asset.url}
+							key={material.title}
                             description={material.description}
-                            materialThickness={material.materialThickness}
+                            materialThickness={material.cuttingSpecs}
                             processes={material.processes}
                             disclaimer={material.disclaimer}
 						/>

@@ -1,7 +1,33 @@
-import { InkscapeScreenshot, MetatronCutting, MetatronAssembly } from '../../data/images';
-import { getImageUrl } from '../../utilities/helpers';
+import { useEffect, useState } from 'react';
+import sanityClient from '../../utilities/sanityClient';
 
 const OurProcess = () => {
+
+	const [processSteps, setProcessSteps] = useState([]);
+
+	useEffect(() => {
+		sanityClient.fetch(
+			`*[_type == "maker-process"]{
+				_id,
+				order,
+				title,
+				image{
+					altText,
+					asset->{
+						_id,
+						url
+					},
+				},
+				description
+			  }
+			  `
+		)
+		.then((data) => {
+			console.log('data fetched: ', data);
+			setProcessSteps(data);
+		})
+		.catch(console.error);
+	}, []);
 
 	return (
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10 bg-secondary-section-light dark:bg-secondary-section-dark">
@@ -25,63 +51,24 @@ const OurProcess = () => {
 					</p>
 				</div>
 
-
-
 				<div className="grid grid-cols-1 md:grid-cols-3 mt-6 gap-10 mb-24">
-					<div className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
-						<img
-							src={getImageUrl(InkscapeScreenshot)}
-							className='rounded-t-xl'
-							alt="Design Process"
-						/>
-						<p className="text-center font-display font-medium text-2xl sm:text-4xl mt-6 mb-6 text-ternary-dark dark:text-ternary-light">
-							Design
-						</p>
-						<p className="font-general-medium text-lg mb-8 mx-8 text-ternary-dark dark:text-ternary-light">
-
-
-							We take your vision and bring it to life using the power of digital design. Sketches or pictures of similar work are helpful here.
-							We meticulously craft clean, detailed vector files, ensuring that every element is perfectly captured. 
-							<b>Vector files</b> are created by programs like Adobe Illustrator or 
-							
-							<a
-							href="https://inkscape.org/"
-							className="underline hover:text-indigo-600 dark:hover:text-indigo-300 ml-1 duration-500"
-							>
-								Inkscape (open source).
-							</a>
-						</p>
-					</div>
-					<div className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
-						<img
-							src={getImageUrl(MetatronCutting)}
-							className="rounded-t-xl border-none"
-							alt="Cutting Process"
-						/>
-						<p className="text-center font-display font-medium text-2xl sm:text-4xl mt-6 mb-6 text-ternary-dark dark:text-ternary-light">
-							Cut
-						</p>
-						<p className="font-general-medium text-lg mb-8 mx-8 text-ternary-dark dark:text-ternary-light">
-							Our laser cutter takes center stage, unleashing its magic to cut, etch, and engrave your design with incredible precision. 
-							From wood to acrylic, leather to fabric, our laser works its wonders on a range of materials, turning them into the building blocks of your masterpiece. 
-
-						</p>
-					</div>
-					<div className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
-							<img
-								src={getImageUrl(MetatronAssembly)}
-								className="rounded-t-xl border-none"
-								alt="Fabricate Process"
-							/>
-						<p className="text-center font-display font-medium text-2xl sm:text-4xl mt-6 mb-6 text-ternary-dark dark:text-ternary-light">
-							Make
-						</p>
-						<p className="font-general-medium text-lg mb-8 mx-8 text-ternary-dark dark:text-ternary-light">
-							Now comes the build! This final step is where it all comes together. 
-							This includes sanding, painting, staining, gluing, nailing, clear coating, and any other finishing touches. 
-							The result is a meticulously handcrafted work of art that radiates quality and captivates the senses.
-						</p>
-					</div>
+					{processSteps
+						.sort((a,b) => a.order < b.order ? -1 : 1)
+						.map((process) => (
+							<div key={process.image.altText} className='rounded-xl shadow-lg hover:shadow-xl mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-section-dark'>
+								<img
+									src={process.image.asset.url}
+									className='rounded-t-xl'
+									alt={process.image.altText}
+								/>
+								<p className="text-center font-display font-medium text-2xl sm:text-4xl mt-6 mb-6 text-ternary-dark dark:text-ternary-light">
+									{process.title}
+								</p>
+								<p className="font-general-medium text-lg mb-8 mx-8 text-ternary-dark dark:text-ternary-light">
+									{process.description}
+								</p>
+							</div>
+					))}
 				</div>
 			</div>
 		</section>

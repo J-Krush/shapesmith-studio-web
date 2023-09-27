@@ -1,7 +1,34 @@
-import { LaserBedSize, OversizedPiece } from '../../data/images';
-import { getImageUrl } from '../../utilities/helpers';
+import { useEffect, useState } from 'react';
+import sanityClient from '../../utilities/sanityClient';
 
 const QuickInfo = () => {
+
+	const [oversizedPieceImage, setOversizedPieceImage] = useState();
+	const [bedSizeImage, setBedSizeImage] = useState();
+
+	useEffect(() => {
+		sanityClient.fetch(
+			`*[_type == "laser-specs"]{
+				_id,
+				title,
+				image{
+					altText,
+					asset->{
+						_id,
+						url,
+					},
+				}
+			  }
+			  `
+		)
+		.then((data) => {
+			setOversizedPieceImage(data.find(img => img.image.altText === 'oversized-piece'))
+			setBedSizeImage(data.find(img => img.image.altText === 'bed-size'))
+		})
+		.catch(console.error);
+	}, []);
+
+	
 
     return (
         <section className="py-5 sm:py-10 mt-5 sm:mt-10">
@@ -28,8 +55,8 @@ const QuickInfo = () => {
 						<div className='flex-1 text-center'>
 							<div className='md:m-4 sm:my-4 p-6 sm:p-10 bg-[#eeeeee] dark:bg-[#eeeeee] rounded-xl shadow-xl'>
 								<img
-									src={getImageUrl(LaserBedSize)}
-									alt="Bed Size"
+									src={bedSizeImage && bedSizeImage.image.asset.url}
+									alt={bedSizeImage && bedSizeImage.image.altText}
 								/>
 							</div>
 							
@@ -42,8 +69,8 @@ const QuickInfo = () => {
 						<div className='flex-1 mr-4 sm:order-last md:order-first'>
 							<img
 								className='rounded-xl shadow-xl'
-								src={getImageUrl(OversizedPiece)}
-								alt="Oversized Piece"
+								src={oversizedPieceImage && oversizedPieceImage.image.asset.url}
+								alt={oversizedPieceImage && oversizedPieceImage.image.altText}
 							/>
 						</div>
 						<p className="flex-1 font-general-medium text-lg text-ternary-dark dark:text-ternary-light sm:mb-4">
