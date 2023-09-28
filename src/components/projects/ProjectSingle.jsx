@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { getImageUrl } from '../../utilities/helpers';
 
-const ProjectSingle = ({ title, category, image, linkTo }) => {
+const ProjectSingle = ({ title, imageUrl, linkTo }) => {
 
 	return (
 		<motion.div
@@ -19,7 +18,7 @@ const ProjectSingle = ({ title, category, image, linkTo }) => {
 					<div className="rounded-xl shadow-lg hover:shadow-xl cursor-pointer mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-dark">
 						<div>
 							<img
-								src={getImageUrl(image)}
+								src={imageUrl}
 								className="aspect-square object-cover rounded-xl border-none"
 								alt={title}
 							/>

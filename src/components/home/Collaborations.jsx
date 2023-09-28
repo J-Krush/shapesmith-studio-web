@@ -1,8 +1,32 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Effigy1 } from '../../data/images';
-import { getImageUrl } from '../../utilities/helpers';
+import sanityClient from '../../utilities/sanityClient';
 
 const Collaborations = () => {
+
+	const [collaborationData, setCollaborationData] = useState();
+
+	useEffect(() => {
+		sanityClient.fetch(
+			`*[_type == "collaboration"]{
+				_id,
+				title,
+				description,
+				images[]{
+					altText,
+					asset->{
+						_id,
+						url,
+					},
+				}
+			  }
+			  `
+		)
+		.then((data) => {
+			setCollaborationData(data[0]);
+		})
+		.catch(console.error);
+	}, []);
 
 	return (
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10 bg-secondary-section-light dark:bg-secondary-section-dark">
@@ -37,7 +61,7 @@ const Collaborations = () => {
 					<div className="flex items-center sm:p-0 sm:mt-0">
 						<img
 							className="rounded-lg md:ml-6"
-							src={getImageUrl(Effigy1)}
+							src={collaborationData && collaborationData.images[0].asset.url}
 							alt="Effigy build"
 						/>
 					</div>

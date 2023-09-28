@@ -3,7 +3,6 @@ import ProjectSingle from './ProjectSingle';
 import { ProjectsContext } from '../../context/ProjectsContext';
 
 import { capabilitiesTitle } from '../../data/projects';
-
 const ProjectsGrid = () => {
 	const { projects } = useContext(ProjectsContext);
 
@@ -33,20 +32,19 @@ const ProjectsGrid = () => {
 							Contact Us!
 						</a>
 					</p>
-
-					
-
 				</div>
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 mx-12 sm:mx-0 sm:gap-10">
-					{projects.map((project) => (
-						<ProjectSingle
-							title={project.title}
-							category={project.category}
-							image={project.img}
-							key={project.id}
-							linkTo={project.slug}
-						/>
+					{projects
+						.sort((a,b) => a.order < b.order ? -1 : 1)
+						.map((project) => (
+							<ProjectSingle
+								title={project.title}
+								category={project.category}
+								imageUrl={project.listImage.asset.url}
+								key={project.title}
+								linkTo={project.slug}
+							/>
 					))}
 				</div>
 			</div>
