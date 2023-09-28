@@ -24,8 +24,6 @@ export const AboutMeProvider = ({ children }) => {
 			  `
 		)
 		.then((data) => {
-
-			console.log('about me data: ', data);
 			setAboutMe(data[0]);
 		})
 		.catch(console.error);

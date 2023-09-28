@@ -19,10 +19,10 @@ const ContactForm = () => {
     const handleSubmit = e => {
         // e.preventDefault(); 
 
-		console.log('handle submit');
-		console.log('name: ', formName);
-		console.log('email: ', formEmail);
-		console.log('message: ', formMessage);
+		// console.log('handle submit');
+		// console.log('name: ', formName);
+		// console.log('email: ', formEmail);
+		// console.log('message: ', formMessage);
 		
 		e.preventDefault();
 
@@ -39,7 +39,7 @@ const ContactForm = () => {
             })
         })
             .then(() => {
-				console.log('success');
+				// console.log('success');
 				alert("Success!");
 				setFormSubmitted(true);
 			})
