@@ -23,7 +23,6 @@ const OurProcess = () => {
 			  `
 		)
 		.then((data) => {
-			console.log('data fetched: ', data);
 			setProcessSteps(data);
 		})
 		.catch(console.error);

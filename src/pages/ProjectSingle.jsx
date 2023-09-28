@@ -2,6 +2,7 @@ import ProjectGallery from '../components/projects/ProjectGallery';
 import ProjectHeader from '../components/projects/ProjectHeader';
 import ProjectInfo from '../components/projects/ProjectInfo';
 import { SingleProjectProvider } from '../context/SingleProjectContext';
+import { ProjectsProvider } from '../context/ProjectsContext';
 import { motion } from 'framer-motion';
 
 const ProjectSingle = () => {
@@ -17,11 +18,13 @@ const ProjectSingle = () => {
 			}}
 			className="container mx-auto mt-5 sm:mt-10"
 		>
-			<SingleProjectProvider >
-				<ProjectHeader />
-				<ProjectGallery />
-				<ProjectInfo />
-			</SingleProjectProvider>
+			<ProjectsProvider>
+				<SingleProjectProvider >
+					<ProjectHeader />
+					<ProjectGallery />
+					<ProjectInfo />
+				</SingleProjectProvider>
+			</ProjectsProvider>
 		</motion.div>
 	);
 };

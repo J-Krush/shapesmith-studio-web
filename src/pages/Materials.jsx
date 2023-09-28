@@ -27,7 +27,6 @@ const Materials = () => {
 			  `
 		)
 		.then((data) => {
-			console.log('material data fetched: ', data);
 			setMaterials(data);
 		})
 		.catch(console.error);

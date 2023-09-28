@@ -23,17 +23,17 @@ const ProjectGallery = () => {
 		<div>
 			<div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
 				<div className="-m-1 flex flex-wrap md:-m-2">
-					{singleProjectData.ProjectImages.map((project) => {
+					{singleProjectData && singleProjectData.detailImages.map((image) => {
 
 						return (
-							<div className="flex w-1/3 flex-wrap" key={project.id}>
+							<div className="flex w-1/3 flex-wrap" key={image.asset.id}>
 								<div className="w-full p-1 md:p-2">
 									<img
-										src={getImageUrl(project.img)}
+										src={image.asset.url}
 										className="rounded-xl cursor-pointer shadow-lg sm:shadow-none"
-										alt={project.title}
-										key={project.id}
-										onClick={() => showModal(getImageUrl(project.img))}
+										alt={image.altText}
+										key={image.asset.id}
+										onClick={() => showModal(image.asset.url)}
 									/>
 								</div>
 							</div>

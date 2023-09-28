@@ -1,18 +1,19 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, useContext, createContext, useEffect } from 'react';
 import { useParams } from "react-router-dom"
-import { capabilitiesData } from '../data/projects';
+import { ProjectsContext } from '../context/ProjectsContext';
 
 const SingleProjectContext = createContext();
-
 
 export const SingleProjectProvider = ({ children }) => {
 
 	const { capability } = useParams();
-	const [singleProjectData, setSingleProjectData] = useState(capabilitiesData.find((cap) => cap.id === capability));
+	const { projects } = useContext(ProjectsContext);
+
+	const [singleProjectData, setSingleProjectData] = useState(projects.find((cap) => cap.slug.includes(capability)));
 
 	useEffect(() => {
-		setSingleProjectData(capabilitiesData.find((cap) => cap.id === capability));
-	  }, [capability]);
+		setSingleProjectData(projects.find((cap) => cap.slug.includes(capability)));
+	  }, [capability, projects]);
 
 	return (
 		<SingleProjectContext.Provider

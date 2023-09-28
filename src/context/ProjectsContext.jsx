@@ -13,8 +13,11 @@ export const ProjectsProvider = (props) => {
 			`*[_type == "laser-style"]{
 				order,
 				title,
+				description,
 				header,
 				slug,
+				preferredMaterials,
+				considerations,
 				listImage{
 					altText,
 					asset->{
@@ -33,7 +36,6 @@ export const ProjectsProvider = (props) => {
 			  `
 		)
 		.then((data) => {
-			console.log('laser styles fetched: ', data);
 			setProjects(data);
 		})
 		.catch(console.error);
