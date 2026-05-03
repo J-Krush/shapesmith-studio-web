@@ -30,7 +30,31 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The `ProjectGallery` image modal opens and closes via React state — no `document.getElementById` `classList` manipulation in the codebase
   4. `pnpm install && pnpm build` succeeds on a clean checkout against the pinned Node version (`.nvmrc` + `netlify.toml` + committed `pnpm-lock.yaml`)
   5. `pnpm test` runs a passing smoke test that mounts `<App />` — the broken legacy `App.test.js` is gone
-**Plans**: TBD
+**Plans**: 6 plans across 5 waves
+Plans:
+
+**Wave 1**
+- [ ] 01-01-PLAN.md — FOUND-05: pin Node 20 + pnpm 9, write netlify.toml, commit pnpm-lock.yaml
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 01-02-PLAN.md — FOUND-01: useSanityQuery hook + migrate 6 inline fetch sites
+
+**Wave 3** *(blocked on Wave 1 completion; plans run in parallel — zero file overlap)*
+- [ ] 01-03-PLAN.md — FOUND-03: dark theme via <html class="dark">, remove useThemeSwitcher and -light tokens
+- [ ] 01-04-PLAN.md — FOUND-04: state-driven ProjectGallery modal, fix _id key bug
+
+**Wave 4** *(blocked on Plan 01-03 — App.js + AppHeader.jsx file conflict)*
+- [ ] 01-05-PLAN.md — FOUND-02: SERVICES constant replaces capabilitiesTitle in 4 consumers
+
+**Wave 5** *(blocked on all preceding plans — regression sentinel)*
+- [ ] 01-06-PLAN.md — FOUND-06: smoke test that mounts <App /> with mocked Sanity client
+
+**Cross-cutting constraints:**
+- `--openssl-legacy-provider` flag retained in `package.json` scripts until Phase 4 Vite migration (D-20)
+- `src/data/projects.js` legacy arrays preserved — VIS-05 (Phase 2) owns dead-data purge (D-15)
+- No new test dependencies introduced — stay on CRA-bundled Jest + RTL (D-17)
+- README NOT rewritten in this phase — SEO-04 (Phase 2) owns it (D-22)
+
 **UI hint**: no
 
 ### Phase 2: Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub
@@ -92,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — refactor + env pinning | 0/TBD | Not started | - |
+| 1. Foundation — refactor + env pinning | 0/6 | Planned | - |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/TBD | Not started | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |
