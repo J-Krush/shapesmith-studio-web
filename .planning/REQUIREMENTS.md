@@ -48,7 +48,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 ### Shop Stub
 
-<!-- Shop is wired in as Coming Soon during Bundle 1; real shop is Phase 6. -->
+<!-- Shop is wired in as Coming Soon during Bundle 1; real shop is Phase 5. -->
 
 - [ ] **SHOP-01**: `/shop` is a real route in the router with a "Coming Soon" page reachable from the nav; no dead link
 - [ ] **SHOP-02**: The Coming Soon page captures email signups via Netlify Forms so visitors who want notification can opt in
@@ -153,67 +153,74 @@ Explicitly excluded for this project. Documented to prevent scope creep.
 
 ## Traceability
 
-Empty initially — populated by the roadmapper.
+Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | TBD | Pending |
-| FOUND-02 | TBD | Pending |
-| FOUND-03 | TBD | Pending |
-| FOUND-04 | TBD | Pending |
-| FOUND-05 | TBD | Pending |
-| FOUND-06 | TBD | Pending |
-| SVC-01 | TBD | Pending |
-| SVC-02 | TBD | Pending |
-| SVC-03 | TBD | Pending |
-| SVC-04 | TBD | Pending |
-| SVC-05 | TBD | Pending |
-| MAT-01 | TBD | Pending |
-| MAT-02 | TBD | Pending |
-| MAT-03 | TBD | Pending |
-| VIS-01 | TBD | Pending |
-| VIS-02 | TBD | Pending |
-| VIS-03 | TBD | Pending |
-| VIS-04 | TBD | Pending |
-| VIS-05 | TBD | Pending |
-| SHOP-01 | TBD | Pending |
-| SHOP-02 | TBD | Pending |
-| CTC-01 | TBD | Pending |
-| CTC-02 | TBD | Pending |
-| CTC-03 | TBD | Pending |
-| CTC-04 | TBD | Pending |
-| CNT-01 | TBD | Pending |
-| CNT-02 | TBD | Pending |
-| CNT-03 | TBD | Pending |
-| CNT-04 | TBD | Pending |
-| SEO-01 | TBD | Pending |
-| SEO-02 | TBD | Pending |
-| SEO-03 | TBD | Pending |
-| SEO-04 | TBD | Pending |
-| QTE-01 | TBD | Pending |
-| QTE-02 | TBD | Pending |
-| QTE-03 | TBD | Pending |
-| QTE-04 | TBD | Pending |
-| QTE-05 | TBD | Pending |
-| QTE-06 | TBD | Pending |
-| QTE-07 | TBD | Pending |
-| QTE-08 | TBD | Pending |
-| QTE-09 | TBD | Pending |
-| QTE-10 | TBD | Pending |
-| VITE-01 | TBD | Pending |
-| VITE-02 | TBD | Pending |
-| VITE-03 | TBD | Pending |
-| SHOP-03 | TBD | Pending |
-| SHOP-04 | TBD | Pending |
-| SHOP-05 | TBD | Pending |
-| SHOP-06 | TBD | Pending |
-| SHOP-07 | TBD | Pending |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| FOUND-06 | Phase 1 | Pending |
+| SVC-01 | Phase 2 | Pending |
+| SVC-02 | Phase 2 | Pending |
+| SVC-03 | Phase 2 | Pending |
+| SVC-04 | Phase 2 | Pending |
+| SVC-05 | Phase 2 | Pending |
+| MAT-01 | Phase 2 | Pending |
+| MAT-02 | Phase 2 | Pending |
+| MAT-03 | Phase 2 | Pending |
+| VIS-01 | Phase 2 | Pending |
+| VIS-02 | Phase 2 | Pending |
+| VIS-03 | Phase 2 | Pending |
+| VIS-04 | Phase 2 | Pending |
+| VIS-05 | Phase 2 | Pending |
+| SHOP-01 | Phase 2 | Pending |
+| SHOP-02 | Phase 2 | Pending |
+| CTC-01 | Phase 2 | Pending |
+| CTC-02 | Phase 2 | Pending |
+| CTC-03 | Phase 2 | Pending |
+| CTC-04 | Phase 2 | Pending |
+| CNT-01 | Phase 2 | Pending |
+| CNT-02 | Phase 2 | Pending |
+| CNT-03 | Phase 2 | Pending |
+| CNT-04 | Phase 2 | Pending |
+| SEO-01 | Phase 2 | Pending |
+| SEO-02 | Phase 2 | Pending |
+| SEO-03 | Phase 2 | Pending |
+| SEO-04 | Phase 2 | Pending |
+| QTE-01 | Phase 3 | Pending |
+| QTE-02 | Phase 3 | Pending |
+| QTE-03 | Phase 3 | Pending |
+| QTE-04 | Phase 3 | Pending |
+| QTE-05 | Phase 3 | Pending |
+| QTE-06 | Phase 3 | Pending |
+| QTE-07 | Phase 3 | Pending |
+| QTE-08 | Phase 3 | Pending |
+| QTE-09 | Phase 3 | Pending |
+| QTE-10 | Phase 3 | Pending |
+| VITE-01 | Phase 4 | Pending |
+| VITE-02 | Phase 4 | Pending |
+| VITE-03 | Phase 4 | Pending |
+| SHOP-03 | Phase 5 | Pending |
+| SHOP-04 | Phase 5 | Pending |
+| SHOP-05 | Phase 5 | Pending |
+| SHOP-06 | Phase 5 | Pending |
+| SHOP-07 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 51 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 51 ⚠️ (will be 0 after roadmap creation)
+- Mapped to phases: 51
+- Unmapped: 0 ✓
+
+**Per-phase counts:**
+- Phase 1 (Foundation): 6 requirements (FOUND-01..06)
+- Phase 2 (Bundle 1 Relaunch): 27 requirements (SVC-01..05, MAT-01..03, VIS-01..05, SHOP-01..02, CTC-01..04, CNT-01..04, SEO-01..04)
+- Phase 3 (Quote Tool): 10 requirements (QTE-01..10)
+- Phase 4 (Vite Migration): 3 requirements (VITE-01..03)
+- Phase 5 (Pre-Made Goods Shop): 5 requirements (SHOP-03..07)
 
 ---
 *Requirements defined: 2026-05-03*
-*Last updated: 2026-05-03 after initial definition*
+*Last updated: 2026-05-02 — traceability populated by roadmapper*
