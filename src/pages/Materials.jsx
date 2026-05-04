@@ -1,36 +1,29 @@
-import { useEffect, useState } from 'react';
-import sanityClient from '../utilities/sanityClient';
+import useSanityQuery from '../hooks/useSanityQuery';
 import MaterialSingle from "../materials/MaterialSingle";
 
 const Materials = () => {
 
-    const [materials, setMaterials] = useState([]);
+	const { data } = useSanityQuery(
+		`*[_type == "material"]{
+			_id,
+			order,
+			title,
+			processes,
+			cuttingSpecs,
+			description,
+			disclaimer,
+			listImage{
+				altText,
+				asset->{
+					_id,
+					url,
+				},
+			}
+		  }
+		  `
+	);
 
-	useEffect(() => {
-		sanityClient.fetch(
-			`*[_type == "material"]{
-				_id,
-                order,
-				title,
-                processes,
-                cuttingSpecs,
-                description,
-                disclaimer,
-				listImage{
-					altText,
-					asset->{
-						_id,
-						url,
-					},
-				}                
-			  }
-			  `
-		)
-		.then((data) => {
-			setMaterials(data);
-		})
-		.catch(console.error);
-	}, []);
+	const materials = data ?? [];
 
 
 	return (

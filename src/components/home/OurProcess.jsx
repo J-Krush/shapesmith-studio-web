@@ -1,32 +1,25 @@
-import { useEffect, useState } from 'react';
-import sanityClient from '../../utilities/sanityClient';
+import useSanityQuery from '../../hooks/useSanityQuery';
 
 const OurProcess = () => {
 
-	const [processSteps, setProcessSteps] = useState([]);
-
-	useEffect(() => {
-		sanityClient.fetch(
-			`*[_type == "maker-process"]{
-				_id,
-				order,
-				title,
-				image{
-					altText,
-					asset->{
-						_id,
-						url
-					},
+	const { data } = useSanityQuery(
+		`*[_type == "maker-process"]{
+			_id,
+			order,
+			title,
+			image{
+				altText,
+				asset->{
+					_id,
+					url
 				},
-				description
-			  }
-			  `
-		)
-		.then((data) => {
-			setProcessSteps(data);
-		})
-		.catch(console.error);
-	}, []);
+			},
+			description
+		  }
+		  `
+	);
+
+	const processSteps = data ?? [];
 
 	return (
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10 bg-secondary-section-light dark:bg-secondary-section-dark">
