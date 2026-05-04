@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-// import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 import { motion } from 'framer-motion';
 
 import { capabilitiesTitle } from '../../data/projects';
@@ -10,7 +9,6 @@ import logoDark from '../../assets/logo-flower-of-life-dark.png';
 
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
-	// const [activeTheme, setTheme] = useThemeSwitcher();
 
 	function toggleMenu() {
 		if (!showMenu) {
@@ -33,26 +31,12 @@ const AppHeader = () => {
 					<div>
 						<Link to="/">
 							<img
-								// src={activeTheme === 'dark' ? logoLight : logoDark}
 								src={logoDark}
 								className="w-12"
 								alt="Logo Flower"
 							/>
 						</Link>
 					</div>
-
-					{/* Theme switcher small screen */}
-					{/* <div
-						onClick={() => setTheme(activeTheme)}
-						aria-label="Theme Switcher"
-						className="block sm:hidden ml-0 bg-primary-light dark:bg-ternary-dark p-3 shadow-sm rounded-xl cursor-pointer"
-					>
-						{activeTheme === 'dark' ? (
-							<FiMoon className="text-ternary-dark hover:text-gray-400 dark:text-ternary-light dark:hover:text-primary-light text-xl" />
-						) : (
-							<FiSun className="text-gray-200 hover:text-gray-50 text-xl" />
-						)}
-					</div> */}
 
 					{/* Small screen hamburger menu */}
 					<div className="sm:hidden">
@@ -184,18 +168,6 @@ const AppHeader = () => {
 						</span>
 					</div>
 
-					{/* Theme switcher large screen */}
-					{/* <div
-						onClick={() => setTheme(activeTheme)}
-						aria-label="Theme Switcher"
-						className="ml-8 bg-primary-light dark:bg-ternary-dark p-3 shadow-sm rounded-xl cursor-pointer"
-					>
-						{activeTheme === 'dark' ? (
-							<FiMoon className="text-ternary-dark hover:text-gray-400 dark:text-ternary-light dark:hover:text-primary-light text-xl" />
-						) : (
-							<FiSun className="text-gray-200 hover:text-gray-50 text-xl" />
-						)}
-					</div> */}
 				</div>
 			</div>
 		</motion.nav>
