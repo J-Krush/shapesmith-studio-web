@@ -1,34 +1,25 @@
-import { useEffect, useState } from 'react';
-import sanityClient from '../../utilities/sanityClient';
+import useSanityQuery from '../../hooks/useSanityQuery';
 
 const QuickInfo = () => {
 
-	const [oversizedPieceImage, setOversizedPieceImage] = useState();
-	const [bedSizeImage, setBedSizeImage] = useState();
+	const { data } = useSanityQuery(
+		`*[_type == "laser-specs"]{
+			_id,
+			title,
+			image{
+				altText,
+				asset->{
+					_id,
+					url,
+				},
+			}
+		  }
+		  `
+	);
 
-	useEffect(() => {
-		sanityClient.fetch(
-			`*[_type == "laser-specs"]{
-				_id,
-				title,
-				image{
-					altText,
-					asset->{
-						_id,
-						url,
-					},
-				}
-			  }
-			  `
-		)
-		.then((data) => {
-			setOversizedPieceImage(data.find(img => img.image.altText === 'oversized-piece'))
-			setBedSizeImage(data.find(img => img.image.altText === 'bed-size'))
-		})
-		.catch(console.error);
-	}, []);
-
-	
+	const specs = data ?? [];
+	const oversizedPieceImage = specs.find((img) => img.image.altText === 'oversized-piece');
+	const bedSizeImage = specs.find((img) => img.image.altText === 'bed-size');
 
     return (
         <section className="py-5 sm:py-10 mt-5 sm:mt-10">
