@@ -5,10 +5,6 @@ import heroLight from '../../assets/bloom-layers-top.jpg';
 import brandMultiFont from '../../assets/brand-horizontal-multi-font.png';
 
 const AppBanner = () => {
-	// const [activeTheme] = useThemeSwitcher();
-
-	// console.log('activeTheme: ', activeTheme);
-
 	return (
 		<div 
 			className="container mx-auto h-full"
@@ -22,7 +18,6 @@ const AppBanner = () => {
 				<div className="w-2/3 text-left sm:mr-8">
 					<motion.div>
 						<img
-							// src={activeTheme === 'dark' ? brandLight : brandDark}
 							src={brandMultiFont}
 							className="mb-12"
 							alt="Brand"
@@ -63,9 +58,6 @@ const AppBanner = () => {
 				>
 					<img
 						className='rounded-lg my-24'
-						// src={
-						// 	activeTheme === 'dark' ? heroLight : heroDark
-						// }
 						src={heroLight}
 						alt="Developer"
 					/>
