@@ -47,7 +47,7 @@ Plans:
 - [x] 01-05-PLAN.md — FOUND-02: SERVICES constant replaces capabilitiesTitle in 4 consumers
 
 **Wave 5** *(blocked on all preceding plans — regression sentinel)*
-- [ ] 01-06-PLAN.md — FOUND-06: smoke test that mounts <App /> with mocked Sanity client
+- [x] 01-06-PLAN.md — FOUND-06: smoke test that mounts <App /> with mocked Sanity client
 
 **Cross-cutting constraints:**
 - `--openssl-legacy-provider` flag retained in `package.json` scripts until Phase 4 Vite migration (D-20)
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — refactor + env pinning | 5/6 | In progress | - |
+| 1. Foundation — refactor + env pinning | 6/6 | Awaiting verification | - |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/TBD | Not started | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |

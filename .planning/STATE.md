@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 1 of 5 (Foundation — refactor + env pinning)
-Plan: 5 of 6 in current phase
-Status: Wave 4 complete; advancing to Wave 5 (01-06 smoke test — regression sentinel)
-Last activity: 2026-05-04 — Plan 01-05 complete (SERVICES constant; capabilitiesTitle export removed)
+Plan: 6 of 6 in current phase
+Status: All plans executed; running code review + verification
+Last activity: 2026-05-04 — Wave 5 complete (smoke test passes; pnpm test exits 0)
 
-Progress: [████████░░] 83%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
