@@ -2,16 +2,17 @@ import { useContext } from 'react';
 import ProjectSingle from './ProjectSingle';
 import { ProjectsContext } from '../../context/ProjectsContext';
 
-import { capabilitiesTitle } from '../../data/projects';
+import { SERVICES } from '../../data/services';
 const ProjectsGrid = () => {
 	const { projects } = useContext(ProjectsContext);
+	const laser = SERVICES.find((s) => s.key === 'laser');
 
 	return (
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10">
 			<div className="container mx-auto sm:mx-50">
 				<div>
 					<p className="capitalize font-display font-bold text-4xl md:text-center sm:text-left mb-6 text-ternary-dark dark:text-ternary-light">
-						Laser Cutting {capabilitiesTitle}
+						Laser Cutting {laser.navLabel}
 					</p>
 					<p className="font-general-medium text-xl font-regular text-m mb-12 text-ternary-dark dark:text-ternary-light">
 						

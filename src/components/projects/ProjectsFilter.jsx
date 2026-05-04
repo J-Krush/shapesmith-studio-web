@@ -1,4 +1,4 @@
-import { capabilitiesTitle } from "../../data/projects";
+import { SERVICES } from "../../data/services";
 
 const selectOptions = [
 	'Web Application',
@@ -8,6 +8,7 @@ const selectOptions = [
 ];
 
 const ProjectsFilter = ({ setSelectProject }) => {
+	const laser = SERVICES.find((s) => s.key === 'laser');
 	return (
 		<select
 			onChange={(e) => {
@@ -30,7 +31,7 @@ const ProjectsFilter = ({ setSelectProject }) => {
             "
 		>
 			<option value={setSelectProject} className="capitalize text-sm sm:text-md">
-				All {capabilitiesTitle}
+				All {laser.navLabel}
 			</option>
 
 			{selectOptions.map((option) => (

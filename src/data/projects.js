@@ -19,14 +19,12 @@ import {
 
  } from './images';
 
-export const capabilitiesTitle = 'styles';
-
 export const capabilitiesData = [
 	{
 		id: 'layered-wall-art',
 		title: 'Layered Wall Art',
 		img: CatTop,
-		slug: `/${capabilitiesTitle}/layered-wall-art`,
+		slug: `/styles/layered-wall-art`,
 		ProjectHeader: {
 			title: 'Multi-layered Wall Art',
 			tags: 'Unknown',
@@ -100,7 +98,7 @@ export const capabilitiesData = [
 		id: '3d-slices',
 		title: 'Sliced 3D Models',
 		img: SkullSliced,
-		slug: `/${capabilitiesTitle}/3d-slices`,
+		slug: `/styles/3d-slices`,
 		ProjectHeader: {
 			title: 'Sliced 3D Models',
 			tags: 'Unknown',
@@ -132,7 +130,7 @@ export const capabilitiesData = [
 		id: 'signage',
 		title: 'Signage',
 		img: InwardArtsSigns,
-		slug: `/${capabilitiesTitle}/signage`,
+		slug: `/styles/signage`,
 		ProjectHeader: {
 			title: 'Signage and Branding',
 			tags: 'Unknown',
@@ -178,7 +176,7 @@ export const capabilitiesData = [
 		id: 'jewelry',
 		title: 'Jewelry',
 		img: EarringsGeometric,
-		slug: `/${capabilitiesTitle}/jewelry`,
+		slug: `/styles/jewelry`,
 		ProjectHeader: {
 			title: 'Jewelry',
 			tags: 'Unknown',
@@ -208,7 +206,7 @@ export const capabilitiesData = [
 		id: 'furniture',
 		title: 'Furniture & Large Pieces',
 		img: HeadboardInstalled,
-		slug: `/${capabilitiesTitle}/furniture`,
+		slug: `/styles/furniture`,
 		ProjectHeader: {
 			title: 'Furniture & Large Pieces',
 			tags: 'Unknown',
@@ -244,7 +242,7 @@ export const capabilitiesData = [
 		id: 'merchandise',
 		title: 'Merchandise & Party Favors',
 		img: VenmoSign,
-		slug: `/${capabilitiesTitle}/merchandise`,
+		slug: `/styles/merchandise`,
 		ProjectHeader: {
 			title: 'Merchandise, Party Favors & Wedding Gifts',
 			tags: 'Unknown',

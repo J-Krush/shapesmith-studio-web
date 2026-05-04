@@ -6,7 +6,7 @@ import AppFooter from './components/shared/AppFooter';
 import AppHeader from './components/shared/AppHeader';
 import './css/App.css';
 import UseScrollToTop from './hooks/useScrollToTop';
-import { capabilitiesTitle } from '../src/data/projects';
+import { SERVICES } from './data/services';
 import Materials from './pages/Materials';
 
 // import './App.css';
@@ -21,6 +21,7 @@ const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
 
 
 function App() {
+	const laser = SERVICES.find((s) => s.key === 'laser');
 
 	return (
 		<AnimatePresence>
@@ -31,9 +32,9 @@ function App() {
 					<Suspense fallback={""}>
 						<Routes>
 							<Route path="/" element={<Home />} />
-							<Route path={`/${capabilitiesTitle}`} element={<Projects />} />
+							<Route path={`/${laser.urlSegment}`} element={<Projects />} />
 							<Route
-								path={`/${capabilitiesTitle}/:capability`}
+								path={`/${laser.urlSegment}/:capability`}
 								element={<ProjectSingle />}
 							/>
 							<Route
