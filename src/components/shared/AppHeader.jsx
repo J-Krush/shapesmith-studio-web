@@ -3,12 +3,13 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { capabilitiesTitle } from '../../data/projects';
+import { SERVICES } from '../../data/services';
 // import logoLight from '../../assets/logo-flower-of-life-light.png';
 import logoDark from '../../assets/logo-flower-of-life-dark.png';
 
 const AppHeader = () => {
 	const [showMenu, setShowMenu] = useState(false);
+	const laser = SERVICES.find((s) => s.key === 'laser');
 
 	function toggleMenu() {
 		if (!showMenu) {
@@ -78,12 +79,12 @@ const AppHeader = () => {
 						Home
 					</Link>
 					<Link
-						to={`/${capabilitiesTitle}`}
+						to={`/${laser.urlSegment}`}
 						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:border-t-0 border-primary-light dark:border-secondary-dark"
-						aria-label={capabilitiesTitle}
+						aria-label={laser.navLabel}
 						onClick={() => setShowMenu(false)}
 					>
-						{capabilitiesTitle}
+						{laser.navLabel}
 					</Link>
 					<Link
 						to="/materials"
@@ -131,11 +132,11 @@ const AppHeader = () => {
 						Shop (Coming Soon)
 					</Link> */}
 					<Link
-						to={`/${capabilitiesTitle}`}
+						to={`/${laser.urlSegment}`}
 						className="capitalize block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label={capabilitiesTitle}
+						aria-label={laser.navLabel}
 					>
-						{capabilitiesTitle}
+						{laser.navLabel}
 					</Link>
 					<Link
 						to="/materials"
