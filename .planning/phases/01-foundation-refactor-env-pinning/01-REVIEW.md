@@ -30,7 +30,10 @@ findings:
   warning: 6
   info: 7
   total: 15
+  resolved: 1
 status: issues_found
+resolved_findings:
+  - BL-01 (resolved 2026-05-04 via commit 6942a1a — restored four -light tokens in tailwind.config.js)
 ---
 
 # Phase 1: Code Review Report
@@ -75,7 +78,7 @@ is consistent across `.nvmrc`, `netlify.toml`, and `package.json`. The
 
 ## Blocker Issues
 
-### BL-01: Tailwind `-light` color tokens deleted but still referenced as dark-mode utilities, dropping production styles
+### BL-01: Tailwind `-light` color tokens deleted but still referenced as dark-mode utilities, dropping production styles  [RESOLVED 2026-05-04 — commit 6942a1a restored the four tokens; compiled CSS verified to contain `.dark:text-ternary-light` and friends]
 
 **File:** `tailwind.config.js:30-49` (combined with consumer files listed below)
 
