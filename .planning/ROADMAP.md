@@ -40,8 +40,8 @@ Plans:
 - [x] 01-02-PLAN.md — FOUND-01: useSanityQuery hook + migrate 6 inline fetch sites
 
 **Wave 3** *(blocked on Wave 1 completion; plans run in parallel — zero file overlap)*
-- [ ] 01-03-PLAN.md — FOUND-03: dark theme via <html class="dark">, remove useThemeSwitcher and -light tokens
-- [ ] 01-04-PLAN.md — FOUND-04: state-driven ProjectGallery modal, fix _id key bug
+- [x] 01-03-PLAN.md — FOUND-03: dark theme via <html class="dark">, remove useThemeSwitcher and -light tokens
+- [x] 01-04-PLAN.md — FOUND-04: state-driven ProjectGallery modal, fix _id key bug
 
 **Wave 4** *(blocked on Plan 01-03 — App.js + AppHeader.jsx file conflict)*
 - [ ] 01-05-PLAN.md — FOUND-02: SERVICES constant replaces capabilitiesTitle in 4 consumers
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — refactor + env pinning | 2/6 | In progress | - |
+| 1. Foundation — refactor + env pinning | 4/6 | In progress | - |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/TBD | Not started | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |

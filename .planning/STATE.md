@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 1 of 5 (Foundation — refactor + env pinning)
-Plan: 2 of 6 in current phase
-Status: Wave 2 complete; advancing to Wave 3 (parallel: 01-03 + 01-04)
-Last activity: 2026-05-04 — Plan 01-02 complete (useSanityQuery hook + 6-consumer migration)
+Plan: 4 of 6 in current phase
+Status: Wave 3 complete; advancing to Wave 4 (01-05 SERVICES consolidation)
+Last activity: 2026-05-04 — Wave 3 complete (01-03 dark theme refactor + 01-04 state-driven gallery, parallel)
 
-Progress: [██░░░░░░░░] 33%
+Progress: [█████░░░░░] 67%
 
 ## Performance Metrics
 
