@@ -2,6 +2,10 @@
   "name": "shapesmith-studio-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.0.0",
   "dependencies": {
     "@sanity/client": "^6.1.7",
     "@testing-library/jest-dom": "^5.16.5",
