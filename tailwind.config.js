@@ -29,10 +29,15 @@ module.exports = {
 
 		extend: {
 			colors: {
+				'primary-light': '#F7F8FC',
+				'secondary-light': '#FFFFFF',
+				'ternary-light': '#f6f7f8',
+
 				'primary-dark': '#291c30',
 				'secondary-dark': '#102D44',
 				'ternary-dark': '#1E3851',
 
+				'secondary-section-light': '#d1d1d1ff',
 				'secondary-section-dark': '#594a60',
 				'ternary-section-dark': '#94989c',
 
