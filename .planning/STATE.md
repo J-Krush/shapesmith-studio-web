@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 1 of 5 (Foundation — refactor + env pinning)
-Plan: 1 of 6 in current phase
-Status: Wave 1 complete; advancing to Wave 2
-Last activity: 2026-05-03 — Plan 01-01 complete (Node 20 + pnpm 9 pinned, netlify.toml, pnpm-lock.yaml committed)
+Plan: 2 of 6 in current phase
+Status: Wave 2 complete; advancing to Wave 3 (parallel: 01-03 + 01-04)
+Last activity: 2026-05-04 — Plan 01-02 complete (useSanityQuery hook + 6-consumer migration)
 
-Progress: [█░░░░░░░░░] 17%
+Progress: [██░░░░░░░░] 33%
 
 ## Performance Metrics
 
