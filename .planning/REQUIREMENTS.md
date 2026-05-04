@@ -11,12 +11,12 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- Codebase refactors and environment pinning that unblock subsequent work. -->
 
-- [ ] **FOUND-01**: Sanity data fetching is unified through a single `useSanityQuery` hook with consistent `{ data, loading, error }` and request cancellation; existing inline `useEffect` fetch sites are migrated to use it
-- [ ] **FOUND-02**: A single `SERVICES` constant in `src/data/services.js` is the source of truth for service `key`, `urlSegment`, `navLabel`, Sanity content type, and contact-form subject; the existing load-bearing `capabilitiesTitle` is removed
-- [ ] **FOUND-03**: The dark-theme application no longer happens as a render-time side effect (moved into `useEffect` or set on `<html>` in `index.html`); `useThemeSwitcher` and any unused `dark:` Tailwind variants are stripped — committing to dark-only for now
-- [ ] **FOUND-04**: The image-modal in `ProjectGallery` (and its eventual `/3d-printing` equivalent) renders from React state — the `document.getElementById` `classList` manipulation is removed
-- [ ] **FOUND-05**: Node version is pinned via `.nvmrc` (Node 20 LTS), `netlify.toml` declares `NODE_VERSION` and the build image, and `pnpm-lock.yaml` is committed (currently untracked)
-- [ ] **FOUND-06**: `App.test.js` is replaced with a smoke test that actually passes; broken legacy test removed
+- [x] **FOUND-01**: Sanity data fetching is unified through a single `useSanityQuery` hook with consistent `{ data, loading, error }` and request cancellation; existing inline `useEffect` fetch sites are migrated to use it
+- [x] **FOUND-02**: A single `SERVICES` constant in `src/data/services.js` is the source of truth for service `key`, `urlSegment`, `navLabel`, Sanity content type, and contact-form subject; the existing load-bearing `capabilitiesTitle` is removed
+- [x] **FOUND-03**: The dark-theme application no longer happens as a render-time side effect (moved into `useEffect` or set on `<html>` in `index.html`); `useThemeSwitcher` and any unused `dark:` Tailwind variants are stripped — committing to dark-only for now
+- [x] **FOUND-04**: The image-modal in `ProjectGallery` (and its eventual `/3d-printing` equivalent) renders from React state — the `document.getElementById` `classList` manipulation is removed
+- [x] **FOUND-05**: Node version is pinned via `.nvmrc` (Node 20 LTS), `netlify.toml` declares `NODE_VERSION` and the build image, and `pnpm-lock.yaml` is committed (currently untracked)
+- [x] **FOUND-06**: `App.test.js` is replaced with a smoke test that actually passes; broken legacy test removed
 
 ### Services (3D Printing Surface)
 
@@ -157,12 +157,12 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
-| FOUND-05 | Phase 1 | Pending |
-| FOUND-06 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Validated |
+| FOUND-02 | Phase 1 | Validated |
+| FOUND-03 | Phase 1 | Validated |
+| FOUND-04 | Phase 1 | Validated |
+| FOUND-05 | Phase 1 | Validated |
+| FOUND-06 | Phase 1 | Validated |
 | SVC-01 | Phase 2 | Pending |
 | SVC-02 | Phase 2 | Pending |
 | SVC-03 | Phase 2 | Pending |
@@ -223,4 +223,4 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 
 ---
 *Requirements defined: 2026-05-03*
-*Last updated: 2026-05-02 — traceability populated by roadmapper*
+*Last updated: 2026-05-04 — Phase 1 (FOUND-01..06) validated*

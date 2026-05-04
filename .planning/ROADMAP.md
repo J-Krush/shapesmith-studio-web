@@ -12,7 +12,7 @@ The studio is returning from a multi-year pause to actually drive revenue from t
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation — refactor + env pinning** - Cheap, high-leverage, non-visual unblocks for every later phase
+- [x] **Phase 1: Foundation — refactor + env pinning** - Cheap, high-leverage, non-visual unblocks for every later phase  *(completed 2026-05-04)*
 - [ ] **Phase 2: Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub** - The big visible relaunch; ships everything required for the studio to feel ready to market
 - [ ] **Phase 3: Auto-Pricing Quote Tool** - File upload → ballpark estimate → manual confirmation gate
 - [ ] **Phase 4: Vite Migration** - Exit Create React App between revenue features, no user-visible change
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation — refactor + env pinning | 6/6 | Awaiting verification | - |
+| 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/TBD | Not started | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |

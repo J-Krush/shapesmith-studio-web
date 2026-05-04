@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 
 ## Current Position
 
-Phase: 1 of 5 (Foundation — refactor + env pinning)
-Plan: 6 of 6 in current phase
-Status: All plans executed; running code review + verification
-Last activity: 2026-05-04 — Wave 5 complete (smoke test passes; pnpm test exits 0)
+Phase: 2 of 5 (Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub)
+Plan: 0 of TBD in current phase
+Status: Phase 1 complete; ready to plan Phase 2
+Last activity: 2026-05-04 — Phase 1 verified (5/5 must-haves; FOUND-01..06 validated; BL-01 fixed in-flight via commit 6942a1a)
 
-Progress: [██████████] 100%
+Progress: Phase 1 [██████████] 100% — Complete
 
 ## Performance Metrics
 
