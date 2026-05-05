@@ -11,10 +11,10 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 
 Phase: 2 of 5 (Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub)
 Plan: 0 of TBD in current phase
-Status: Phase 1 complete; ready to plan Phase 2
-Last activity: 2026-05-04 — Phase 1 verified (5/5 must-haves; FOUND-01..06 validated; BL-01 fixed in-flight via commit 6942a1a)
+Status: Phase 2 context gathered; ready for `/gsd-plan-phase 2`
+Last activity: 2026-05-05 — Phase 2 CONTEXT.md written (32 decisions across 4 areas; commit 3bff550)
 
-Progress: Phase 1 [██████████] 100% — Complete
+Progress: Phase 1 [██████████] 100% — Complete; Phase 2 [█░░░░░░░░░] context
 
 ## Performance Metrics
 
@@ -69,6 +69,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-03
-Stopped at: Phase 1 planned — ready for `/gsd-execute-phase 1`
-Resume file: .planning/phases/01-foundation-refactor-env-pinning/01-01-PLAN.md
+Last session: 2026-05-05
+Stopped at: Phase 2 context gathered — ready for `/gsd-plan-phase 2`
+Resume file: .planning/phases/02-bundle-1-relaunch-3d-printing-spruce-content-seo-shop-stub/02-CONTEXT.md
