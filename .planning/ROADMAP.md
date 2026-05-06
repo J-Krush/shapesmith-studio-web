@@ -86,7 +86,7 @@ Plans:
 - [x] 02-04-PLAN.md — Trust copy + SEO: SEOHead mounted on every route; JsonLdLocalBusiness on Home; sitemap.xml postbuild script + robots.txt; public/index.html static SEO defaults + og-default.png; theme-color #291c30 (SEO-01, SEO-02, SEO-03)
 
 **Wave 5** *(blocked on Wave 4)*
-- [ ] 02-05-PLAN.md — Contact + shop + cleanup + README: ContactForm pre-fill + CSS-hidden honeypot + relative URL + response-time promise + accent submit + no alert(); Shop Coming Soon page with shop-notify form; public/index.html hidden-form prerender extended (service field + shop-notify form); VIS-05 dead-code purge (13 files); styled-components removal; useScrollToTop listener-leak fix; encodeFormData extraction; README.md replacement (SHOP-01, SHOP-02, CTC-01, CTC-02, CTC-03, CTC-04, VIS-05, SEO-04)
+- [x] 02-05-PLAN.md — Contact + shop + cleanup + README: ContactForm pre-fill + CSS-hidden honeypot + relative URL + response-time promise + accent submit + no alert(); Shop Coming Soon page with shop-notify form; public/index.html hidden-form prerender extended (service field + shop-notify form); VIS-05 dead-code purge (13 files); styled-components removal; useScrollToTop listener-leak fix; encodeFormData extraction; README.md replacement (SHOP-01, SHOP-02, CTC-01, CTC-02, CTC-03, CTC-04, VIS-05, SEO-04)
 **UI hint**: yes
 
 ### Phase 3: Auto-Pricing Quote Tool

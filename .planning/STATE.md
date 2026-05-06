@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Plan 02-03 complete — ready to start Plan 02-04 (Wave 4 — trust copy + SEO mounting)
-last_updated: "2026-05-06T19:29:15.868Z"
+stopped_at: Plan 02-05 complete — Phase 2 closed (all 27 requirements landed); ready for verifier sign-off
+last_updated: "2026-05-06T19:43:11.622Z"
 last_activity: 2026-05-06
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 11
-  completed_plans: 10
-  percent: 91
+  completed_plans: 11
+  percent: 100
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 
 ## Current Position
 
-Phase: 02 (Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub) — EXECUTING
-Plan: 4 of 5 complete — ready to start Plan 02-04 (Wave 4: trust copy + SEO — SEOHead mounted on every route, JsonLdLocalBusiness on Home, sitemap.xml + robots.txt, og-default.png, theme-color)
-Status: Ready to execute
+Phase: 02 (Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub) — COMPLETE
+Plan: 5 of 5 complete — Phase 2 closed; all 27 requirements (SVC-01..05, MAT-01..03, VIS-01..05, SHOP-01..02, CTC-01..04, CNT-01..04, SEO-01..04) landed across 5 plans
+Status: Phase complete — ready for verifier sign-off
 Last activity: 2026-05-06
 
-Progress: [█████████░] 91%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Progress: [█████████░] 91%
 
 *Updated after each plan completion*
 | Phase 02 P04 | 5m | 2 tasks | 11 files |
+| Phase 02 P05 | 6m | 3 tasks | 23 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,7 @@ Recent decisions affecting current work:
 - Roadmap (2026-05-02): ServicesContext-vs-parallel-PrintsContext deferred to Phase 2's plan (input: trade-off table in research/SUMMARY.md) — RESOLVED in Plan 02-01 (generalized ServicesContext chosen)
 - Roadmap (2026-05-02): Granularity coarse → 5 phases (research suggested 6; combined Foundation as standalone, Bundle 1 spruce + content + SEO into one)
 - [Phase ?]: Plan 02-04 (2026-05-06): SEO surface fully wired. <SEOHead /> mounts on every public route except /shop (Plan 05 owns it); <JsonLdLocalBusiness /> on Home only (D-21); public/index.html has Phase 2 static defaults (description/og: tags/theme-color #291c30) replacing CRA boilerplate; public/og-default.png is the brand wordmark fallback (D-20); scripts/generate-sitemap.cjs runs postbuild via npm-lifecycle, writing build/sitemap.xml from STATIC_ROUTES + Sanity laser/print slugs; public/robots.txt references the sitemap. T-02-04-01 (JSON-LD injection) mitigated via JSON.stringify; T-02-04-02 (XML injection) mitigated via escapeXml; T-02-04-05 (DoS) mitigated via try/catch + buildDir guard. First-build sitemap emits 6 URLs (all static — Sanity slugs not yet populated; script handles empty arrays gracefully).
+- [Phase ?]: Plan 02-05 (2026-05-06): Phase 2 closed. Pre-fill from ?service= query OR document.referrer (D-24); CSS-hidden honeypot off-screen, NOT display-hidden (D-26); relative-URL fetch('/'); SERVICES-driven dropdown (D-25); studio-info.responseTimePromise via useSanityQuery (D-27); state-driven error UX replacing alert(). Shop.jsx replaced with Coming Soon page + shop-notify Netlify form (D-23) + SEOHead (closes SEO-01). public/index.html prerender extended (D-28). encodeFormData utility extracted. VIS-05 cleanup: 13 files / 1313 lines deleted, styled-components dropped, useScrollToTop leak fixed. README.md project-specific (D-31). All 27 Phase 2 requirements landed.
 
 ### Pending Todos
 
@@ -99,8 +101,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-06T19:29:15.862Z
-Stopped at: Plan 02-03 complete — ready to start Plan 02-04 (Wave 4 — trust copy + SEO mounting)
+Last session: 2026-05-06T19:43:05.962Z
+Stopped at: Plan 02-05 complete — Phase 2 closed (all 27 requirements landed); ready for verifier sign-off
 Resume file: None
 
 ### Performance Metrics (Phase 2)
@@ -110,3 +112,7 @@ Resume file: None
 **Plan 02-02:** ~6 minutes actual (single sequential session, no checkpoint). 3 tasks (all auto). 5 created files + 8 modified files. 3 commits (87e84d1, e5bbe99, 89a8db1). Deviation: GROQ override carried forward from Plan 02-01 spike (uses `$serviceKey in services`, not `processes`); Rule 3 jest.mock for `./utilities/sanityImage` to keep smoke test passing once `MaterialSingle` joined SanityImage's chain.
 
 **Plan 02-03:** ~7 minutes actual (single sequential session, no checkpoint). 3 tasks (all auto). 1 created file (NotFound.jsx) + 13 modified files (AppBanner, AppHeader, App.js, QuickInfo, ServicesGrid, ContactForm, SocialLinks, AppFooter, AppFooterCopyright, HireMeModal, AboutMeBio, App.css, main.css). 3 commits (3b1289a, d2ec150, b9eadc7). Deviations: Rule 3 NotFound.jsx created in Task 2 (not Task 3) to avoid build-blocking missing-module error after lazy import added; Rule 2 indigo→accent purge extended into dead-comment code (HireMeModal + AppFooter + AppFooterCopyright) and live `App.css .scrollToTop` to satisfy synthesis check; obsolete dark-token parity check skipped (invalidated by Phase 1 commit 6942a1a that restored `-light` tokens for dark-mode use); single-quote NAV_ITEMS string literals (consistent with codebase JS convention).
+
+**Plan 02-04:** ~5 minutes actual (single sequential session, no checkpoint). 2 tasks (both auto). 2 created files (scripts/generate-sitemap.cjs, public/og-default.png) + 9 modified files (Home.jsx, AboutMe.jsx, Contact.jsx, Projects.jsx, ProjectSingle.jsx, NotFound.jsx, public/index.html, public/robots.txt, package.json). 2 commits (d2b9b17, d90d8cf).
+
+**Plan 02-05:** ~6 minutes actual (single sequential session, no checkpoint). 3 tasks (all auto). 1 created file (src/utilities/encodeFormData.jsx) + 9 modified files (ContactForm.jsx, Shop.jsx, public/index.html, useScrollToTop.jsx, AboutMeContext.jsx, App.js, package.json, pnpm-lock.yaml, README.md) + 13 deleted files (1,313 lines removed). 3 commits (b3511bd, 2a40089, 6b12b2d). Deviations: §1 `display:none` literal in source COMMENTS tripped honeypot grep guard — comments rephrased; §2 `useScrollToTop` listener-leak fix used `useCallback(scrollToTop, [showScroll])` + effect dep `[scrollToTop]` instead of bare `[]` deps to preserve threshold-based `setShowScroll` semantics. **Phase 2 closed: all 27 requirements landed across 5 plans.**

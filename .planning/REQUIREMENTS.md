@@ -44,23 +44,23 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 - [x] **VIS-02**: The site nav (header) is visually refreshed and accommodates the new services entries cleanly on mobile and desktop  *(completed 2026-05-06 — Plan 02-03; peer-equal SERVICES.map nav with active-state, /shop added, /materials dropped, hamburger cleaned up)*
 - [x] **VIS-03**: The visual refresh is applied consistently across every route — `/`, `/styles`, `/styles/:slug`, `/3d-printing`, `/3d-printing/:slug`, `/about`, `/contact`, `/shop`, `/404` — no half-spruced surfaces remain  *(completed 2026-05-06 — Plan 02-03; static-inspection sweep verified, indigo synthesis check empty, /404 + /shop routes live, NotFound has inline Helmet noindex)*
 - [ ] **VIS-04**: Sanity images are served via `@sanity/image-url` with responsive `srcSet` and lazy loading; full-size CDN originals are no longer used for thumbnails
-- [ ] **VIS-05**: Dead/legacy code (`src/data/materials.js`, `src/data/aboutMeData.js`, `src/data/singleProjectData.js`, `src/data/images.js`, `src/components/contact/contact-form.js`, unused `styled-components` dependency) is removed in the same window
+- [x] **VIS-05**: Dead/legacy code (`src/data/materials.js`, `src/data/aboutMeData.js`, `src/data/singleProjectData.js`, `src/data/images.js`, `src/components/contact/contact-form.js`, unused `styled-components` dependency) is removed in the same window
 
 ### Shop Stub
 
 <!-- Shop is wired in as Coming Soon during Bundle 1; real shop is Phase 5. -->
 
-- [ ] **SHOP-01**: `/shop` is a real route in the router with a "Coming Soon" page reachable from the nav; no dead link
-- [ ] **SHOP-02**: The Coming Soon page captures email signups via Netlify Forms so visitors who want notification can opt in
+- [x] **SHOP-01**: `/shop` is a real route in the router with a "Coming Soon" page reachable from the nav; no dead link
+- [x] **SHOP-02**: The Coming Soon page captures email signups via Netlify Forms so visitors who want notification can opt in
 
 ### Contact + Lead Capture
 
 <!-- Contact form gets a service pre-fill; honeypot and dead-form bugs fixed. -->
 
-- [ ] **CTC-01**: The contact form's "service interested in" field pre-fills based on referrer page (`/3d-printing` → 3D Printing; `/styles` → Laser Cutting) and `?service=` query string; user can change the value
-- [ ] **CTC-02**: The Netlify hidden form declaration in `public/index.html` is updated so the new `service` field is recognized at deploy time
-- [ ] **CTC-03**: The honeypot field is rendered visually hidden (CSS or `hidden` attribute), not visible to humans
-- [ ] **CTC-04**: The contact page displays a response-time promise ("We reply within 1 business day") sourced from Sanity so the owner can adjust without a redeploy
+- [x] **CTC-01**: The contact form's "service interested in" field pre-fills based on referrer page (`/3d-printing` → 3D Printing; `/styles` → Laser Cutting) and `?service=` query string; user can change the value
+- [x] **CTC-02**: The Netlify hidden form declaration in `public/index.html` is updated so the new `service` field is recognized at deploy time
+- [x] **CTC-03**: The honeypot field is rendered visually hidden (CSS or `hidden` attribute), not visible to humans
+- [x] **CTC-04**: The contact page displays a response-time promise ("We reply within 1 business day") sourced from Sanity so the owner can adjust without a redeploy
 
 ### Content (Local-Customer Trust)
 
@@ -78,7 +78,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 - [x] **SEO-01**: Every route renders a per-page `<title>`, `<meta name="description">`, `og:title`, `og:description`, `og:image`, and `og:url`, driven by `react-helmet-async` (or equivalent) with copy sourced from Sanity per page where appropriate
 - [x] **SEO-02**: The homepage embeds Schema.org `LocalBusiness` JSON-LD (business name, location, hours/turnaround, services, contact) so local search can index the studio correctly
 - [x] **SEO-03**: A `sitemap.xml` is generated at build time including all routes (including detail pages); `robots.txt` is updated to reference it
-- [ ] **SEO-04**: README is replaced (currently CRA boilerplate) with a project-specific quickstart and content-update guide
+- [x] **SEO-04**: README is replaced (currently CRA boilerplate) with a project-specific quickstart and content-update guide
 
 ### Quote Tool (Auto-Pricing)
 
@@ -175,13 +175,13 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | VIS-02 | Phase 2 | Validated (Plan 02-03) |
 | VIS-03 | Phase 2 | Validated (Plan 02-03) |
 | VIS-04 | Phase 2 | Pending |
-| VIS-05 | Phase 2 | Pending |
-| SHOP-01 | Phase 2 | Pending |
-| SHOP-02 | Phase 2 | Pending |
-| CTC-01 | Phase 2 | Pending |
-| CTC-02 | Phase 2 | Pending |
-| CTC-03 | Phase 2 | Pending |
-| CTC-04 | Phase 2 | Pending |
+| VIS-05 | Phase 2 | Complete |
+| SHOP-01 | Phase 2 | Complete |
+| SHOP-02 | Phase 2 | Complete |
+| CTC-01 | Phase 2 | Complete |
+| CTC-02 | Phase 2 | Complete |
+| CTC-03 | Phase 2 | Complete |
+| CTC-04 | Phase 2 | Complete |
 | CNT-01 | Phase 2 | Validated (Plan 02-02) |
 | CNT-02 | Phase 2 | Validated (Plan 02-02) |
 | CNT-03 | Phase 2 | Validated (Plan 02-02) |
@@ -189,7 +189,7 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | SEO-01 | Phase 2 | Complete |
 | SEO-02 | Phase 2 | Complete |
 | SEO-03 | Phase 2 | Complete |
-| SEO-04 | Phase 2 | Pending |
+| SEO-04 | Phase 2 | Complete |
 | QTE-01 | Phase 3 | Pending |
 | QTE-02 | Phase 3 | Pending |
 | QTE-03 | Phase 3 | Pending |
