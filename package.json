@@ -28,6 +28,7 @@
   "scripts": {
     "start": "react-scripts start --openssl-legacy-provider",
     "build": "react-scripts build --openssl-legacy-provider",
+    "postbuild": "node scripts/generate-sitemap.cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/css/tailwind.css -o src/css/main.css"
