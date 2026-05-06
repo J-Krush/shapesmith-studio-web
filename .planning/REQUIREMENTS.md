@@ -24,7 +24,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 - [x] **SVC-01**: Visitors can navigate to `/3d-printing` and see a grid of 3D printing styles backed by a new `print-style` Sanity content type; the page works with placeholder/blank visuals when Sanity returns no images
 - [x] **SVC-02**: Visitors can click into a single print style at `/3d-printing/:slug` and see a detail page mirroring the existing `/styles/:capability` shape (header + gallery + info), again degrading gracefully without photography
-- [ ] **SVC-03**: The site nav shows both "Laser Cutting" and "3D Printing" as peer entries with equal visual weight on every page (mobile + desktop)
+- [x] **SVC-03**: The site nav shows both "Laser Cutting" and "3D Printing" as peer entries with equal visual weight on every page (mobile + desktop)  *(completed 2026-05-06 — Plan 02-03; AppHeader.jsx NAV_ITEMS via SERVICES.map iterated in both desktop + mobile blocks; pretty-printed "styles" → "Laser Cutting"; active-state border-b-2 border-accent + aria-current="page")*
 - [x] **SVC-04**: The existing `/styles` and `/styles/:capability` routes continue to work without regressions throughout the migration  *(completed 2026-05-06 — Plan 02-01; smoke test passes; route param normalized to `:slug` per RESEARCH §Pattern 3)*
 - [ ] **SVC-05**: The owner can add `print-style` documents in Sanity Studio per a written schema spec produced during planning (no app deploy needed to publish content)
 
@@ -40,9 +40,9 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- Targeted homepage refresh and visual sweep — not a full redesign. -->
 
-- [ ] **VIS-01**: The homepage hero is refreshed to feature both laser cutting and 3D printing equally, with copy and visual treatment appropriate to a returning relaunch
-- [ ] **VIS-02**: The site nav (header) is visually refreshed and accommodates the new services entries cleanly on mobile and desktop
-- [ ] **VIS-03**: The visual refresh is applied consistently across every route — `/`, `/styles`, `/styles/:slug`, `/3d-printing`, `/3d-printing/:slug`, `/about`, `/contact`, `/shop`, `/404` — no half-spruced surfaces remain
+- [x] **VIS-01**: The homepage hero is refreshed to feature both laser cutting and 3D printing equally, with copy and visual treatment appropriate to a returning relaunch  *(completed 2026-05-06 — Plan 02-03; AppBanner dual-service hero, brand wordmark + H1 "Maker Studio — Custom Laser Cutting & 3D Printing" + 50/50 cards driven by SERVICES.map + single shared accent CTA)*
+- [x] **VIS-02**: The site nav (header) is visually refreshed and accommodates the new services entries cleanly on mobile and desktop  *(completed 2026-05-06 — Plan 02-03; peer-equal SERVICES.map nav with active-state, /shop added, /materials dropped, hamburger cleaned up)*
+- [x] **VIS-03**: The visual refresh is applied consistently across every route — `/`, `/styles`, `/styles/:slug`, `/3d-printing`, `/3d-printing/:slug`, `/about`, `/contact`, `/shop`, `/404` — no half-spruced surfaces remain  *(completed 2026-05-06 — Plan 02-03; static-inspection sweep verified, indigo synthesis check empty, /404 + /shop routes live, NotFound has inline Helmet noindex)*
 - [ ] **VIS-04**: Sanity images are served via `@sanity/image-url` with responsive `srcSet` and lazy loading; full-size CDN originals are no longer used for thumbnails
 - [ ] **VIS-05**: Dead/legacy code (`src/data/materials.js`, `src/data/aboutMeData.js`, `src/data/singleProjectData.js`, `src/data/images.js`, `src/components/contact/contact-form.js`, unused `styled-components` dependency) is removed in the same window
 
@@ -165,15 +165,15 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | FOUND-06 | Phase 1 | Validated |
 | SVC-01 | Phase 2 | Validated (Plan 02-02) |
 | SVC-02 | Phase 2 | Validated (Plan 02-02) |
-| SVC-03 | Phase 2 | Pending |
+| SVC-03 | Phase 2 | Validated (Plan 02-03) |
 | SVC-04 | Phase 2 | Validated (Plan 02-01) |
 | SVC-05 | Phase 2 | Pending |
 | MAT-01 | Phase 2 | Validated (Plan 02-02) |
 | MAT-02 | Phase 2 | Validated (Plan 02-02) |
 | MAT-03 | Phase 2 | Validated (Plan 02-02) |
-| VIS-01 | Phase 2 | Pending |
-| VIS-02 | Phase 2 | Pending |
-| VIS-03 | Phase 2 | Pending |
+| VIS-01 | Phase 2 | Validated (Plan 02-03) |
+| VIS-02 | Phase 2 | Validated (Plan 02-03) |
+| VIS-03 | Phase 2 | Validated (Plan 02-03) |
 | VIS-04 | Phase 2 | Pending |
 | VIS-05 | Phase 2 | Pending |
 | SHOP-01 | Phase 2 | Pending |

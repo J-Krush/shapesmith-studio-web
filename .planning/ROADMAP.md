@@ -80,7 +80,7 @@ Plans:
 - [x] 02-02-PLAN.md — 3D printing surface: MaterialsSection + FAQ + WontMake + TrustCopyBlock components; SanityImage adoption in ServiceCard/ServiceGallery/MaterialSingle; section composition into ProjectSingle + Projects pages; /materials → /styles#materials redirect (Navigate + public/_redirects) (SVC-01, SVC-02, MAT-01, MAT-02, MAT-03, CNT-01, CNT-02, CNT-03)  *(completed 2026-05-06)*
 
 **Wave 3** *(blocked on Waves 1+2)*
-- [ ] 02-03-PLAN.md — Visual spruce sweep: AppBanner dual-service hero, AppHeader peer-equal nav with active-state, NotFound /404 page, /shop route added, indigo→accent template-residue swap across 4 sites, target="__blank" typo + rel=noopener fixes, AboutMe + QuickInfo touch (VIS-01, VIS-02, VIS-03, SVC-03)
+- [x] 02-03-PLAN.md — Visual spruce sweep: AppBanner dual-service hero, AppHeader peer-equal nav with active-state, NotFound /404 page, /shop route added, indigo→accent template-residue swap across 4 sites, target="__blank" typo + rel=noopener fixes, AboutMe + QuickInfo touch (VIS-01, VIS-02, VIS-03, SVC-03)  *(completed 2026-05-06)*
 
 **Wave 4** *(blocked on Wave 3)*
 - [ ] 02-04-PLAN.md — Trust copy + SEO: SEOHead mounted on every route; JsonLdLocalBusiness on Home; sitemap.xml postbuild script + robots.txt; public/index.html static SEO defaults + og-default.png; theme-color #291c30 (SEO-01, SEO-02, SEO-03)
@@ -133,7 +133,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
-| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 2/5 | In progress | - |
+| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 3/5 | In progress | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
