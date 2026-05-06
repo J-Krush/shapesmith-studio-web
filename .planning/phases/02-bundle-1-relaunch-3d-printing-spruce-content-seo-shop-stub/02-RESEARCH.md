@@ -1705,9 +1705,11 @@ PLAN.md should put a "Sanity Studio prep checkpoint" gate between Wave 1 (schema
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED at execution time via Plan 02-01 checkpoint)
 
-1. **What is the actual current shape of `material.processes` in Sanity Studio?**
+Q1 (material.processes shape) is execution-blocking and is resolved by the [CHECKPOINT] task in Plan 02-01 — owner runs `*[_type == "material"][0..2]{processes}` in Sanity Vision and records the outcome in 02-01-SUMMARY.md before Wave 2 progresses. Plan 02-02's MaterialsSection GROQ is then updated to match.
+
+1. **What is the actual current shape of `material.processes` in Sanity Studio?** (RESOLVED via Plan 02-01 checkpoint task)
    - What we know: D-06 commits to the target shape (reference array → process enum). D-07 has a fallback (string array).
    - What's unclear: which form exists today.
    - Recommendation: PLAN.md Wave 1 task 1: the planner produces the schema spec. Wave 1 task 2: the owner verifies in Sanity Vision tool which shape exists today, reports back, and the plan picks the GROQ form. This adds ~10 minutes to Wave 1, prevents Wave 2 from going down a path that doesn't match reality.
