@@ -16,6 +16,8 @@ const Contact = lazy(() => import('./pages/Contact.jsx'));
 const Home = lazy(() => import('./pages/Home'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
+const Shop = lazy(() => import('./pages/Shop'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 
 
@@ -54,6 +56,12 @@ function App() {
 
 								<Route path="about" element={<About />} />
 								<Route path="contact" element={<Contact />} />
+								{/* /shop is a live route as of Plan 02-03 — currently renders the
+								    legacy "Shop Coming Soon!" stub; Plan 02-05 replaces with the
+								    Coming Soon page + shop-notify form per D-23. */}
+								<Route path="/shop" element={<Shop />} />
+								{/* /404 catch-all (Plan 02-03) — must be the LAST route. */}
+								<Route path="*" element={<NotFound />} />
 							</Routes>
 						</Suspense>
 						<AppFooter />
