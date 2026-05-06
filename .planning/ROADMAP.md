@@ -83,7 +83,7 @@ Plans:
 - [x] 02-03-PLAN.md — Visual spruce sweep: AppBanner dual-service hero, AppHeader peer-equal nav with active-state, NotFound /404 page, /shop route added, indigo→accent template-residue swap across 4 sites, target="__blank" typo + rel=noopener fixes, AboutMe + QuickInfo touch (VIS-01, VIS-02, VIS-03, SVC-03)  *(completed 2026-05-06)*
 
 **Wave 4** *(blocked on Wave 3)*
-- [ ] 02-04-PLAN.md — Trust copy + SEO: SEOHead mounted on every route; JsonLdLocalBusiness on Home; sitemap.xml postbuild script + robots.txt; public/index.html static SEO defaults + og-default.png; theme-color #291c30 (SEO-01, SEO-02, SEO-03)
+- [x] 02-04-PLAN.md — Trust copy + SEO: SEOHead mounted on every route; JsonLdLocalBusiness on Home; sitemap.xml postbuild script + robots.txt; public/index.html static SEO defaults + og-default.png; theme-color #291c30 (SEO-01, SEO-02, SEO-03)
 
 **Wave 5** *(blocked on Wave 4)*
 - [ ] 02-05-PLAN.md — Contact + shop + cleanup + README: ContactForm pre-fill + CSS-hidden honeypot + relative URL + response-time promise + accent submit + no alert(); Shop Coming Soon page with shop-notify form; public/index.html hidden-form prerender extended (service field + shop-notify form); VIS-05 dead-code purge (13 files); styled-components removal; useScrollToTop listener-leak fix; encodeFormData extraction; README.md replacement (SHOP-01, SHOP-02, CTC-01, CTC-02, CTC-03, CTC-04, VIS-05, SEO-04)

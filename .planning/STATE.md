@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Plan 02-03 complete — Wave 4 ready (Plan 02-04 — trust copy + SEO mounting)
-last_updated: "2026-05-06T19:12:27Z"
-last_activity: 2026-05-06 -- Plan 02-03 finalized; dual-service hero + peer-equal nav + /404 + /shop routes + indigo→accent purge; VIS-01..03 + SVC-03 satisfied
+stopped_at: Plan 02-03 complete — ready to start Plan 02-04 (Wave 4 — trust copy + SEO mounting)
+last_updated: "2026-05-06T19:29:15.868Z"
+last_activity: 2026-05-06
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 11
-  completed_plans: 9
-  percent: 82
+  completed_plans: 10
+  percent: 91
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 02 (Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub) — EXECUTING
-Plan: 3 of 5 complete — ready to start Plan 02-04 (Wave 4: trust copy + SEO — SEOHead mounted on every route, JsonLdLocalBusiness on Home, sitemap.xml + robots.txt, og-default.png, theme-color)
-Status: Wave 3 done; dual-service hero + peer-equal nav + /404 + /shop routes live; indigo template residue purged; external-link safety (D-30) honored; visual identity is now consistent across all 9 routes
-Last activity: 2026-05-06 -- Plan 02-03 finalized; 3 task commits (3b1289a, d2ec150, b9eadc7); SUMMARY committed
+Plan: 4 of 5 complete — ready to start Plan 02-04 (Wave 4: trust copy + SEO — SEOHead mounted on every route, JsonLdLocalBusiness on Home, sitemap.xml + robots.txt, og-default.png, theme-color)
+Status: Ready to execute
+Last activity: 2026-05-06
 
-Progress: Phase 1 [██████████] 100% — Complete; Phase 2 [██████░░░░] 3/5 plans complete
+Progress: [█████████░] 91%
 
 ## Performance Metrics
 
@@ -52,6 +52,7 @@ Progress: Phase 1 [██████████] 100% — Complete; Phase 2 [�
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 02 P04 | 5m | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,7 @@ Recent decisions affecting current work:
 - Roadmap (2026-05-02): Vite migration is its own phase between Phase 3 (quote) and Phase 5 (shop) — not skipped
 - Roadmap (2026-05-02): ServicesContext-vs-parallel-PrintsContext deferred to Phase 2's plan (input: trade-off table in research/SUMMARY.md) — RESOLVED in Plan 02-01 (generalized ServicesContext chosen)
 - Roadmap (2026-05-02): Granularity coarse → 5 phases (research suggested 6; combined Foundation as standalone, Bundle 1 spruce + content + SEO into one)
+- [Phase ?]: Plan 02-04 (2026-05-06): SEO surface fully wired. <SEOHead /> mounts on every public route except /shop (Plan 05 owns it); <JsonLdLocalBusiness /> on Home only (D-21); public/index.html has Phase 2 static defaults (description/og: tags/theme-color #291c30) replacing CRA boilerplate; public/og-default.png is the brand wordmark fallback (D-20); scripts/generate-sitemap.cjs runs postbuild via npm-lifecycle, writing build/sitemap.xml from STATIC_ROUTES + Sanity laser/print slugs; public/robots.txt references the sitemap. T-02-04-01 (JSON-LD injection) mitigated via JSON.stringify; T-02-04-02 (XML injection) mitigated via escapeXml; T-02-04-05 (DoS) mitigated via try/catch + buildDir guard. First-build sitemap emits 6 URLs (all static — Sanity slugs not yet populated; script handles empty arrays gracefully).
 
 ### Pending Todos
 
@@ -97,9 +99,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-06T19:12:27Z
+Last session: 2026-05-06T19:29:15.862Z
 Stopped at: Plan 02-03 complete — ready to start Plan 02-04 (Wave 4 — trust copy + SEO mounting)
-Resume file: .planning/phases/02-bundle-1-relaunch-3d-printing-spruce-content-seo-shop-stub/02-04-PLAN.md
+Resume file: None
 
 ### Performance Metrics (Phase 2)
 

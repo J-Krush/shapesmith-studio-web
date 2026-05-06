@@ -75,9 +75,9 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- Per-page meta + structured data so local search and link previews work. -->
 
-- [ ] **SEO-01**: Every route renders a per-page `<title>`, `<meta name="description">`, `og:title`, `og:description`, `og:image`, and `og:url`, driven by `react-helmet-async` (or equivalent) with copy sourced from Sanity per page where appropriate
-- [ ] **SEO-02**: The homepage embeds Schema.org `LocalBusiness` JSON-LD (business name, location, hours/turnaround, services, contact) so local search can index the studio correctly
-- [ ] **SEO-03**: A `sitemap.xml` is generated at build time including all routes (including detail pages); `robots.txt` is updated to reference it
+- [x] **SEO-01**: Every route renders a per-page `<title>`, `<meta name="description">`, `og:title`, `og:description`, `og:image`, and `og:url`, driven by `react-helmet-async` (or equivalent) with copy sourced from Sanity per page where appropriate
+- [x] **SEO-02**: The homepage embeds Schema.org `LocalBusiness` JSON-LD (business name, location, hours/turnaround, services, contact) so local search can index the studio correctly
+- [x] **SEO-03**: A `sitemap.xml` is generated at build time including all routes (including detail pages); `robots.txt` is updated to reference it
 - [ ] **SEO-04**: README is replaced (currently CRA boilerplate) with a project-specific quickstart and content-update guide
 
 ### Quote Tool (Auto-Pricing)
@@ -186,9 +186,9 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | CNT-02 | Phase 2 | Validated (Plan 02-02) |
 | CNT-03 | Phase 2 | Validated (Plan 02-02) |
 | CNT-04 | Phase 2 | Pending |
-| SEO-01 | Phase 2 | Pending |
-| SEO-02 | Phase 2 | Pending |
-| SEO-03 | Phase 2 | Pending |
+| SEO-01 | Phase 2 | Complete |
+| SEO-02 | Phase 2 | Complete |
+| SEO-03 | Phase 2 | Complete |
 | SEO-04 | Phase 2 | Pending |
 | QTE-01 | Phase 3 | Pending |
 | QTE-02 | Phase 3 | Pending |
