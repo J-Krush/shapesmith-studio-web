@@ -47,8 +47,8 @@ function App() {
 								))}
 								{/* Legacy /materials route → in-page Materials section on /styles per D-17.
 								    This handles SPA hops (client-side already loaded). public/_redirects
-								    handles direct hits + crawlers with a real 301 status code. The
-								    src/pages/Materials.jsx file is preserved (Plan 02-05 owns deletion). */}
+								    handles direct hits + crawlers with a real 301 status code.
+								    The legacy src/pages/Materials.jsx file was deleted in Plan 02-05 (VIS-05). */}
 								<Route
 									path="/materials"
 									element={<Navigate to="/styles#materials" replace />}

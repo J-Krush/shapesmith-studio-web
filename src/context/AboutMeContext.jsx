@@ -1,6 +1,5 @@
 import { createContext } from 'react';
 import useSanityQuery from '../hooks/useSanityQuery';
-// import { aboutMeData } from '../data/aboutMeData';
 
 const AboutMeContext = createContext();
 
