@@ -8,7 +8,6 @@ import AppHeader from './components/shared/AppHeader';
 import './css/App.css';
 import UseScrollToTop from './hooks/useScrollToTop';
 import { SERVICES } from './data/services';
-import Materials from './pages/Materials';
 
 // import './App.css';
 
@@ -22,10 +21,6 @@ const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
 
 
 function App() {
-	// `Navigate` is imported now (used by Plan 02 for /materials → /styles#materials);
-	// silence eslint until then.
-	void Navigate;
-
 	return (
 		<HelmetProvider>
 			<AnimatePresence>
@@ -48,9 +43,13 @@ function App() {
 										/>
 									</Route>
 								))}
+								{/* Legacy /materials route → in-page Materials section on /styles per D-17.
+								    This handles SPA hops (client-side already loaded). public/_redirects
+								    handles direct hits + crawlers with a real 301 status code. The
+								    src/pages/Materials.jsx file is preserved (Plan 02-05 owns deletion). */}
 								<Route
 									path="/materials"
-									element={<Materials />}
+									element={<Navigate to="/styles#materials" replace />}
 								/>
 
 								<Route path="about" element={<About />} />
