@@ -26,3 +26,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+
+# local pnpm store override (per-workstation; do not commit)
+.npmrc
