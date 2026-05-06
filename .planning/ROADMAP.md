@@ -74,7 +74,7 @@ Plans:
 Plans:
 
 **Wave 1**
-- [ ] 02-01-PLAN.md — Foundations: schema spec doc, packages install (@sanity/image-url + react-helmet-async), HelmetProvider mount, ServicesContext + SingleServiceContext clean rip, projects/ → services/ rename, page generalization, SanityImage/Placeholder/SEOHead/JsonLdLocalBusiness scaffolds (SVC-04, SVC-05, VIS-04, CNT-04, SEO-01)
+- [x] 02-01-PLAN.md — Foundations: schema spec doc, packages install (@sanity/image-url + react-helmet-async), HelmetProvider mount, ServicesContext + SingleServiceContext clean rip, projects/ → services/ rename, page generalization, SanityImage/Placeholder/SEOHead/JsonLdLocalBusiness scaffolds (SVC-04, SVC-05, VIS-04, CNT-04, SEO-01)  *(completed 2026-05-06)*
 
 **Wave 2** *(blocked on Wave 1)*
 - [ ] 02-02-PLAN.md — 3D printing surface: MaterialsSection + FAQ + WontMake + TrustCopyBlock components; SanityImage adoption in ServiceCard/ServiceGallery/MaterialSingle; section composition into ProjectSingle + Projects pages; /materials → /styles#materials redirect (Navigate + public/_redirects) (SVC-01, SVC-02, MAT-01, MAT-02, MAT-03, CNT-01, CNT-02, CNT-03)
@@ -133,7 +133,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
-| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/5 | Planned | - |
+| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 1/5 | In progress | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |

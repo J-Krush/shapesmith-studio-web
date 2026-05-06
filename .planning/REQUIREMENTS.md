@@ -25,7 +25,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 - [ ] **SVC-01**: Visitors can navigate to `/3d-printing` and see a grid of 3D printing styles backed by a new `print-style` Sanity content type; the page works with placeholder/blank visuals when Sanity returns no images
 - [ ] **SVC-02**: Visitors can click into a single print style at `/3d-printing/:slug` and see a detail page mirroring the existing `/styles/:capability` shape (header + gallery + info), again degrading gracefully without photography
 - [ ] **SVC-03**: The site nav shows both "Laser Cutting" and "3D Printing" as peer entries with equal visual weight on every page (mobile + desktop)
-- [ ] **SVC-04**: The existing `/styles` and `/styles/:capability` routes continue to work without regressions throughout the migration
+- [x] **SVC-04**: The existing `/styles` and `/styles/:capability` routes continue to work without regressions throughout the migration  *(completed 2026-05-06 — Plan 02-01; smoke test passes; route param normalized to `:slug` per RESEARCH §Pattern 3)*
 - [ ] **SVC-05**: The owner can add `print-style` documents in Sanity Studio per a written schema spec produced during planning (no app deploy needed to publish content)
 
 ### Materials Sections
@@ -166,7 +166,7 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | SVC-01 | Phase 2 | Pending |
 | SVC-02 | Phase 2 | Pending |
 | SVC-03 | Phase 2 | Pending |
-| SVC-04 | Phase 2 | Pending |
+| SVC-04 | Phase 2 | Validated (Plan 02-01) |
 | SVC-05 | Phase 2 | Pending |
 | MAT-01 | Phase 2 | Pending |
 | MAT-02 | Phase 2 | Pending |
