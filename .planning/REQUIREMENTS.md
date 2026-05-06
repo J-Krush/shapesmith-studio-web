@@ -26,7 +26,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 - [x] **SVC-02**: Visitors can click into a single print style at `/3d-printing/:slug` and see a detail page mirroring the existing `/styles/:capability` shape (header + gallery + info), again degrading gracefully without photography
 - [x] **SVC-03**: The site nav shows both "Laser Cutting" and "3D Printing" as peer entries with equal visual weight on every page (mobile + desktop)  *(completed 2026-05-06 — Plan 02-03; AppHeader.jsx NAV_ITEMS via SERVICES.map iterated in both desktop + mobile blocks; pretty-printed "styles" → "Laser Cutting"; active-state border-b-2 border-accent + aria-current="page")*
 - [x] **SVC-04**: The existing `/styles` and `/styles/:capability` routes continue to work without regressions throughout the migration  *(completed 2026-05-06 — Plan 02-01; smoke test passes; route param normalized to `:slug` per RESEARCH §Pattern 3)*
-- [ ] **SVC-05**: The owner can add `print-style` documents in Sanity Studio per a written schema spec produced during planning (no app deploy needed to publish content)
+- [x] **SVC-05**: The owner can add `print-style` documents in Sanity Studio per a written schema spec produced during planning (no app deploy needed to publish content)  *(completed 2026-05-06 — Plan 02-01; `02-SCHEMA-SPEC.md` shipped covering process enum, material.services field deviation, studio-info, print-style, laser-style extension, faq schemas in defineType syntax)*
 
 ### Materials Sections
 
@@ -167,14 +167,14 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | SVC-02 | Phase 2 | Validated (Plan 02-02) |
 | SVC-03 | Phase 2 | Validated (Plan 02-03) |
 | SVC-04 | Phase 2 | Validated (Plan 02-01) |
-| SVC-05 | Phase 2 | Pending |
+| SVC-05 | Phase 2 | Validated (Plan 02-01) |
 | MAT-01 | Phase 2 | Validated (Plan 02-02) |
 | MAT-02 | Phase 2 | Validated (Plan 02-02) |
 | MAT-03 | Phase 2 | Validated (Plan 02-02) |
 | VIS-01 | Phase 2 | Validated (Plan 02-03) |
 | VIS-02 | Phase 2 | Validated (Plan 02-03) |
 | VIS-03 | Phase 2 | Validated (Plan 02-03) |
-| VIS-04 | Phase 2 | Pending |
+| VIS-04 | Phase 2 | Partial (service surfaces complete via SanityImage; 4 home/about components — OurProcess, Collaborations, QuickSpecs, AboutMeBio — still use asset.url; non-blocking per verifier) |
 | VIS-05 | Phase 2 | Complete |
 | SHOP-01 | Phase 2 | Complete |
 | SHOP-02 | Phase 2 | Complete |
@@ -185,7 +185,7 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | CNT-01 | Phase 2 | Validated (Plan 02-02) |
 | CNT-02 | Phase 2 | Validated (Plan 02-02) |
 | CNT-03 | Phase 2 | Validated (Plan 02-02) |
-| CNT-04 | Phase 2 | Pending |
+| CNT-04 | Phase 2 | Partial (SanityImage uses asset.altText fallback chain across service surfaces; one hardcoded `alt="Effigy build"` in Collaborations.jsx remains; non-blocking per verifier) |
 | SEO-01 | Phase 2 | Complete |
 | SEO-02 | Phase 2 | Complete |
 | SEO-03 | Phase 2 | Complete |

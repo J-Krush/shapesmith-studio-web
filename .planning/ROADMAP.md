@@ -133,7 +133,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
-| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 3/5 | In progress | - |
+| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
