@@ -2,16 +2,41 @@
 
 > **Header note (read first).** This is the canonical Phase 2 owner-prep doc. Apply schemas in Sanity Studio BEFORE the Plan-02 / Plan-04 executors run (per CONTEXT.md D-07). Each plan that depends on a Sanity content type names its blocking schemas:
 >
-> - Plan 02 (`MaterialsSection` / `FAQ` / `WontMake` / `TrustCopyBlock`) blocks on: `process` enum + 2 enum docs, `material.processes` migrated, `studio-info` singleton present, `print-style` + `laser-style` extension live, `faq` schema live.
+> - Plan 02 (`MaterialsSection` / `FAQ` / `WontMake` / `TrustCopyBlock`) blocks on: `material.services` field added + backfilled, `studio-info` singleton present, `print-style` + `laser-style` extension live, `faq` schema live, `process` enum + 2 enum docs (still required for `faq.service` references — see §6).
 > - Plan 04 (SEO meta + JSON-LD wiring) blocks on: `studio-info` populated with `name`, `description`, `url`, `address`, `sameAs`, `areaServed`, `makesOffer`, `ogImage`; `seo` block populated on `laser-style`/`print-style` docs.
->
-> If owner cannot complete the schema migration in time, note the deviation in PLAN.md and use the **D-07 fallback** shape for `material.processes` (string array) — the GROQ fallback path is documented below.
 >
 > All schemas use Sanity Studio v3 `defineType` / `defineField` syntax. Field names are **camelCase** to match existing project conventions (`listImage`, `detailImages`, `cuttingSpecs`, `preferredMaterials`).
 
 ---
 
-## 1. `process` enum (NEW — supporting doc)
+## Deviation from Plan 02-01 Task 4 Checkpoint
+
+**Date:** 2026-05-06
+**Decision authority:** owner (resolves CONTEXT.md D-06 / D-07 ambiguity for `material`)
+
+The Plan 02-01 Task 4 checkpoint asked the owner to verify the actual shape of `material.processes` in Sanity Studio. The Vision query returned values like:
+
+```json
+{ "processes": ["Cut", "engrave", "etch"] }
+```
+
+This is a **flat string array of laser-cutting operations** — NOT service-compatibility tags (`laser` / `print` / `both`). The plan's D-06 reference-array path and D-07 string-array fallback **both assumed** the field documented service compatibility. The actual semantics are different: `material.processes` documents which **laser operations** a material supports.
+
+**Owner-approved approach:** Add a NEW field `services` to the `material` schema (string array of `laser` | `print` | `both`). The existing `processes` field is preserved as-is — it correctly documents laser operations and remains useful. Backfill: every existing `material` doc gets `services: ["laser"]` (current site is laser-only). The MaterialsSection GROQ filter becomes `$serviceKey in services` (a flat-string-array check — neither D-06 ref-deref nor D-07 process-string).
+
+**Sections affected by this deviation:**
+- §2 — Replaces the `material.processes` migration section with **§2 `material.services` field addition**.
+- §7 — Owner verification query updated to query `services` (not `processes`).
+- §8 — Rollout checklist updated to reflect the new field + backfill.
+- §1 — `process` enum is **no longer required for `material`**. It is still required for `faq.service` references (see §6); kept in this doc on those grounds.
+
+**Wave 2 executor notes:** `MaterialsSection.jsx` `MATERIALS_QUERY` filter must read `$serviceKey in services` — not `$serviceKey in processes[]->key` (D-06) and not `$serviceKey in processes` (D-07). Both prior paths are obsolete.
+
+---
+
+## 1. `process` enum (NEW — supporting doc, scope reduced by deviation)
+
+> **Scope note (per Task 4 deviation):** This enum is no longer used by `material` (which adopts the simpler `services` string-array field — §2). It is still used by `faq.service` (§6) where the reference-array shape mirrors the editorial workflow naturally. If owner prefers, the same flat-string-array pattern could be adopted on `faq.service` later (deferred — not required for the relaunch).
 
 ```ts
 // process.ts
@@ -41,64 +66,61 @@ export default defineType({
 1. Create a `process` document with `key: "laser"`, `label: "Laser cutting"`.
 2. Create a `process` document with `key: "print"`, `label: "3D printing"`.
 
-Without these two docs the reference-array dereference in MaterialsSection / FAQ returns nothing and every section renders the empty state.
+Without these two docs the reference-array dereference in `faq` returns nothing and the FAQ section renders the empty state.
 
 ---
 
-## 2. `material.processes` migration (D-06 target / D-07 fallback)
+## 2. `material.services` field addition (RESOLVES Task 4 checkpoint)
 
-### D-06 target shape (preferred — reference array)
+> **Status:** Resolves CONTEXT.md D-06 / D-07 ambiguity. Replaces the prior "migrate `processes` field" guidance — `processes` is preserved as-is (it documents laser operations like `Cut`, `engrave`, `etch` — see deviation note above).
 
-Add or replace the `processes` field on the existing `material` schema:
+### What to add
 
-```ts
-// material.ts — MODIFY existing schema
-defineField({
-  name: 'processes',
-  type: 'array',
-  title: 'Processes',
-  description: 'Which services use this material? Add laser, print, or both.',
-  of: [{ type: 'reference', to: [{ type: 'process' }] }],
-  validation: (Rule) => Rule.min(1),
-}),
-```
-
-**Owner migration steps:**
-
-1. Publish the `process` schema and create the two enum docs (step 1 above).
-2. Modify the `material.processes` field shape in Sanity Studio.
-3. Re-tag every existing material doc — for each material set `processes` to `[laser]`, `[print]`, or `[laser, print]` reference values.
-4. Verify in the Studio Vision tool (see §6 below).
-
-**Resulting GROQ filter** (used in `src/components/services/MaterialsSection.jsx` Plan 02):
-
-```groq
-*[_type == "material" && $serviceKey in processes[]->key] | order(order asc){ ... }
-```
-
-### D-07 fallback (if ref-array migration is too painful)
-
-Leave `processes` as a free-text string array. Use:
+Add a NEW `services` field to the existing `material` schema. **Do not modify, rename, or remove the existing `processes` field** — it documents laser operations and is still useful (and may be surfaced in the UI for laser materials in a later phase).
 
 ```ts
+// material.ts — ADD this defineField entry to the existing schema's `fields` array.
 defineField({
-  name: 'processes',
+  name: 'services',
   type: 'array',
-  title: 'Processes',
-  description: 'Tag with "laser", "print", or "both".',
+  title: 'Services',
+  description: 'Which Shapesmith services use this material? Tag laser, print, or both.',
   of: [{ type: 'string' }],
   options: { list: ['laser', 'print', 'both'] },
   validation: (Rule) => Rule.min(1),
 }),
 ```
 
-**Resulting GROQ filter** (Plan 02 executor swaps to this if Outcome B in §6 below):
+### Backfill (one-time, all existing materials)
 
-```groq
-*[_type == "material" && $serviceKey in processes] | order(order asc){ ... }
+Every existing `material` doc must be backfilled with `services: ["laser"]` (the current site is laser-only — the existing materials are all laser-compatible). This is a one-time edit per doc in Studio (or a single Vision/CLI mutation if owner prefers a batch update).
+
+**Suggested batch mutation in Sanity Vision** (Studio sidebar → Vision plugin → switch to "Mutate" mode):
+
+```json
+{
+  "mutations": [
+    {
+      "patch": {
+        "query": "*[_type == \"material\" && !defined(services)]",
+        "set": { "services": ["laser"] }
+      }
+    }
+  ]
+}
 ```
 
-If the owner reports the migration cost is prohibitive (a large existing material count making per-doc retagging painful), Plan 02-02's executor swaps to the fallback GROQ in `src/components/services/MaterialsSection.jsx`'s `MATERIALS_QUERY` constant (one-line change) and notes the deviation in `02-02-SUMMARY.md`.
+After running, every laser material is tagged. New 3D-print materials added later get `services: ["print"]` (or `["laser", "print"]` for materials that work for both).
+
+### Resulting GROQ filter
+
+Used in `src/components/services/MaterialsSection.jsx` (Plan 02-02 implements):
+
+```groq
+*[_type == "material" && $serviceKey in services] | order(order asc){ ... }
+```
+
+**Important:** This is a flat-string-array `in` check on the new `services` field — not `$serviceKey in processes[]->key` (D-06, obsolete) and not `$serviceKey in processes` (D-07, obsolete). Both prior approaches are superseded by this deviation.
 
 ---
 
@@ -417,25 +439,31 @@ export default defineType({
 
 ## 7. Owner verification (Sanity Vision)
 
-After publishing the schemas above and re-tagging materials, run this exact query in Sanity Vision (Studio sidebar → Vision plugin):
+After adding the `material.services` field and backfilling, run this exact query in Sanity Vision (Studio sidebar → Vision plugin):
 
-**Verify D-06 reference-array shape works:**
-
-```
-*[_type == "material" && "laser" in processes[]->key]
-```
-
-This should return at least one laser-tagged material. If it returns nothing AND the `process` enum docs (key: "laser", key: "print") exist AND materials have at least one reference set, the migration is incomplete.
-
-**If the materials still use the D-07 fallback string-array shape:**
+**Verify the `material.services` field is populated:**
 
 ```
-*[_type == "material" && "laser" in processes]
+*[_type == "material" && "laser" in services]
 ```
 
-This should return at least one laser-tagged material when materials are tagged with the literal strings `"laser"` / `"print"` / `"both"`.
+This should return at least one (likely all) laser-tagged material. If it returns nothing, the backfill is incomplete — re-run the patch mutation in §2.
 
-**Plan 02-01 Task 4 checkpoint** asks the owner to run `*[_type == "material"][0..2]{processes}` and report which shape the field is in (Outcome A — references, or Outcome B — strings). Plan 02-02's executor reads the recorded outcome from `02-01-SUMMARY.md` and updates the `MATERIALS_QUERY` accordingly.
+**Verify a sample doc shape:**
+
+```
+*[_type == "material"][0..2]{title, services, processes}
+```
+
+Expected output: each material has both `services` (e.g., `["laser"]`) AND `processes` (e.g., `["Cut", "engrave", "etch"]`). The `processes` field is preserved as-is from before the deviation.
+
+**FAQ verification** (after `faq` schema + docs are published per §6):
+
+```
+*[_type == "faq" && "laser" in service[]->key]
+```
+
+Should return the FAQ items tagged for laser. Requires the `process` enum docs from §1 to exist.
 
 ---
 
@@ -443,12 +471,12 @@ This should return at least one laser-tagged material when materials are tagged 
 
 Tick in order:
 
-- [ ] Add `process` schema and publish.
-- [ ] Create the two enum docs (`key: "laser"`, `key: "print"`).
-- [ ] Modify `material.processes` to the D-06 ref-array shape (or accept D-07 fallback).
-- [ ] Re-tag existing materials with their service references (or string tags for D-07).
-- [ ] Add `studio-info` schema, publish, create the singleton doc, fill placeholder copy in §3.
-- [ ] Add `print-style` schema, publish, create one starter doc with §4 placeholder copy.
-- [ ] Extend `laser-style` with the 3 new fields in §5; fill placeholder copy on every existing doc.
-- [ ] Add `faq` schema, publish, create 5–8 FAQ docs per service tagged with `process` references.
-- [ ] Run the verification query in §7. Record the outcome in `02-01-SUMMARY.md` per the Plan 02-01 Task 4 checkpoint.
+- [ ] Add `process` schema (§1) and publish — required for `faq.service` references.
+- [ ] Create the two `process` enum docs (`key: "laser"`, `key: "print"`).
+- [ ] Add the new `services` field to `material` (§2) and publish.
+- [ ] Backfill `services: ["laser"]` on every existing material (Vision patch mutation in §2, or per-doc edit in Studio).
+- [ ] Add `studio-info` schema (§3), publish, create the singleton doc, fill placeholder copy.
+- [ ] Add `print-style` schema (§4), publish, create one starter doc with placeholder copy.
+- [ ] Extend `laser-style` with the 3 new fields (§5); fill placeholder copy on every existing doc.
+- [ ] Add `faq` schema (§6), publish, create 5–8 FAQ docs per service tagged with `process` references.
+- [ ] Run the verification queries in §7. Both `material.services` and `faq.service` should return populated rows.
