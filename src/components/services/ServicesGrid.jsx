@@ -39,9 +39,7 @@ const ServicesGrid = () => {
 						.map((entry) => (
 							<ServiceCard
 								title={entry.title}
-								category={entry.category}
-								imageUrl={entry.listImage?.asset?.url}
-								imageAlt={entry.listImage?.altText ?? entry.listImage?.asset?.altText ?? entry.title}
+								listImage={entry.listImage}
 								key={entry.title}
 								linkTo={`/${service.urlSegment}/${entry.slug?.current ?? entry.slug}`}
 							/>
