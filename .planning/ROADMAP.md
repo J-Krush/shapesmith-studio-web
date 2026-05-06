@@ -70,7 +70,23 @@ Plans:
   3. Each service page displays an in-page Materials section filtered by service, plus turnaround/pickup/service-area copy, a "what we won't make" scope policy, and 5–8 FAQ items — all sourced from Sanity so the owner can edit without a redeploy; the legacy `/materials` route redirects or shows a friendly moved notice
   4. A visitor landing on `/contact` from `/3d-printing` (or via `?service=3d-printing`) sees the service field pre-filled to "3D Printing"; the honeypot is visually hidden; the response-time promise is shown and is editable in Sanity; the Netlify hidden form recognizes the new `service` field at deploy time
   5. `/shop` is a live route showing a Coming Soon page with a working email-capture form; every route has a per-page `<title>`, `<meta description>`, `og:` tags via `react-helmet-async`; the homepage embeds `LocalBusiness` JSON-LD; `sitemap.xml` is generated at build and `robots.txt` references it; the README is replaced with a project-specific quickstart
-**Plans**: TBD
+**Plans**: 5 plans across 5 waves
+Plans:
+
+**Wave 1**
+- [ ] 02-01-PLAN.md — Foundations: schema spec doc, packages install (@sanity/image-url + react-helmet-async), HelmetProvider mount, ServicesContext + SingleServiceContext clean rip, projects/ → services/ rename, page generalization, SanityImage/Placeholder/SEOHead/JsonLdLocalBusiness scaffolds (SVC-04, SVC-05, VIS-04, CNT-04, SEO-01)
+
+**Wave 2** *(blocked on Wave 1)*
+- [ ] 02-02-PLAN.md — 3D printing surface: MaterialsSection + FAQ + WontMake + TrustCopyBlock components; SanityImage adoption in ServiceCard/ServiceGallery/MaterialSingle; section composition into ProjectSingle + Projects pages; /materials → /styles#materials redirect (Navigate + public/_redirects) (SVC-01, SVC-02, MAT-01, MAT-02, MAT-03, CNT-01, CNT-02, CNT-03)
+
+**Wave 3** *(blocked on Waves 1+2)*
+- [ ] 02-03-PLAN.md — Visual spruce sweep: AppBanner dual-service hero, AppHeader peer-equal nav with active-state, NotFound /404 page, /shop route added, indigo→accent template-residue swap across 4 sites, target="__blank" typo + rel=noopener fixes, AboutMe + QuickInfo touch (VIS-01, VIS-02, VIS-03, SVC-03)
+
+**Wave 4** *(blocked on Wave 3)*
+- [ ] 02-04-PLAN.md — Trust copy + SEO: SEOHead mounted on every route; JsonLdLocalBusiness on Home; sitemap.xml postbuild script + robots.txt; public/index.html static SEO defaults + og-default.png; theme-color #291c30 (SEO-01, SEO-02, SEO-03)
+
+**Wave 5** *(blocked on Wave 4)*
+- [ ] 02-05-PLAN.md — Contact + shop + cleanup + README: ContactForm pre-fill + CSS-hidden honeypot + relative URL + response-time promise + accent submit + no alert(); Shop Coming Soon page with shop-notify form; public/index.html hidden-form prerender extended (service field + shop-notify form); VIS-05 dead-code purge (13 files); styled-components removal; useScrollToTop listener-leak fix; encodeFormData extraction; README.md replacement (SHOP-01, SHOP-02, CTC-01, CTC-02, CTC-03, CTC-04, VIS-05, SEO-04)
 **UI hint**: yes
 
 ### Phase 3: Auto-Pricing Quote Tool
@@ -117,7 +133,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
-| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/TBD | Not started | - |
+| 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 0/5 | Planned | - |
 | 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
