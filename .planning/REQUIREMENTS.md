@@ -22,8 +22,8 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- New /3d-printing surface mirroring /styles. -->
 
-- [ ] **SVC-01**: Visitors can navigate to `/3d-printing` and see a grid of 3D printing styles backed by a new `print-style` Sanity content type; the page works with placeholder/blank visuals when Sanity returns no images
-- [ ] **SVC-02**: Visitors can click into a single print style at `/3d-printing/:slug` and see a detail page mirroring the existing `/styles/:capability` shape (header + gallery + info), again degrading gracefully without photography
+- [x] **SVC-01**: Visitors can navigate to `/3d-printing` and see a grid of 3D printing styles backed by a new `print-style` Sanity content type; the page works with placeholder/blank visuals when Sanity returns no images
+- [x] **SVC-02**: Visitors can click into a single print style at `/3d-printing/:slug` and see a detail page mirroring the existing `/styles/:capability` shape (header + gallery + info), again degrading gracefully without photography
 - [ ] **SVC-03**: The site nav shows both "Laser Cutting" and "3D Printing" as peer entries with equal visual weight on every page (mobile + desktop)
 - [x] **SVC-04**: The existing `/styles` and `/styles/:capability` routes continue to work without regressions throughout the migration  *(completed 2026-05-06 — Plan 02-01; smoke test passes; route param normalized to `:slug` per RESEARCH §Pattern 3)*
 - [ ] **SVC-05**: The owner can add `print-style` documents in Sanity Studio per a written schema spec produced during planning (no app deploy needed to publish content)
@@ -32,9 +32,9 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- Materials move from a top-level route to in-page sections on each service page. -->
 
-- [ ] **MAT-01**: Each service page (`/styles` and `/3d-printing`) contains an in-page Materials section listing materials available for that specific service, with a scroll-anchor link from elsewhere on the page (e.g., "See materials")
-- [ ] **MAT-02**: The Sanity `material` schema supports tagging which service(s) each material applies to (laser, print, both) so the in-page filter is data-driven, not code-driven; owner adds the schema field per planning spec
-- [ ] **MAT-03**: The old top-level `/materials` route either redirects to the laser materials section anchor or returns a friendly "moved" notice; no broken link
+- [x] **MAT-01**: Each service page (`/styles` and `/3d-printing`) contains an in-page Materials section listing materials available for that specific service, with a scroll-anchor link from elsewhere on the page (e.g., "See materials")
+- [x] **MAT-02**: The Sanity `material` schema supports tagging which service(s) each material applies to (laser, print, both) so the in-page filter is data-driven, not code-driven; owner adds the schema field per planning spec
+- [x] **MAT-03**: The old top-level `/materials` route either redirects to the laser materials section anchor or returns a friendly "moved" notice; no broken link
 
 ### Visual Spruce
 
@@ -66,9 +66,9 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- "Looks legit" copy work — table-stakes for the local-hobbyist audience. -->
 
-- [ ] **CNT-01**: Each service page (`/styles`, `/3d-printing`) shows turnaround time, pickup availability, and service area; copy lives in Sanity (extended `profile` or new `studio-info` schema)
-- [ ] **CNT-02**: Each service page surfaces a "What we won't make" / scope policy block sourced from Sanity
-- [ ] **CNT-03**: Each service page includes 5–8 FAQ items backed by a new `faq` Sanity schema (per-service)
+- [x] **CNT-01**: Each service page (`/styles`, `/3d-printing`) shows turnaround time, pickup availability, and service area; copy lives in Sanity (extended `profile` or new `studio-info` schema)
+- [x] **CNT-02**: Each service page surfaces a "What we won't make" / scope policy block sourced from Sanity
+- [x] **CNT-03**: Each service page includes 5–8 FAQ items backed by a new `faq` Sanity schema (per-service)
 - [ ] **CNT-04**: Image alt text on Sanity-backed images uses the existing/extended Sanity alt field, not empty strings or filename fallbacks
 
 ### SEO
@@ -163,14 +163,14 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | FOUND-04 | Phase 1 | Validated |
 | FOUND-05 | Phase 1 | Validated |
 | FOUND-06 | Phase 1 | Validated |
-| SVC-01 | Phase 2 | Pending |
-| SVC-02 | Phase 2 | Pending |
+| SVC-01 | Phase 2 | Validated (Plan 02-02) |
+| SVC-02 | Phase 2 | Validated (Plan 02-02) |
 | SVC-03 | Phase 2 | Pending |
 | SVC-04 | Phase 2 | Validated (Plan 02-01) |
 | SVC-05 | Phase 2 | Pending |
-| MAT-01 | Phase 2 | Pending |
-| MAT-02 | Phase 2 | Pending |
-| MAT-03 | Phase 2 | Pending |
+| MAT-01 | Phase 2 | Validated (Plan 02-02) |
+| MAT-02 | Phase 2 | Validated (Plan 02-02) |
+| MAT-03 | Phase 2 | Validated (Plan 02-02) |
 | VIS-01 | Phase 2 | Pending |
 | VIS-02 | Phase 2 | Pending |
 | VIS-03 | Phase 2 | Pending |
@@ -182,9 +182,9 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | CTC-02 | Phase 2 | Pending |
 | CTC-03 | Phase 2 | Pending |
 | CTC-04 | Phase 2 | Pending |
-| CNT-01 | Phase 2 | Pending |
-| CNT-02 | Phase 2 | Pending |
-| CNT-03 | Phase 2 | Pending |
+| CNT-01 | Phase 2 | Validated (Plan 02-02) |
+| CNT-02 | Phase 2 | Validated (Plan 02-02) |
+| CNT-03 | Phase 2 | Validated (Plan 02-02) |
 | CNT-04 | Phase 2 | Pending |
 | SEO-01 | Phase 2 | Pending |
 | SEO-02 | Phase 2 | Pending |
