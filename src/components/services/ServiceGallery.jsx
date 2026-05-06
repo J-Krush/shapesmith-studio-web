@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
-import SingleProjectContext from '../../context/SingleProjectContext';
+import { useState } from 'react';
+import { useSingleService } from '../../context/SingleServiceContext';
 
-const ProjectGallery = () => {
-	const { singleProjectData } = useContext(SingleProjectContext);
+const ServiceGallery = () => {
+	const { singleService } = useSingleService();
 
 	const [openImage, setOpenImage] = useState(null);
 
@@ -10,7 +10,7 @@ const ProjectGallery = () => {
 		<div>
 			<div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
 				<div className="-m-1 flex flex-wrap md:-m-2">
-					{singleProjectData && singleProjectData.detailImages.map((image) => {
+					{singleService && singleService.detailImages && singleService.detailImages.map((image) => {
 
 						return (
 							<div className="flex w-1/3 flex-wrap" key={image.asset._id}>
@@ -18,7 +18,7 @@ const ProjectGallery = () => {
 									<img
 										src={image.asset.url}
 										className="rounded-xl cursor-pointer shadow-lg sm:shadow-none"
-										alt={image.altText}
+										alt={image.altText ?? image.asset.altText ?? ''}
 										onClick={() => setOpenImage(image.asset.url)}
 									/>
 								</div>
@@ -51,4 +51,4 @@ const ProjectGallery = () => {
 	);
 };
 
-export default ProjectGallery;
+export default ServiceGallery;

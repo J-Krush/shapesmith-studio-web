@@ -1,7 +1,7 @@
 import AppBanner from '../components/shared/AppBanner';
-import ProjectsGrid from '../components/projects/ProjectsGrid';
+import ServicesGrid from '../components/services/ServicesGrid';
 import OurProcess from '../components/home/OurProcess';
-import { ProjectsProvider } from '../context/ProjectsContext';
+import { ServicesProvider } from '../context/ServicesContext';
 import Collaborations from '../components/home/Collaborations';
 import QuickInfo from '../components/home/QuickInfo';
 import QuickSpecs from '../components/home/QuickSpecs';
@@ -14,9 +14,9 @@ const Home = () => {
 			<QuickInfo />
 
 			<div className="mt-24">
-				<ProjectsProvider>
-					<ProjectsGrid></ProjectsGrid>
-				</ProjectsProvider>
+				<ServicesProvider serviceKey="laser">
+					<ServicesGrid></ServicesGrid>
+				</ServicesProvider>
 			</div>
 
 			<OurProcess />

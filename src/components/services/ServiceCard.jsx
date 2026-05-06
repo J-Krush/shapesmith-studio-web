@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const ProjectSingle = ({ title, imageUrl, linkTo }) => {
+const ServiceCard = ({ title, imageUrl, imageAlt, linkTo }) => {
 
 	return (
 		<motion.div
@@ -20,10 +20,10 @@ const ProjectSingle = ({ title, imageUrl, linkTo }) => {
 							<img
 								src={imageUrl}
 								className="aspect-square object-cover rounded-xl border-none"
-								alt={title}
+								alt={imageAlt ?? title}
 							/>
 						</div>
-						
+
 					</div>
 					<div className="text-center px-4 py-6">
 							<p className="font-general-medium text-lg md:text-xl text-ternary-dark dark:text-ternary-light mb-2">
@@ -36,4 +36,4 @@ const ProjectSingle = ({ title, imageUrl, linkTo }) => {
 	);
 };
 
-export default ProjectSingle;
+export default ServiceCard;

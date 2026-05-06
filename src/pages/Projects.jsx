@@ -1,14 +1,12 @@
-import ProjectsGrid from '../components/projects/ProjectsGrid';
-import { ProjectsProvider } from '../context/ProjectsContext';
+import ServicesGrid from '../components/services/ServicesGrid';
+import { ServicesProvider } from '../context/ServicesContext';
 
-const Projects = () => {
-	return (
-		<ProjectsProvider>
-			<div className="container mx-auto">
-				<ProjectsGrid />
-			</div>
-		</ProjectsProvider>
-	);
-};
+const Projects = ({ serviceKey }) => (
+	<ServicesProvider serviceKey={serviceKey}>
+		<div className="container mx-auto">
+			<ServicesGrid />
+		</div>
+	</ServicesProvider>
+);
 
 export default Projects;
