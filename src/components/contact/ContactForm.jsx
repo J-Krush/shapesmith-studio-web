@@ -150,7 +150,7 @@ const ContactForm = () => {
 						</div>
 
 						<button
-							className="font-general-medium w-40 px-4 py-2.5 text-white text-center font-medium tracking-wider bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900 rounded-lg mt-6 duration-500"
+							className="font-general-medium w-40 px-4 py-2.5 text-white text-center font-medium tracking-wider bg-accent hover:bg-accent-highlight focus:ring-1 focus:ring-accent rounded-lg mt-6 duration-500"
 							type="submit"
 							aria-label="Send Message"
 							onClick={handleSubmit}

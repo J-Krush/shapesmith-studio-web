@@ -25,7 +25,7 @@ const ServicesGrid = () => {
 
 						<a
 						href="/contact"
-						className="underline hover:text-indigo-600 dark:hover:text-indigo-300 ml-1 duration-500"
+						className="underline hover:text-accent ml-1 duration-500"
 						>
 							Contact Us!
 						</a>
