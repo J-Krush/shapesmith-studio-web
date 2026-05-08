@@ -103,7 +103,7 @@ Plans:
 Plans:
 
 **Wave 1**
-- [ ] 03-01-PLAN.md — Stub: /quote route + tabs + dropzone + STL/OBJ/SVG parsers + geometry readouts (no submission, no pricing) (QTE-01, QTE-02, QTE-03, QTE-09 partial — memory-bounded parsing)
+- [x] 03-01-PLAN.md — Stub: /quote route + tabs + dropzone + STL/OBJ/SVG parsers + geometry readouts (no submission, no pricing) (QTE-01, QTE-02, QTE-03, QTE-09 partial — memory-bounded parsing)
 
 **Wave 2** *(blocked on Wave 1)*
 - [ ] 03-02-PLAN.md — Pricing: pricing-rule Sanity schema spec + MaterialPicker + QuantityInput + PriceRange + calculatePrice (QTE-04, QTE-05, QTE-06)
@@ -147,7 +147,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
-| 3. Auto-Pricing Quote Tool | 0/4 | Not started | - |
+| 3. Auto-Pricing Quote Tool | 1/4 | In Progress|  |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
 

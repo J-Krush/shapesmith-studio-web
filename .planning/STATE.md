@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 3 UI-SPEC approved
-last_updated: "2026-05-08T00:39:53.605Z"
-last_activity: 2026-05-08 -- Phase 03 execution started
+last_updated: "2026-05-08T15:22:55.187Z"
+last_activity: 2026-05-08
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 15
-  completed_plans: 11
-  percent: 73
+  completed_plans: 12
+  percent: 80
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-02)
 
 **Core value:** The site has to look legit enough that the owner feels comfortable marketing it again — visual confidence first, features second.
-**Current focus:** Phase 03 — auto-pricing-quote-tool
+**Current focus:** Phase 3 — auto-pricing-quote-tool
 
 ## Current Position
 
-Phase: 03 (auto-pricing-quote-tool) — EXECUTING
-Plan: 1 of 4
-Status: Executing Phase 03
-Last activity: 2026-05-08 -- Phase 03 execution started
+Phase: 3 (auto-pricing-quote-tool) — EXECUTING
+Plan: 2 of 4
+Status: Ready to execute
+Last activity: 2026-05-08
 
-Progress: [██████████] 100%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [██████████] 100%
 *Updated after each plan completion*
 | Phase 02 P04 | 5m | 2 tasks | 11 files |
 | Phase 02 P05 | 6m | 3 tasks | 23 files |
+| Phase 03 P01 | 10m | 3 tasks | 19 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,8 @@ Recent decisions affecting current work:
 - Roadmap (2026-05-02): Granularity coarse → 5 phases (research suggested 6; combined Foundation as standalone, Bundle 1 spruce + content + SEO into one)
 - [Phase ?]: Plan 02-04 (2026-05-06): SEO surface fully wired. <SEOHead /> mounts on every public route except /shop (Plan 05 owns it); <JsonLdLocalBusiness /> on Home only (D-21); public/index.html has Phase 2 static defaults (description/og: tags/theme-color #291c30) replacing CRA boilerplate; public/og-default.png is the brand wordmark fallback (D-20); scripts/generate-sitemap.cjs runs postbuild via npm-lifecycle, writing build/sitemap.xml from STATIC_ROUTES + Sanity laser/print slugs; public/robots.txt references the sitemap. T-02-04-01 (JSON-LD injection) mitigated via JSON.stringify; T-02-04-02 (XML injection) mitigated via escapeXml; T-02-04-05 (DoS) mitigated via try/catch + buildDir guard. First-build sitemap emits 6 URLs (all static — Sanity slugs not yet populated; script handles empty arrays gracefully).
 - [Phase ?]: Plan 02-05 (2026-05-06): Phase 2 closed. Pre-fill from ?service= query OR document.referrer (D-24); CSS-hidden honeypot off-screen, NOT display-hidden (D-26); relative-URL fetch('/'); SERVICES-driven dropdown (D-25); studio-info.responseTimePromise via useSanityQuery (D-27); state-driven error UX replacing alert(). Shop.jsx replaced with Coming Soon page + shop-notify Netlify form (D-23) + SEOHead (closes SEO-01). public/index.html prerender extended (D-28). encodeFormData utility extracted. VIS-05 cleanup: 13 files / 1313 lines deleted, styled-components dropped, useScrollToTop leak fixed. README.md project-specific (D-31). All 27 Phase 2 requirements landed.
+- [Phase ?]: Plan 03-01 (2026-05-08): /quote stub shipped — lazy route + WAI-ARIA tabs (3D / Laser) + native HTML5 dropzone + Three.js STLLoader/OBJLoader + DOMParser-based SVG parser with offscreen-host getTotalLength. D-16 implicit shapes ENABLED in parseSvg. Pre-fill cascade mirrors ContactForm.jsx D-24 verbatim per D-05. Plan 03-01 placeholder is a disabled CTA per D-03. /quote chunk = 4.3 KB gzip; Three.js core = 38.7 KB gzip (loaded on demand). Main chunk grew only +221 B.
+- [Phase ?]: Plan 03-01 (2026-05-08): [Rule 3 deviation] Volume math extracted from parseStl/parseObj into volumeAndBbox.js — Three.js v0.184 ships examples/jsm/ as ESM and CRA 5 react-scripts test does NOT honor a transformIgnorePatterns override. Per-loader Jest tests dropped; math coverage moved to volumeAndBbox.test.js (unit-cube + winding-flip). Loader-wrapper code is exercised in browser only.
 
 ### Pending Todos
 
@@ -101,9 +104,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-07T23:20:40.892Z
+Last session: 2026-05-08T15:22:24.732Z
 Stopped at: Phase 3 UI-SPEC approved
-Resume file: .planning/phases/03-auto-pricing-quote-tool/03-UI-SPEC.md
+Resume file: None
 
 ### Performance Metrics (Phase 2)
 

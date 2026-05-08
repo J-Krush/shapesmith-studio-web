@@ -84,9 +84,9 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- Bundle 2: instant ballpark estimate via file upload. Manual confirmation required. -->
 
-- [ ] **QTE-01**: Visitors can navigate to a Quote page from each service page and from a top-level CTA
-- [ ] **QTE-02**: Visitors can upload a file (STL/3MF for 3D printing; SVG/DXF for laser cutting) via drag-and-drop or file picker, with stated size/format constraints surfaced before they touch a file
-- [ ] **QTE-03**: The uploaded file is parsed in the browser (Three.js STLLoader for STL; `dxf` library for DXF; SVG parsing via DOM) and validated client-side; bad files give friendly error messages
+- [x] **QTE-01**: Visitors can navigate to a Quote page from each service page and from a top-level CTA
+- [x] **QTE-02**: Visitors can upload a file (STL/3MF for 3D printing; SVG/DXF for laser cutting) via drag-and-drop or file picker, with stated size/format constraints surfaced before they touch a file
+- [x] **QTE-03**: The uploaded file is parsed in the browser (Three.js STLLoader for STL; `dxf` library for DXF; SVG parsing via DOM) and validated client-side; bad files give friendly error messages
 - [ ] **QTE-04**: Visitors can pick a material and quantity from data-driven options (Sanity `material` filtered by service) and see live updates to the estimate
 - [ ] **QTE-05**: The estimate is displayed as a price *range* with a visible disclaimer ("Estimate, final price subject to confirmation"); the word "quote" is not used until the owner confirms; a 15–25% markup buffer is applied at the formula level
 - [ ] **QTE-06**: A `pricing-rule` Sanity schema exposes per-material rate, machine-time multiplier, setup fee, and density so the owner can tune pricing without a deploy
@@ -190,9 +190,9 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | SEO-02 | Phase 2 | Complete |
 | SEO-03 | Phase 2 | Complete |
 | SEO-04 | Phase 2 | Complete |
-| QTE-01 | Phase 3 | Pending |
-| QTE-02 | Phase 3 | Pending |
-| QTE-03 | Phase 3 | Pending |
+| QTE-01 | Phase 3 | Complete |
+| QTE-02 | Phase 3 | Complete |
+| QTE-03 | Phase 3 | Complete |
 | QTE-04 | Phase 3 | Pending |
 | QTE-05 | Phase 3 | Pending |
 | QTE-06 | Phase 3 | Pending |
