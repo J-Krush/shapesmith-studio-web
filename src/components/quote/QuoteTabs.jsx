@@ -9,8 +9,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SERVICES } from '../../data/services';
+import useSanityQuery from '../../hooks/useSanityQuery';
 import FileDropzone from './FileDropzone';
 import GeometrySummary from './GeometrySummary';
+import MaterialPicker, { MATERIALS_QUERY } from './MaterialPicker';
+import QuantityInput from './QuantityInput';
+import PriceRange from './PriceRange';
 import { formatError } from '../../utilities/quote/formatErrors';
 
 const TAB_CONFIG = {
@@ -36,6 +40,20 @@ const QuoteTabs = () => {
 	const [geometryByTab, setGeometryByTab] = useState({ print: null, laser: null });
 	const [errorByTab, setErrorByTab] = useState({ print: '', laser: '' });
 	const [busyByTab, setBusyByTab] = useState({ print: false, laser: false });
+	// Per-tab material + quantity state — Plan 03-02. Switching tabs preserves
+	// each tab's independent selection.
+	const [materialIdByTab, setMaterialIdByTab] = useState({ print: '', laser: '' });
+	const [quantityByTab, setQuantityByTab] = useState({ print: 1, laser: 1 });
+
+	// Sanity query owned at QuoteTabs level so MaterialPicker and PriceRange
+	// share one materials list (no double-fetch). Re-runs when the active tab
+	// changes (different serviceKey).
+	const { data: materialsData, loading: materialsLoading } = useSanityQuery(
+		MATERIALS_QUERY,
+		{ serviceKey: activeKey },
+		[activeKey],
+	);
+	const materials = materialsData ?? [];
 
 	// Pre-fill cascade — mirrors ContactForm.jsx D-24 verbatim per D-05.
 	useEffect(() => {
@@ -180,6 +198,62 @@ const QuoteTabs = () => {
 							geometry={geometryByTab[activeKey]}
 							loading={busyByTab[activeKey]}
 						/>
+					)}
+					{/* Plan 03-02 — material picker + quantity + price range. Only after
+					    geometry has parsed; the MaterialPicker handles its own loading
+					    + empty states. */}
+					{geometryByTab[activeKey] && (
+						<div className="mt-6">
+							<MaterialPicker
+								materials={materials}
+								loading={materialsLoading}
+								value={materialIdByTab[activeKey]}
+								onChange={(e) =>
+									setMaterialIdByTab((prev) => ({
+										...prev,
+										[activeKey]: e.target.value,
+									}))
+								}
+							/>
+							{materialIdByTab[activeKey] && (
+								<QuantityInput
+									value={quantityByTab[activeKey]}
+									onChange={(e) =>
+										setQuantityByTab((prev) => ({
+											...prev,
+											[activeKey]: Math.max(
+												1,
+												Math.min(999, parseInt(e.target.value, 10) || 1),
+											),
+										}))
+									}
+								/>
+							)}
+							{(() => {
+								const picked = materials.find(
+									(m) => m._id === materialIdByTab[activeKey],
+								);
+								if (!picked) return null;
+								if (!picked.pricing) {
+									return (
+										<p className="mt-4 text-sm text-ternary-light">
+											Pricing not yet configured for this material — please{' '}
+											<a href="/contact" className="hover:text-accent">
+												contact us
+											</a>{' '}
+											for a manual quote.
+										</p>
+									);
+								}
+								return (
+									<PriceRange
+										geometry={geometryByTab[activeKey]}
+										pricing={picked.pricing}
+										quantity={quantityByTab[activeKey]}
+									/>
+								);
+							})()}
+						</div>
 					)}
 					{/* Plan 03-01 placeholder submit affordance per D-03 — disabled CTA,
 					    kept honest. Real submission lands in Plan 03-03. */}
