@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 UI-SPEC approved
-last_updated: "2026-05-08T20:52:15.213Z"
+stopped_at: "Plan 03-03 partial ship — Tasks 2-3 landed; Tasks 1 + 4 deferred pending owner-prep"
+last_updated: "2026-05-08T21:30:00.000Z"
 last_activity: 2026-05-08
 progress:
   total_phases: 5
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 
 ## Current Position
 
-Phase: 3 (auto-pricing-quote-tool) — EXECUTING
-Plan: 3 of 4
-Status: Ready to execute
+Phase: 3 (auto-pricing-quote-tool) — EXECUTING (Plan 03-03 partial)
+Plan: 3 of 4 (in-progress; Tasks 2+3 shipped, Tasks 1+4 deferred)
+Status: Awaiting owner-prep (Task 1) before resume
 Last activity: 2026-05-08
 
 Progress: [█████████░] 87%
@@ -83,6 +83,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 03-01 (2026-05-08): /quote stub shipped — lazy route + WAI-ARIA tabs (3D / Laser) + native HTML5 dropzone + Three.js STLLoader/OBJLoader + DOMParser-based SVG parser with offscreen-host getTotalLength. D-16 implicit shapes ENABLED in parseSvg. Pre-fill cascade mirrors ContactForm.jsx D-24 verbatim per D-05. Plan 03-01 placeholder is a disabled CTA per D-03. /quote chunk = 4.3 KB gzip; Three.js core = 38.7 KB gzip (loaded on demand). Main chunk grew only +221 B.
 - [Phase ?]: Plan 03-01 (2026-05-08): [Rule 3 deviation] Volume math extracted from parseStl/parseObj into volumeAndBbox.js — Three.js v0.184 ships examples/jsm/ as ESM and CRA 5 react-scripts test does NOT honor a transformIgnorePatterns override. Per-loader Jest tests dropped; math coverage moved to volumeAndBbox.test.js (unit-cube + winding-flip). Loader-wrapper code is exercised in browser only.
 - [Phase ?]: Plan 03-02: hoisted useSanityQuery to QuoteTabs to avoid double-fetch; MaterialPicker is presentational
+- [Phase 3]: Plan 03-03 (2026-05-08): **PARTIAL ship — Tasks 2 + 3 (frontend + Function code) shipped; Tasks 1 + 4 DEFERRED at user request.** Tasks 2-3 land the Netlify Function (submit-quote handler, formatQuoteText helper, function-local resend dep, netlify.toml [functions] block) and the QuoteSubmitForm + GoogleReCaptchaProvider wiring (replaces Plan 03-01's disabled placeholder CTA). Task 1 (owner-prep — Resend domain verification, reCAPTCHA v3 site registration, Netlify env-var population: RESEND_API_KEY, RECAPTCHA_SECRET_KEY, REACT_APP_RECAPTCHA_SITE_KEY) and Task 4 (real-send end-to-end smoke test in owner inbox) DEFERRED — owner will complete owner-prep and re-run /gsd-execute-phase 3 to finish Plan 03-03 + close Phase 3. Plan 03-03 stays in-progress; SUMMARY.md NOT created (it's the completion marker); ROADMAP plan-progress NOT advanced. Frontend gracefully degrades when env vars are unset (provider mounts, script never loads, executeRecaptcha is undefined, button shows "spam protection isn't loaded yet" inline message — never throws). pnpm build is clean (35/35 tests, +2.1 KB main chunk). Commits: 91e2373 (Task 2 RED), 0432361 (Task 2 GREEN), 4a8cfdf (Task 3 RED), 1f737cc (Task 3 GREEN).
 
 ### Pending Todos
 
@@ -102,13 +103,14 @@ None yet.
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| *(none)* | | | |
+| Plan 03-03 Task 1 | Owner-prep: Resend domain verification + reCAPTCHA v3 registration + Netlify env vars (RESEND_API_KEY, RECAPTCHA_SECRET_KEY, REACT_APP_RECAPTCHA_SITE_KEY) | Pending owner action — re-run `/gsd-execute-phase 3` after dashboard config + redeploy | 2026-05-08 |
+| Plan 03-03 Task 4 | End-to-end smoke test (real visitor → owner inbox round-trip) | Blocked on Task 1 — cannot verify until env vars exist | 2026-05-08 |
 
 ## Session Continuity
 
-Last session: 2026-05-08T20:51:57.312Z
-Stopped at: Phase 3 UI-SPEC approved
-Resume file: None
+Last session: 2026-05-08T21:30:00.000Z
+Stopped at: Plan 03-03 Tasks 2-3 (frontend + Function code) shipped. Task 1 (Resend/reCAPTCHA/Netlify env-var owner-prep) and Task 4 (real-send verification) DEFERRED at user request — resume by re-running /gsd-execute-phase 3 after owner-prep is complete.
+Resume file: .planning/phases/03-auto-pricing-quote-tool/03-03-PLAN.md (Tasks 1 + 4)
 
 ### Performance Metrics (Phase 2)
 
