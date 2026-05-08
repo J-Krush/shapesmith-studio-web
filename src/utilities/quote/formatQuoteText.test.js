@@ -81,9 +81,11 @@ test('formatQuoteText still renders a range when priceLow === priceHigh (QTE-05 
 });
 
 test('formatQuoteText formats prices >= $1000 with the kilo suffix', () => {
+	// Use values that are unambiguous under IEEE-754 toFixed(1) rounding.
+	// 1200 → "1.2"  (n / 1000 = 1.2 exactly); 1500 → "1.5".
 	const bigPayload = {
 		...BASE_3D_PAYLOAD,
-		metadata: { ...BASE_3D_PAYLOAD.metadata, priceLow: 1200, priceHigh: 1450 },
+		metadata: { ...BASE_3D_PAYLOAD.metadata, priceLow: 1200, priceHigh: 1500 },
 	};
 	const text = formatQuoteText(bigPayload);
 	expect(text).toContain('Estimated range: $1.2k – $1.5k');

@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# Netlify function-local deps (function-local pnpm install produces these;
+# Netlify auto-installs at build time so they MUST NOT be committed).
+netlify/functions/*/node_modules
+
 # testing
 /coverage
 
