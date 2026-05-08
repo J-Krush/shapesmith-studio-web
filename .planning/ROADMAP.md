@@ -99,7 +99,20 @@ Plans:
   3. The visitor can submit the estimate and the studio owner receives an email (via Netlify Function + Resend) containing the metadata they need to manually reply with a real quote — there is no path from upload to a binding order without owner review
   4. The submission is server-side spam-protected (reCAPTCHA v3 token verified inside the Function); user-uploaded SVG content is sanitized via DOMPurify before any DOM render; STL/DXF parsing is memory-bounded so an oversized file degrades gracefully rather than locking the browser
   5. A `pricing-rule` Sanity schema exposes per-material rate, machine-time multiplier, setup fee, and density so the owner can tune pricing without a deploy; form state persists across page reloads via `localStorage`
-**Plans**: TBD
+**Plans**: 4 plans across 4 waves
+Plans:
+
+**Wave 1**
+- [ ] 03-01-PLAN.md — Stub: /quote route + tabs + dropzone + STL/OBJ/SVG parsers + geometry readouts (no submission, no pricing) (QTE-01, QTE-02, QTE-03, QTE-09 partial — memory-bounded parsing)
+
+**Wave 2** *(blocked on Wave 1)*
+- [ ] 03-02-PLAN.md — Pricing: pricing-rule Sanity schema spec + MaterialPicker + QuantityInput + PriceRange + calculatePrice (QTE-04, QTE-05, QTE-06)
+
+**Wave 3** *(blocked on Wave 2)*
+- [ ] 03-03-PLAN.md — Submission: Netlify Function + Resend + reCAPTCHA v3 server verify + QuoteSubmitForm (QTE-07, QTE-08, QTE-09 server-side)
+
+**Wave 4** *(blocked on Wave 3 — last-mile polish)*
+- [ ] 03-04-PLAN.md — localStorage form-state persistence + restore banner (QTE-10)
 **UI hint**: yes
 
 ### Phase 4: Vite Migration
@@ -134,7 +147,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
-| 3. Auto-Pricing Quote Tool | 0/TBD | Not started | - |
+| 3. Auto-Pricing Quote Tool | 0/4 | Not started | - |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
 
