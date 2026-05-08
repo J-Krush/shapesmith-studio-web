@@ -1143,22 +1143,25 @@ These three items are the same shape as Phase 2's "owner adds Sanity schema befo
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Whether to install `react-google-recaptcha-v3` or load `https://www.google.com/recaptcha/api.js` directly.**
    - What we know: library is 9 KB min / 3.6 KB gzip with React provider context; manual script load saves ~3.6 KB but adds ~30 LOC of plumbing.
    - What's unclear: which the planner prefers given the codebase's "small dep is fine if it removes plumbing" stance (cf. `react-helmet-async`, `framer-motion`).
    - Recommendation: install `react-google-recaptcha-v3` for cleanliness. Bundle cost is negligible relative to the Three.js loaders cost in this phase.
+   - **RESOLVED:** Install `react-google-recaptcha-v3@^1.11.0` — see Plan 03-03 Task 3 Step A. Rationale: 3.6 KB gzip is negligible; provider hook simplifies token mint and lifecycle.
 
 2. **Whether implicit-shape SVG path-length (`<rect>`, `<circle>`, etc.) lands in Plan 03-01 or a follow-up plan.**
    - What we know: D-16 leaves it to the planner; both implementations are identical (`getTotalLength()` works on all SVGGeometryElement subclasses).
    - What's unclear: how much real-world laser-cutting design uses non-`<path>` primitives. Inkscape converts most shapes to paths on export; LightBurn imports varies.
    - Recommendation: include in 03-01. Cost is 1 LOC (extend the querySelector). Visitor with a `<rect>`-only design otherwise gets a wrong "0 mm" path length and a confusing zero-cost reading later.
+   - **RESOLVED:** Include `rect`/`circle`/`ellipse`/`line`/`polyline`/`polygon` in path-length sum via offscreen `<path>` conversion — see Plan 03-01 Task 1 Step 4 (`parseSvg.js`). Rationale: prevents wrong-zero readouts on shape-only designs at one-line cost.
 
 3. **Whether to add Web Worker for parsing in Plan 03-01 or defer.**
    - What we know: D-11 says "profile first." 25MB STL ≈ 500K triangles ≈ 100–300ms on desktop [ASSUMED A2].
    - What's unclear: real mobile parse time on cheap Android. Could be 1–3 seconds, which would feel like a freeze.
    - Recommendation: defer Web Worker to a follow-up. Plan 03-01 acceptance includes a real-file profile run on desktop + one mobile device; if the mobile time exceeds 1 second, file a follow-up plan.
+   - **DEFERRED:** Main-thread parsing on first ship; profile mobile real-file parse time as Plan 03-01 acceptance step. Web Worker re-evaluated only if profiling shows freezes. Not in any current plan.
 
 4. **Plan ordering for Plans 03-02..03-NN.**
    - What we know: D-01 says planner determines wave count + ordering. The remaining QTE items are: QTE-04 (material+quantity), QTE-05 (range display), QTE-06 (pricing-rule schema), QTE-07 (Function+Resend), QTE-08 (reCAPTCHA), QTE-09 (DOMPurify only if SVG preview lands; STL/DXF memory-bounded already in 03-01), QTE-10 (localStorage).
@@ -1168,11 +1171,13 @@ These three items are the same shape as Phase 2's "owner adds Sanity schema befo
      - **Plan 03-03:** Netlify Function + Resend (QTE-07) + reCAPTCHA v3 client+server (QTE-08) — submission lands, with spam protection.
      - **Plan 03-04:** localStorage form-state persistence (QTE-10) — last because it's lowest-risk polish.
      - DOMPurify (QTE-09) only enters if a future plan introduces SVG preview rendering (out-of-scope per CONTEXT.md/QTE-13). Plan 03-01 + 03-03 cover the memory-bounded parsing aspect of QTE-09 already (file size cap + Function input validation).
+   - **RESOLVED:** Followed RESEARCH recommendation — 03-02 = pricing schema + picker + range; 03-03 = Function + Resend + reCAPTCHA; 03-04 = localStorage.
 
 5. **Whether `studio-info` Sanity singleton should be extended to hold `laserBedSize` for the bbox-vs-bed comparison.**
    - What we know: D-15 mentions "later plans will compare to a Sanity `studio-info.laserBedSize` if it exists."
    - What's unclear: planner's call. Could ride along with the pricing-rule schema in Plan 03-02 or be deferred.
    - Recommendation: include in `03-SCHEMA-SPEC.md` as an optional extension. Owner can fill or leave empty; UI degrades to "bed comparison unavailable" if not set.
+   - **DEFERRED:** Not added in any current plan. Bbox-vs-bedSize comparison can be a follow-up plan if owner asks; not blocking the v0 ship.
 
 ---
 
