@@ -7,10 +7,16 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 // Default mock — token mint resolves with a fake token. Individual tests
-// override `mockExecuteRecaptcha` to simulate "not ready" and "rejected".
+// override the hook's `executeRecaptcha` reference (notably setting it to
+// undefined to simulate the "script hasn't loaded yet" state) without
+// re-mocking the module — `jest.resetModules` would also reset React, breaking hooks.
+//
+// Names must be prefixed with `mock` so Jest's mock-factory hoist allows the
+// closure to reference them before they're initialized at file-evaluation time.
 const mockExecuteRecaptcha = jest.fn(() => Promise.resolve('FAKE_TOKEN_VALUE'));
+const mockUseGoogleReCaptchaState = { executeRecaptcha: mockExecuteRecaptcha };
 jest.mock('react-google-recaptcha-v3', () => ({
-	useGoogleReCaptcha: () => ({ executeRecaptcha: mockExecuteRecaptcha }),
+	useGoogleReCaptcha: () => mockUseGoogleReCaptchaState,
 	GoogleReCaptchaProvider: ({ children }) => children,
 }));
 
@@ -42,6 +48,7 @@ const fillRequired = () => {
 beforeEach(() => {
 	mockExecuteRecaptcha.mockClear();
 	mockExecuteRecaptcha.mockImplementation(() => Promise.resolve('FAKE_TOKEN_VALUE'));
+	mockUseGoogleReCaptchaState.executeRecaptcha = mockExecuteRecaptcha;
 	global.fetch = jest.fn();
 });
 
@@ -61,8 +68,9 @@ test('renders name + email + message fields and the submit CTA copy', () => {
 
 test('renders the response-time reminder above the submit button', () => {
 	render(<QuoteSubmitForm payload={BASE_PAYLOAD} />);
+	// JSX uses &rsquo; (U+2019 right single quote), not a straight apostrophe.
 	expect(
-		screen.getByText(/we'll review your file and reply with a real quote/i),
+		screen.getByText(/we[’']ll review your file and reply with a real quote/i),
 	).toBeInTheDocument();
 });
 
@@ -89,7 +97,8 @@ test('successful submit: mints token + POSTs JSON to /.netlify/functions/submit-
 		metadata: BASE_PAYLOAD.metadata,
 	});
 
-	await screen.findByText(/got it — we'll be in touch\./i);
+	// JSX renders `Got it — we’ll be in touch.` (U+2014 em-dash, U+2019 apostrophe).
+	await screen.findByText(/got it [—-] we[’']ll be in touch\./i);
 });
 
 test('button shows "Sending…" and is disabled while submitting', async () => {
@@ -132,19 +141,10 @@ test('network failure (fetch throws) shows the same inline error', async () => {
 });
 
 test('reCAPTCHA hook not ready (executeRecaptcha undefined) shows a helpful inline error and does NOT POST', async () => {
-	mockExecuteRecaptcha.mockImplementationOnce(() => {
-		// Simulate the hook returning before script-load: undefined executeRecaptcha.
-		throw new Error('SHOULD_NOT_BE_CALLED');
-	});
-	// Override the mock so executeRecaptcha is undefined for this test.
-	jest.resetModules();
-	jest.doMock('react-google-recaptcha-v3', () => ({
-		useGoogleReCaptcha: () => ({ executeRecaptcha: undefined }),
-		GoogleReCaptchaProvider: ({ children }) => children,
-	}));
-	const FreshForm = require('./QuoteSubmitForm').default;
+	// Simulate the hook returning before script-load: executeRecaptcha is undefined.
+	mockUseGoogleReCaptchaState.executeRecaptcha = undefined;
 
-	render(<FreshForm payload={BASE_PAYLOAD} />);
+	render(<QuoteSubmitForm payload={BASE_PAYLOAD} />);
 	fillRequired();
 	fireEvent.submit(screen.getByRole('button', { name: /send this for a real quote/i }).closest('form'));
 

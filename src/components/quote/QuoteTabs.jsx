@@ -15,7 +15,9 @@ import GeometrySummary from './GeometrySummary';
 import MaterialPicker, { MATERIALS_QUERY } from './MaterialPicker';
 import QuantityInput from './QuantityInput';
 import PriceRange from './PriceRange';
+import QuoteSubmitForm from './QuoteSubmitForm';
 import { formatError } from '../../utilities/quote/formatErrors';
+import { calculatePrice } from '../../utilities/quote/calculatePrice';
 
 const TAB_CONFIG = {
 	print: {
@@ -245,31 +247,45 @@ const QuoteTabs = () => {
 										</p>
 									);
 								}
+								// Plan 03-03 — real range AND real submission form. The disabled
+								// "coming soon" placeholder from Plan 03-01 is gone.
+								const geometry = geometryByTab[activeKey];
+								const quantity = quantityByTab[activeKey];
+								const range = calculatePrice(geometry, picked.pricing, quantity);
+								const file = filesByTab[activeKey];
+								// Build the metadata payload that the Function will email. 3D-only
+								// fields are spread conditionally so the helper's 3D-vs-laser
+								// branches only see the fields that exist for this geometry.
+								const metadata = {
+									filename: file.name,
+									fileSizeMB: parseFloat(file.sizeMB),
+									materialName: picked.title,
+									quantity,
+									priceLow: range.low,
+									priceHigh: range.high,
+									...(geometry.mode === '3d' && {
+										volumeCm3: geometry.volumeCm3,
+										bbox: `${geometry.bbox.w} × ${geometry.bbox.d} × ${geometry.bbox.h} mm`,
+										triangleCount: geometry.triangleCount,
+									}),
+									...(geometry.mode === 'laser' && {
+										cutArea: `${geometry.bbox.w} × ${geometry.bbox.h} mm`,
+										pathLengthMm: geometry.pathLengthMm,
+									}),
+								};
 								return (
-									<PriceRange
-										geometry={geometryByTab[activeKey]}
-										pricing={picked.pricing}
-										quantity={quantityByTab[activeKey]}
-									/>
+									<>
+										<PriceRange
+											geometry={geometry}
+											pricing={picked.pricing}
+											quantity={quantity}
+										/>
+										<QuoteSubmitForm
+											payload={{ service: activeKey, metadata }}
+										/>
+									</>
 								);
 							})()}
-						</div>
-					)}
-					{/* Plan 03-01 placeholder submit affordance per D-03 — disabled CTA,
-					    kept honest. Real submission lands in Plan 03-03. */}
-					{geometryByTab[activeKey] && (
-						<div className="mt-8">
-							<button
-								type="button"
-								disabled
-								className="font-general-medium px-5 py-2.5 text-white bg-accent/40 cursor-not-allowed rounded-md"
-							>
-								Submit for confirmation — coming soon
-							</button>
-							<p className="mt-3 text-sm text-ternary-section-dark">
-								We&rsquo;re still building the submission flow. In the meantime, you can{' '}
-								<a href="/contact" className="hover:text-accent">contact us</a> directly.
-							</p>
 						</div>
 					)}
 				</motion.div>
