@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 3 UI-SPEC approved
-last_updated: "2026-05-08T15:22:55.187Z"
+last_updated: "2026-05-08T20:52:15.213Z"
 last_activity: 2026-05-08
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 15
-  completed_plans: 12
-  percent: 80
+  completed_plans: 13
+  percent: 87
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 3 (auto-pricing-quote-tool) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 Status: Ready to execute
 Last activity: 2026-05-08
 
-Progress: [████████░░] 80%
+Progress: [█████████░] 87%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [████████░░] 80%
 | Phase 02 P04 | 5m | 2 tasks | 11 files |
 | Phase 02 P05 | 6m | 3 tasks | 23 files |
 | Phase 03 P01 | 10m | 3 tasks | 19 files |
+| Phase 03 P03-02 | ~3.5m | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 02-05 (2026-05-06): Phase 2 closed. Pre-fill from ?service= query OR document.referrer (D-24); CSS-hidden honeypot off-screen, NOT display-hidden (D-26); relative-URL fetch('/'); SERVICES-driven dropdown (D-25); studio-info.responseTimePromise via useSanityQuery (D-27); state-driven error UX replacing alert(). Shop.jsx replaced with Coming Soon page + shop-notify Netlify form (D-23) + SEOHead (closes SEO-01). public/index.html prerender extended (D-28). encodeFormData utility extracted. VIS-05 cleanup: 13 files / 1313 lines deleted, styled-components dropped, useScrollToTop leak fixed. README.md project-specific (D-31). All 27 Phase 2 requirements landed.
 - [Phase ?]: Plan 03-01 (2026-05-08): /quote stub shipped — lazy route + WAI-ARIA tabs (3D / Laser) + native HTML5 dropzone + Three.js STLLoader/OBJLoader + DOMParser-based SVG parser with offscreen-host getTotalLength. D-16 implicit shapes ENABLED in parseSvg. Pre-fill cascade mirrors ContactForm.jsx D-24 verbatim per D-05. Plan 03-01 placeholder is a disabled CTA per D-03. /quote chunk = 4.3 KB gzip; Three.js core = 38.7 KB gzip (loaded on demand). Main chunk grew only +221 B.
 - [Phase ?]: Plan 03-01 (2026-05-08): [Rule 3 deviation] Volume math extracted from parseStl/parseObj into volumeAndBbox.js — Three.js v0.184 ships examples/jsm/ as ESM and CRA 5 react-scripts test does NOT honor a transformIgnorePatterns override. Per-loader Jest tests dropped; math coverage moved to volumeAndBbox.test.js (unit-cube + winding-flip). Loader-wrapper code is exercised in browser only.
+- [Phase ?]: Plan 03-02: hoisted useSanityQuery to QuoteTabs to avoid double-fetch; MaterialPicker is presentational
 
 ### Pending Todos
 
@@ -104,7 +106,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-08T15:22:24.732Z
+Last session: 2026-05-08T20:51:57.312Z
 Stopped at: Phase 3 UI-SPEC approved
 Resume file: None
 

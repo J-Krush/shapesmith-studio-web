@@ -106,7 +106,7 @@ Plans:
 - [x] 03-01-PLAN.md — Stub: /quote route + tabs + dropzone + STL/OBJ/SVG parsers + geometry readouts (no submission, no pricing) (QTE-01, QTE-02, QTE-03, QTE-09 partial — memory-bounded parsing)
 
 **Wave 2** *(blocked on Wave 1)*
-- [ ] 03-02-PLAN.md — Pricing: pricing-rule Sanity schema spec + MaterialPicker + QuantityInput + PriceRange + calculatePrice (QTE-04, QTE-05, QTE-06)
+- [x] 03-02-PLAN.md — Pricing: pricing-rule Sanity schema spec + MaterialPicker + QuantityInput + PriceRange + calculatePrice (QTE-04, QTE-05, QTE-06)
 
 **Wave 3** *(blocked on Wave 2)*
 - [ ] 03-03-PLAN.md — Submission: Netlify Function + Resend + reCAPTCHA v3 server verify + QuoteSubmitForm (QTE-07, QTE-08, QTE-09 server-side)
