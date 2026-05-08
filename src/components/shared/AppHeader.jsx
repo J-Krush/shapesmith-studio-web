@@ -23,6 +23,9 @@ const NAV_ITEMS = [
 	})),
 	{ to: '/about', label: 'About', match: '/about' },
 	{ to: '/shop', label: 'Shop', match: '/shop' },
+	// Plan 03-01 / D-06: top-level "Get a Quote" CTA in the nav. Active-state
+	// border-b-2 border-accent applies automatically via navLinkClasses.
+	{ to: '/quote', label: 'Get a Quote', match: '/quote' },
 ];
 
 const AppHeader = () => {

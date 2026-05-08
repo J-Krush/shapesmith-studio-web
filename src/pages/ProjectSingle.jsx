@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import ServiceHeader from '../components/services/ServiceHeader';
 import ServiceGallery from '../components/services/ServiceGallery';
 import ServiceInfo from '../components/services/ServiceInfo';
@@ -58,6 +59,16 @@ const ServiceDetailComposition = ({ serviceKey }) => {
 			<ServiceGallery />
 			<ServiceInfo />
 			<TrustCopyBlock turnaround={turnaround} />
+			{/* Plan 03-01 / D-06: hero CTA into the auto-pricing quote tool.
+			    ?service=urlSegment opens the matching tab via the pre-fill cascade. */}
+			<div className="container mx-auto py-6 sm:py-8 text-center">
+				<Link
+					to={`/quote?service=${service.urlSegment}`}
+					className="inline-block bg-accent hover:bg-accent-highlight text-white font-general-medium px-5 py-2.5 rounded-md duration-300"
+				>
+					Estimate this in our quote tool
+				</Link>
+			</div>
 			<MaterialsSection serviceKey={serviceKey} />
 			<FAQ serviceKey={serviceKey} />
 			<WontMake wontMakeScope={wontMakeScope} />

@@ -14,7 +14,7 @@ const { createClient } = require('@sanity/client');
 // STATIC_ROUTES: keep in sync with src/App.js when routes are added.
 // /materials and /404 are intentionally excluded — one is a redirect (Plan 02-02);
 // the other is noindex (Plan 02-04 NotFound.jsx).
-const STATIC_ROUTES = ['/', '/styles', '/3d-printing', '/about', '/contact', '/shop'];
+const STATIC_ROUTES = ['/', '/styles', '/3d-printing', '/about', '/contact', '/shop', '/quote'];
 const BASE_URL = 'https://shapesmith.studio';
 
 // MUST match src/utilities/sanityClient.jsx exactly. T-02-04-04 accepts the hardcoded
