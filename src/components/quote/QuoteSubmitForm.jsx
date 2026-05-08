@@ -16,11 +16,17 @@
 //     vars), the provider mounts but the script never loads, so
 //     `executeRecaptcha` stays `undefined` — we surface a helpful inline
 //     message instead of throwing.
+//
+// Plan 03-04 (QTE-10): `onSubmitted` is fired AFTER setSubmitted(true) on a
+// successful 2xx round-trip. QuoteTabs passes `() => setQuoteState(null)` so
+// the auto-clear-on-submit rule kicks in — the next visitor on the same
+// browser sees a fresh form, not a stale "we restored your selections"
+// banner pointing at someone else's choices.
 import { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import FormInput from '../reusable/FormInput';
 
-const QuoteSubmitForm = ({ payload }) => {
+const QuoteSubmitForm = ({ payload, onSubmitted }) => {
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -48,6 +54,9 @@ const QuoteSubmitForm = ({ payload }) => {
 			});
 			if (!res.ok) throw new Error(`HTTP_${res.status}`);
 			setSubmitted(true);
+			// Plan 03-04 — auto-clear localStorage entry per QTE-10 so the next
+			// visitor on the same browser does not see a stale restore banner.
+			onSubmitted?.();
 		} catch (err) {
 			console.error('Quote submit failed:', err);
 			setSubmitError(

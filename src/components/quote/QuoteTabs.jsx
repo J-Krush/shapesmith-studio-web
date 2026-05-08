@@ -6,16 +6,26 @@
 // inside the file handler so the Three.js bundle is only fetched when a
 // visitor actually drops a file — not at /quote first paint. This keeps the
 // /quote chunk small (Pitfall 7 — bundle measurement target ≤120 KB gzip).
+//
+// Plan 03-04 (QTE-10) — localStorage persistence. The active tab + materialId +
+// quantity now live in a single quoteState object backed by useLocalStorageState.
+// File / geometry / error / busy state stay per-tab in their own non-persisted
+// maps because (a) File contents are NEVER persisted (privacy + 5MB cap) and
+// (b) geometry is re-derived from the file the visitor re-uploads. The
+// pre-fill cascade is short-circuited when a stored selection was restored
+// (localStorage takes precedence over ?service=/document.referrer).
 import { useEffect, useState, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SERVICES } from '../../data/services';
 import useSanityQuery from '../../hooks/useSanityQuery';
+import useLocalStorageState from '../../hooks/useLocalStorageState';
 import FileDropzone from './FileDropzone';
 import GeometrySummary from './GeometrySummary';
 import MaterialPicker, { MATERIALS_QUERY } from './MaterialPicker';
 import QuantityInput from './QuantityInput';
 import PriceRange from './PriceRange';
 import QuoteSubmitForm from './QuoteSubmitForm';
+import QuoteRestoreBanner from './QuoteRestoreBanner';
 import { formatError } from '../../utilities/quote/formatErrors';
 import { calculatePrice } from '../../utilities/quote/calculatePrice';
 
@@ -36,16 +46,74 @@ const TAB_CONFIG = {
 const TAB_ORDER = ['print', 'laser'];
 const MAX_BYTES = 25 * 1024 * 1024; // D-12 — 25MB cap (QTE-09 partial).
 
+// Plan 03-04 — versioned key (`-v1`) so a future shape change is a non-event.
+const STORAGE_KEY = 'shapesmith-quote-v1';
+const DEFAULT_STATE = { tab: 'print', materialId: '', quantity: 1 };
+
+const isNonDefaultState = (s) =>
+	s &&
+	(s.tab !== DEFAULT_STATE.tab ||
+		s.materialId !== DEFAULT_STATE.materialId ||
+		s.quantity !== DEFAULT_STATE.quantity);
+
 const QuoteTabs = () => {
-	const [activeKey, setActiveKey] = useState('print'); // UI-SPEC default = 3D
+	// Plan 03-04 — single persisted state object replacing activeKey +
+	// materialIdByTab[activeKey] + quantityByTab[activeKey]. The hook's lazy
+	// initializer reads localStorage once, so storage takes precedence over
+	// the URL-based pre-fill cascade below (which short-circuits when a
+	// non-default state was restored).
+	const [quoteState, setQuoteState] = useLocalStorageState(
+		STORAGE_KEY,
+		DEFAULT_STATE,
+	);
+	// Restore-banner visibility: true when storage had a non-default value AT
+	// MOUNT. Lazy initializer ensures we only check the initial value, not
+	// the post-update value (which would never be "default" again after the
+	// first interaction).
+	const [showRestoreBanner, setShowRestoreBanner] = useState(() =>
+		isNonDefaultState(quoteState),
+	);
+
+	// File / geometry / error / busy state stay per-tab and are NOT persisted —
+	// File contents would blow the 5MB localStorage cap, and geometry is
+	// re-derived from the file the visitor re-uploads.
 	const [filesByTab, setFilesByTab] = useState({ print: null, laser: null });
 	const [geometryByTab, setGeometryByTab] = useState({ print: null, laser: null });
 	const [errorByTab, setErrorByTab] = useState({ print: '', laser: '' });
 	const [busyByTab, setBusyByTab] = useState({ print: false, laser: false });
-	// Per-tab material + quantity state — Plan 03-02. Switching tabs preserves
-	// each tab's independent selection.
-	const [materialIdByTab, setMaterialIdByTab] = useState({ print: '', laser: '' });
-	const [quantityByTab, setQuantityByTab] = useState({ print: 1, laser: 1 });
+
+	// Derived UI state — read from the single persisted state object. Optional
+	// chaining + defaults guard against a tampered localStorage value (e.g. a
+	// visitor manually setting `null` via DevTools — T-03-04-02).
+	const activeKey = quoteState?.tab ?? DEFAULT_STATE.tab;
+	const materialId = quoteState?.materialId ?? DEFAULT_STATE.materialId;
+	const quantity = quoteState?.quantity ?? DEFAULT_STATE.quantity;
+
+	// Single update path — every interaction calls updateState({...}) which
+	// (a) merges the patch into quoteState (which writes to localStorage via
+	// the hook's effect) and (b) dismisses the restore banner. The banner is
+	// a one-time confirmation, not persistent UI.
+	const updateState = useCallback(
+		(patch) => {
+			setQuoteState((prev) => ({ ...(prev ?? DEFAULT_STATE), ...patch }));
+			setShowRestoreBanner(false);
+		},
+		[setQuoteState],
+	);
+
+	const handleStartOver = useCallback(() => {
+		// Single state update — the useEffect that mirrors quoteState into
+		// localStorage will write JSON.stringify(DEFAULT_STATE) on the next
+		// render. No need to remove-then-seed across two ticks.
+		setQuoteState(DEFAULT_STATE);
+		setShowRestoreBanner(false);
+		// Also reset per-tab file/geometry/error state — the restore banner
+		// only appears on mount before any new file is dropped, but a visitor
+		// who clicks "Start over" expects a truly fresh form.
+		setFilesByTab({ print: null, laser: null });
+		setGeometryByTab({ print: null, laser: null });
+		setErrorByTab({ print: '', laser: '' });
+	}, [setQuoteState]);
 
 	// Sanity query owned at QuoteTabs level so MaterialPicker and PriceRange
 	// share one materials list (no double-fetch). Re-runs when the active tab
@@ -58,20 +126,24 @@ const QuoteTabs = () => {
 	const materials = materialsData ?? [];
 
 	// Pre-fill cascade — mirrors ContactForm.jsx D-24 verbatim per D-05.
+	// Plan 03-04: short-circuit when localStorage restored a non-default value;
+	// stored selections take precedence over URL/referrer hints.
 	useEffect(() => {
+		if (showRestoreBanner) return;
 		const queryService = new URLSearchParams(window.location.search).get('service');
 		if (queryService) {
 			const m = SERVICES.find(
 				(s) => s.key === queryService || s.urlSegment === queryService,
 			);
 			if (m) {
-				setActiveKey(m.key);
+				updateState({ tab: m.key });
 				return;
 			}
 		}
 		const referrer = (typeof document !== 'undefined' && document.referrer) || '';
 		const rule = SERVICES.find((s) => referrer.includes(`/${s.urlSegment}`));
-		if (rule) setActiveKey(rule.key);
+		if (rule) updateState({ tab: rule.key });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const onFile = useCallback(async (tabKey, file) => {
@@ -119,16 +191,21 @@ const QuoteTabs = () => {
 
 	const handleArrowNav = (e) => {
 		const i = TAB_ORDER.indexOf(activeKey);
-		if (e.key === 'ArrowRight') setActiveKey(TAB_ORDER[(i + 1) % TAB_ORDER.length]);
-		else if (e.key === 'ArrowLeft') setActiveKey(TAB_ORDER[(i - 1 + TAB_ORDER.length) % TAB_ORDER.length]);
-		else if (e.key === 'Home') setActiveKey(TAB_ORDER[0]);
-		else if (e.key === 'End') setActiveKey(TAB_ORDER[TAB_ORDER.length - 1]);
+		if (e.key === 'ArrowRight')
+			updateState({ tab: TAB_ORDER[(i + 1) % TAB_ORDER.length] });
+		else if (e.key === 'ArrowLeft')
+			updateState({
+				tab: TAB_ORDER[(i - 1 + TAB_ORDER.length) % TAB_ORDER.length],
+			});
+		else if (e.key === 'Home') updateState({ tab: TAB_ORDER[0] });
+		else if (e.key === 'End') updateState({ tab: TAB_ORDER[TAB_ORDER.length - 1] });
 	};
 
 	const acceptedExtensions = TAB_CONFIG[activeKey].accepted;
 
 	return (
 		<div className="max-w-3xl mx-auto px-4">
+			{showRestoreBanner && <QuoteRestoreBanner onStartOver={handleStartOver} />}
 			<p className="text-sm text-ternary-section-dark mb-2">
 				Pick what you&rsquo;re making — 3D printed or laser cut.
 			</p>
@@ -148,7 +225,7 @@ const QuoteTabs = () => {
 							aria-selected={isActive}
 							aria-controls={`panel-${key}`}
 							tabIndex={isActive ? 0 : -1}
-							onClick={() => setActiveKey(key)}
+							onClick={() => updateState({ tab: key })}
 							onKeyDown={handleArrowNav}
 							type="button"
 							className={
@@ -209,32 +286,24 @@ const QuoteTabs = () => {
 							<MaterialPicker
 								materials={materials}
 								loading={materialsLoading}
-								value={materialIdByTab[activeKey]}
-								onChange={(e) =>
-									setMaterialIdByTab((prev) => ({
-										...prev,
-										[activeKey]: e.target.value,
-									}))
-								}
+								value={materialId}
+								onChange={(e) => updateState({ materialId: e.target.value })}
 							/>
-							{materialIdByTab[activeKey] && (
+							{materialId && (
 								<QuantityInput
-									value={quantityByTab[activeKey]}
+									value={quantity}
 									onChange={(e) =>
-										setQuantityByTab((prev) => ({
-											...prev,
-											[activeKey]: Math.max(
+										updateState({
+											quantity: Math.max(
 												1,
 												Math.min(999, parseInt(e.target.value, 10) || 1),
 											),
-										}))
+										})
 									}
 								/>
 							)}
 							{(() => {
-								const picked = materials.find(
-									(m) => m._id === materialIdByTab[activeKey],
-								);
+								const picked = materials.find((m) => m._id === materialId);
 								if (!picked) return null;
 								if (!picked.pricing) {
 									return (
@@ -250,7 +319,6 @@ const QuoteTabs = () => {
 								// Plan 03-03 — real range AND real submission form. The disabled
 								// "coming soon" placeholder from Plan 03-01 is gone.
 								const geometry = geometryByTab[activeKey];
-								const quantity = quantityByTab[activeKey];
 								const range = calculatePrice(geometry, picked.pricing, quantity);
 								const file = filesByTab[activeKey];
 								// Build the metadata payload that the Function will email. 3D-only
@@ -282,6 +350,7 @@ const QuoteTabs = () => {
 										/>
 										<QuoteSubmitForm
 											payload={{ service: activeKey, metadata }}
+											onSubmitted={() => setQuoteState(null)}
 										/>
 									</>
 								);
