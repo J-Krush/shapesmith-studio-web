@@ -112,7 +112,7 @@ Plans:
 - [ ] 03-03-PLAN.md — Submission: Netlify Function + Resend + reCAPTCHA v3 server verify + QuoteSubmitForm (QTE-07, QTE-08, QTE-09 server-side)
 
 **Wave 4** *(blocked on Wave 3 — last-mile polish)*
-- [ ] 03-04-PLAN.md — localStorage form-state persistence + restore banner (QTE-10)
+- [x] 03-04-PLAN.md — localStorage form-state persistence + restore banner (QTE-10)
 **UI hint**: yes
 
 ### Phase 4: Vite Migration
@@ -147,7 +147,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
-| 3. Auto-Pricing Quote Tool | 1/4 | In Progress|  |
+| 3. Auto-Pricing Quote Tool | 3/4 | In Progress |  |
 | 4. Vite Migration | 0/TBD | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
 

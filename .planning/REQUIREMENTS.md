@@ -93,7 +93,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 - [ ] **QTE-07**: On submit, the estimate metadata (NOT the file itself by default) is POSTed to a Netlify Function, which validates the input and emails the owner via Resend (or equivalent); the owner manually confirms by replying with a real quote
 - [ ] **QTE-08**: The submission form includes server-verified spam protection (reCAPTCHA v3 token verification or equivalent)
 - [ ] **QTE-09**: User-uploaded SVG content is sanitized via DOMPurify before being rendered in the DOM; STL/DXF parsing is memory-bounded to prevent oversized-file DoS
-- [ ] **QTE-10**: Form state persists across page reloads via `localStorage` so visitors who close their tab can resume
+- [x] **QTE-10**: Form state persists across page reloads via `localStorage` so visitors who close their tab can resume
 
 ### Vite Migration
 
@@ -199,7 +199,7 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | QTE-07 | Phase 3 | Pending |
 | QTE-08 | Phase 3 | Pending |
 | QTE-09 | Phase 3 | Pending |
-| QTE-10 | Phase 3 | Pending |
+| QTE-10 | Phase 3 | Complete |
 | VITE-01 | Phase 4 | Pending |
 | VITE-02 | Phase 4 | Pending |
 | VITE-03 | Phase 4 | Pending |

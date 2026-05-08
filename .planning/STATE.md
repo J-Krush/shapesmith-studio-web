@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 03-03 partial ship — Tasks 2-3 landed; Tasks 1 + 4 deferred pending owner-prep"
-last_updated: "2026-05-08T21:30:00.000Z"
+stopped_at: Plan 03-04 complete (QTE-10 shipped). Phase 3 frontend done — 10/10 QTE requirements landed in code. Plan 03-03 Task 1 (Resend/reCAPTCHA/Netlify env-var owner-prep) + Task 4 (real-send verification) remain DEFERRED at user request — pending owner action.
+last_updated: "2026-05-08T23:06:19.351Z"
 last_activity: 2026-05-08
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 15
-  completed_plans: 13
-  percent: 87
+  completed_plans: 14
+  percent: 93
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 
 ## Current Position
 
-Phase: 3 (auto-pricing-quote-tool) — EXECUTING (Plan 03-03 partial)
-Plan: 3 of 4 (in-progress; Tasks 2+3 shipped, Tasks 1+4 deferred)
-Status: Awaiting owner-prep (Task 1) before resume
+Phase: 3 (auto-pricing-quote-tool) — EXECUTING (Plan 03-03 partial; Plans 01/02/04 complete)
+Plan: 4 of 4 (Plan 03-04 complete; Plan 03-03 Tasks 1+4 deferred pending owner-prep)
+Status: Phase 3 frontend complete — awaiting owner-prep + Plan 03-03 real-send verification
 Last activity: 2026-05-08
 
-Progress: [█████████░] 87%
+Progress: [█████████░] 93%
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [█████████░] 87%
 | Phase 02 P05 | 6m | 3 tasks | 23 files |
 | Phase 03 P01 | 10m | 3 tasks | 19 files |
 | Phase 03 P03-02 | ~3.5m | 2 tasks | 6 files |
+| Phase 03 P04 | 4m | 1 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 03-01 (2026-05-08): [Rule 3 deviation] Volume math extracted from parseStl/parseObj into volumeAndBbox.js — Three.js v0.184 ships examples/jsm/ as ESM and CRA 5 react-scripts test does NOT honor a transformIgnorePatterns override. Per-loader Jest tests dropped; math coverage moved to volumeAndBbox.test.js (unit-cube + winding-flip). Loader-wrapper code is exercised in browser only.
 - [Phase ?]: Plan 03-02: hoisted useSanityQuery to QuoteTabs to avoid double-fetch; MaterialPicker is presentational
 - [Phase 3]: Plan 03-03 (2026-05-08): **PARTIAL ship — Tasks 2 + 3 (frontend + Function code) shipped; Tasks 1 + 4 DEFERRED at user request.** Tasks 2-3 land the Netlify Function (submit-quote handler, formatQuoteText helper, function-local resend dep, netlify.toml [functions] block) and the QuoteSubmitForm + GoogleReCaptchaProvider wiring (replaces Plan 03-01's disabled placeholder CTA). Task 1 (owner-prep — Resend domain verification, reCAPTCHA v3 site registration, Netlify env-var population: RESEND_API_KEY, RECAPTCHA_SECRET_KEY, REACT_APP_RECAPTCHA_SITE_KEY) and Task 4 (real-send end-to-end smoke test in owner inbox) DEFERRED — owner will complete owner-prep and re-run /gsd-execute-phase 3 to finish Plan 03-03 + close Phase 3. Plan 03-03 stays in-progress; SUMMARY.md NOT created (it's the completion marker); ROADMAP plan-progress NOT advanced. Frontend gracefully degrades when env vars are unset (provider mounts, script never loads, executeRecaptcha is undefined, button shows "spam protection isn't loaded yet" inline message — never throws). pnpm build is clean (35/35 tests, +2.1 KB main chunk). Commits: 91e2373 (Task 2 RED), 0432361 (Task 2 GREEN), 4a8cfdf (Task 3 RED), 1f737cc (Task 3 GREEN).
+- [Phase ?]: Plan 03-04 (2026-05-08): localStorage persistence shipped — useLocalStorageState hook + QuoteRestoreBanner + storage-precedence pre-fill cascade. Combined storage shape ({tab, materialId, quantity}) at versioned key shapesmith-quote-v1. setQuoteState(null) auto-clear-on-submit via QuoteSubmitForm.onSubmitted. QuotaExceededError + Safari private mode fail silently — UI keeps working in-memory. Main chunk +3 B gzip. QTE-10 closed; Phase 3 frontend complete (10/10 QTE requirements landed in code; Plan 03-03 Task 1 owner-prep + Task 4 real-send verification remain deferred).
 
 ### Pending Todos
 
@@ -108,9 +110,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-08T21:30:00.000Z
-Stopped at: Plan 03-03 Tasks 2-3 (frontend + Function code) shipped. Task 1 (Resend/reCAPTCHA/Netlify env-var owner-prep) and Task 4 (real-send verification) DEFERRED at user request — resume by re-running /gsd-execute-phase 3 after owner-prep is complete.
-Resume file: .planning/phases/03-auto-pricing-quote-tool/03-03-PLAN.md (Tasks 1 + 4)
+Last session: 2026-05-08T22:53:13.492Z
+Stopped at: Plan 03-04 complete (QTE-10 shipped). Phase 3 frontend done — 10/10 QTE requirements landed in code. Plan 03-03 Task 1 (Resend/reCAPTCHA/Netlify env-var owner-prep) + Task 4 (real-send verification) remain DEFERRED at user request — pending owner action.
+Resume file: None
 
 ### Performance Metrics (Phase 2)
 
