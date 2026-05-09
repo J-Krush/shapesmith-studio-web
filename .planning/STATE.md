@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Plan 04-02 complete (build-tool flip). Vite is now the build tool — pnpm build runs vite v7.3.3 and produces a deployable bundle in build/; react-scripts/postcss-cli/--openssl-legacy-provider/REACT_APP_* are gone. Tests temporarily broken (still on jest.* API → Plan 04-03 owns the rewrite). Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
-last_updated: "2026-05-09T01:09:24Z"
+stopped_at: Plan 04-03 complete (Vitest test migration). All 8 src/ test files run green under `pnpm test` (vitest run) with 43/43 tests passing in ~1.4s. App.test.js sanityImage workaround removed (Pitfall 8 confirmed). Zero `jest.*` references remain anywhere in src/. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
+last_updated: "2026-05-09T01:19:00Z"
 last_activity: 2026-05-09
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 21
-  completed_plans: 16
-  percent: 76
+  completed_plans: 17
+  percent: 81
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 04 (vite-migration) — EXECUTING
-Plan: 3 of 6
+Plan: 4 of 6
 Status: Ready to execute
 Last activity: 2026-05-09
 
-Progress: [████████░░] 76%
+Progress: [████████░░] 81%
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [████████░░] 76%
 | Phase 03 P04 | 4m | 1 tasks | 5 files |
 | Phase 04 P01 | 12 min | 2 tasks | 2 files |
 | Phase 04 P02 | ~5 min | 3 tasks | 4 files |
+| Phase 04 P03 | ~3 min | 1 task | 3 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Plan 03-04 (2026-05-08): localStorage persistence shipped — useLocalStorageState hook + QuoteRestoreBanner + storage-precedence pre-fill cascade. Combined storage shape ({tab, materialId, quantity}) at versioned key shapesmith-quote-v1. setQuoteState(null) auto-clear-on-submit via QuoteSubmitForm.onSubmitted. QuotaExceededError + Safari private mode fail silently — UI keeps working in-memory. Main chunk +3 B gzip. QTE-10 closed; Phase 3 frontend complete (10/10 QTE requirements landed in code; Plan 03-03 Task 1 owner-prep + Task 4 real-send verification remain deferred).
 - [Phase ?]: [Phase 4] Plan 04-01 (2026-05-08): Vite scaffolding landed at repo root WITHOUT flipping the build switch. vite.config.js (ESM, Vite 7 + Vitest 4 inline, build.outDir='build', JSX-in-.js loader override pair, jsdom test env) + index.html (moved from public/ via git mv at 80% similarity, 3 %PUBLIC_URL% tokens replaced with absolute / paths, explicit <script type='module' src='/src/index.js'> tag added). Both Netlify form blocks (contact-form D-28, shop-notify D-23) preserved byte-identical — diff hunks show forms as context-only with zero +/- lines (Pitfall 2 mitigated). package.json untouched (Plan 04-02 owns flip). Deviation: deleted CRA %PUBLIC_URL% explanatory comment block in index.html — plan said don't delete but plan's verify gate required zero %PUBLIC_URL% hits (comment text contained 2). Aligns with RESEARCH.md Step 4 canonical post-migration HTML.
 - [Phase ?]: [Phase 4] Plan 04-02 (2026-05-08): Build-tool flip landed atomically in three commits. package.json swap (ae42791): drop react-scripts/postcss-cli/@babel/plugin-proposal-private-property-in-object/--openssl-legacy-provider; add vite ^7.3.3 + @vitejs/plugin-react ^5 + vitest ^4.1.5 + jsdom ^25; new scripts dev/start/build/preview/postbuild/test/test:watch (eject + build:css gone). pnpm install regenerated lockfile (-1009/+65 packages). Env-var rename (9c91c5d): src/App.js line 35 process.env.REACT_APP_RECAPTCHA_SITE_KEY → import.meta.env.VITE_RECAPTCHA_SITE_KEY + comment block reword (CRA contract → Vite contract); QuoteSubmitForm.jsx line 15 doc-comment aligned. Server-side env vars (RESEND_API_KEY, RECAPTCHA_SECRET_KEY) intentionally untouched (no REACT_APP_ prefix; out of scope). Build verification (fe327d8 empty commit): pnpm build → vite v7.3.3 → 644 modules in 1.86s → build/index.html (3.08 kB) + 23 JS chunks + 1 CSS chunk + sitemap.xml (7 URLs); both Netlify forms byte-preserved in output (grep counts pass); zero %PUBLIC_URL% in output; <script type="module"> entry honored. Non-fatal PostCSS warning surfaced for src/css/tailwind.css line 5 (@import-after-@tailwind ordering — pre-existing CSS authoring issue, deferred to Plan 04-04 cleanup or follow-up). No deviations. Tests still on jest.* API → Plan 04-03 owns rewrite. VITE-01 + VITE-02 closed.
+- [Phase 4] Plan 04-03 (2026-05-09): Vitest test migration landed in one atomic commit (468e097). Three test files migrated mechanically: App.test.js (jest.mock + jest.fn → vi.* + removed the ./utilities/sanityImage mock workaround per Pitfall 8 — confirmed unnecessary), useLocalStorageState.test.jsx (2× jest.restoreAllMocks + 2× jest.spyOn → vi.*), QuoteSubmitForm.test.jsx (2× jest.fn + 1× jest.mock → vi.*; mockExecuteRecaptcha + mockUseGoogleReCaptchaState mock-prefix preserved). Five quote utility test files (formatErrors, formatQuoteText, calculatePrice, parseSvg, volumeAndBbox) UNTOUCHED — they had zero jest.* references. src/setupTests.js UNTOUCHED — @testing-library/jest-dom works under Vitest unchanged. [Rule 3 deviation] Converted `require('./useLocalStorageState').default` and `require('./QuoteSubmitForm').default` to top-level ESM `import` statements — Vitest's CJS interop does not resolve relative paths the way Jest's transformer did (PLAN.md said "Vitest supports CJS require in test files" but that's true only for npm-package paths, not relative ESM sources). Semantic equivalence preserved because vi.mock hoists above all imports identically to jest.mock, so the lazy-require pattern was already redundant. [Rule 3 deviation] Scrubbed literal `jest.mock` text from a comment in QuoteSubmitForm.test.jsx so the strict `grep -rn 'jest\.' src/` acceptance gate returns 0. Final: 8 test files / 43 tests passing under vitest run in ~1.4s; zero jest.* references in src/. Non-fatal jsdom "Not implemented: window.scrollTo" console output from ScrollToTop's useEffect — does NOT cause test failure (CRA-Jest had identical behavior); silencing it is a Plan 04-04 cleanup candidate. VITE-01 test-runner half closed.
 
 ### Pending Todos
 
@@ -114,8 +116,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-09T01:09:24Z
-Stopped at: Plan 04-02 complete (build-tool flip). Vite is now the build tool — pnpm build runs vite v7.3.3 and produces a deployable bundle in build/; react-scripts/postcss-cli/--openssl-legacy-provider/REACT_APP_* are gone. Tests temporarily broken (still on jest.* API → Plan 04-03 owns the rewrite). Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
+Last session: 2026-05-09T01:19:00Z
+Stopped at: Plan 04-03 complete (Vitest test migration). All 8 src/ test files run green under `pnpm test` (vitest run) with 43/43 tests passing in ~1.4s. App.test.js sanityImage workaround removed (Pitfall 8 confirmed). Zero `jest.*` references remain anywhere in src/. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
 Resume file: None
 
 ### Performance Metrics (Phase 2)
