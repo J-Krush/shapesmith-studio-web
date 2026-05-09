@@ -139,7 +139,7 @@ Plans:
 - [x] 04-04-PLAN.md — Cleanup: delete orphan src/css/main.css; sentinel-grep that all CRA residue (react-scripts, postcss-cli, --openssl-legacy-provider, REACT_APP_*, process.env in src/) is gone; pnpm build + pnpm test still green (VITE-01)
 
 **Wave 5** *(blocked on Wave 4 — final pnpm build verification needs cleanup applied)*
-- [ ] 04-05-PLAN.md — netlify.toml SPA fallback: append [[redirects]] /* → /index.html (200) preserving the existing 11-line build/functions block byte-identical; final local pnpm build verification (VITE-03)
+- [x] 04-05-PLAN.md — netlify.toml SPA fallback: append [[redirects]] /* → /index.html (200) preserving the existing 11-line build/functions block byte-identical; final local pnpm build verification (VITE-03)
 
 **Wave 6** *(blocked on Wave 5 — owner action + deploy-preview walkthrough; autonomous: false)*
 - [ ] 04-06-PLAN.md — Owner action + deploy preview: rename Netlify dashboard env var REACT_APP_RECAPTCHA_SITE_KEY → VITE_RECAPTCHA_SITE_KEY; walk deploy preview URL through 11-URL parity checklist + Netlify Forms tab confirmation + DevTools console sanity (VITE-02, VITE-03)
@@ -167,7 +167,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
 | 3. Auto-Pricing Quote Tool | 3/4 | In Progress |  |
-| 4. Vite Migration | 4/6 | In Progress |  |
+| 4. Vite Migration | 5/6 | In Progress |  |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
 
 ---

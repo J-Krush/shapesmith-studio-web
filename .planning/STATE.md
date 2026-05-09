@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Plan 04-04 complete (cleanup orphan CRA residue). src/css/main.css (1,676 lines compiled Tailwind) removed via `git rm` in commit 76365c7; production JS bundle hash byte-identical to Plan 04-02 baseline confirms zero runtime impact. pnpm build (24 chunks, sitemap with 7 URLs) and pnpm test (8 files / 43 tests) both still green. Source-tree sentinel greps clean; stale CRA-era prose found in CLAUDE.md / README.md / netlify/functions/submit-quote/submit-quote.js:18 documented as deferred follow-ups (out-of-tree documentation drift, not authorized by PLAN.md). Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
-last_updated: "2026-05-08T21:30:00Z"
-last_activity: 2026-05-08
+stopped_at: Plan 04-05 complete (netlify.toml SPA fallback + final in-repo build smoke). [[redirects]] /* -> /index.html 200 appended below the existing [functions] block (8 lines added; original 11 lines byte-unchanged) in commit c830092. Final pnpm build clean — 24 chunks built in 1.49s; build/_redirects byte-identical to public/_redirects (preserves /materials -> /styles#materials 301 precedence over the catch-all rewrite); both Netlify form blocks (contact-form D-28 + shop-notify D-23) byte-preserved in build/index.html with full field rosters intact; sitemap.xml regenerated with 7 URLs. Main JS bundle hash unchanged from Plan 04-04 baseline (netlify.toml is deploy-time config, not bundled). The in-repo Vite migration is now self-consistent. Only Plan 04-06 (autonomous: false; Netlify dashboard env var rename REACT_APP_RECAPTCHA_SITE_KEY -> VITE_RECAPTCHA_SITE_KEY + 11-URL deploy-preview parity walkthrough + Netlify Forms tab confirmation + DevTools sanity) remains to close Phase 4. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
+last_updated: "2026-05-09T01:31:44Z"
+last_activity: 2026-05-09
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 21
-  completed_plans: 18
-  percent: 86
+  completed_plans: 19
+  percent: 90
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 04 (vite-migration) — EXECUTING
-Plan: 5 of 6
-Status: Ready to execute
-Last activity: 2026-05-08
+Plan: 6 of 6
+Status: Ready to execute (autonomous: false — owner-action checkpoint required)
+Last activity: 2026-05-09
 
-Progress: [████████▌░] 86%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [████████▌░] 86%
 | Phase 04 P02 | ~5 min | 3 tasks | 4 files |
 | Phase 04 P03 | ~3 min | 1 task | 3 files |
 | Phase 04 P04 | ~3 min | 1 task | 1 file (deleted) |
+| Phase 04 P05 | ~1 min | 1 task | 1 file (additive 8-line netlify.toml diff) |
 
 ## Accumulated Context
 
@@ -93,6 +94,7 @@ Recent decisions affecting current work:
 - [Phase ?]: [Phase 4] Plan 04-01 (2026-05-08): Vite scaffolding landed at repo root WITHOUT flipping the build switch. vite.config.js (ESM, Vite 7 + Vitest 4 inline, build.outDir='build', JSX-in-.js loader override pair, jsdom test env) + index.html (moved from public/ via git mv at 80% similarity, 3 %PUBLIC_URL% tokens replaced with absolute / paths, explicit <script type='module' src='/src/index.js'> tag added). Both Netlify form blocks (contact-form D-28, shop-notify D-23) preserved byte-identical — diff hunks show forms as context-only with zero +/- lines (Pitfall 2 mitigated). package.json untouched (Plan 04-02 owns flip). Deviation: deleted CRA %PUBLIC_URL% explanatory comment block in index.html — plan said don't delete but plan's verify gate required zero %PUBLIC_URL% hits (comment text contained 2). Aligns with RESEARCH.md Step 4 canonical post-migration HTML.
 - [Phase ?]: [Phase 4] Plan 04-02 (2026-05-08): Build-tool flip landed atomically in three commits. package.json swap (ae42791): drop react-scripts/postcss-cli/@babel/plugin-proposal-private-property-in-object/--openssl-legacy-provider; add vite ^7.3.3 + @vitejs/plugin-react ^5 + vitest ^4.1.5 + jsdom ^25; new scripts dev/start/build/preview/postbuild/test/test:watch (eject + build:css gone). pnpm install regenerated lockfile (-1009/+65 packages). Env-var rename (9c91c5d): src/App.js line 35 process.env.REACT_APP_RECAPTCHA_SITE_KEY → import.meta.env.VITE_RECAPTCHA_SITE_KEY + comment block reword (CRA contract → Vite contract); QuoteSubmitForm.jsx line 15 doc-comment aligned. Server-side env vars (RESEND_API_KEY, RECAPTCHA_SECRET_KEY) intentionally untouched (no REACT_APP_ prefix; out of scope). Build verification (fe327d8 empty commit): pnpm build → vite v7.3.3 → 644 modules in 1.86s → build/index.html (3.08 kB) + 23 JS chunks + 1 CSS chunk + sitemap.xml (7 URLs); both Netlify forms byte-preserved in output (grep counts pass); zero %PUBLIC_URL% in output; <script type="module"> entry honored. Non-fatal PostCSS warning surfaced for src/css/tailwind.css line 5 (@import-after-@tailwind ordering — pre-existing CSS authoring issue, deferred to Plan 04-04 cleanup or follow-up). No deviations. Tests still on jest.* API → Plan 04-03 owns rewrite. VITE-01 + VITE-02 closed.
 - [Phase 4] Plan 04-04 (2026-05-08): Cleanup of orphan CRA-era artifact landed in one atomic commit (76365c7). Deleted src/css/main.css (1,676 lines / 31,526 bytes; compiled Tailwind utility CSS produced by the now-removed build:css npm script) via `git rm`. Two-pass pre-deletion grep proved zero consumers in src/, public/, root config (vite.config.js, postcss.config.js, tailwind.config.js, package.json, netlify.toml, index.html). Vite's runtime CSS path is src/index.js → src/index.css → @tailwind directives → Vite PostCSS pipeline; main.css was parallel and unreachable. Post-deletion: `pnpm build` exits 0 with 24 chunks + sitemap.xml (7 URLs), and the main JS bundle hash (build/assets/index-BI4RGJBk.js) is BYTE-IDENTICAL to Plan 04-02 baseline — proving nothing in the runtime tree referenced main.css. `pnpm test` exits 0 with 8 files / 43 tests passed. Sentinel greps inside source tree (src/, public/, root config) for `--openssl-legacy-provider`, `react-scripts`, `postcss-cli`, `@babel/plugin-proposal-private-property-in-object`, `REACT_APP_`, `process.env`, and `main.css` consumers all return 0 hits. NOT touched per executor's <critical_constraints>: tailwind.config.js @tailwindcss/forms plugin string-vs-require bug (RESEARCH §Open Question 3 — would activate form-element styling and violate "no user-visible change"), web-vitals removal (RESEARCH §Open Question 4 — out of Phase 4 scope), PostCSS @import-after-@tailwind warning at src/css/tailwind.css:5 (carried over from Plan 04-02), jsdom "Not implemented: window.scrollTo" test console output (carried over from Plan 04-03 — cosmetic). Filed as deferred follow-ups: stale CRA-era prose in CLAUDE.md `<!-- GSD:* -->` blocks (generated from .planning/codebase/STACK.md / CONVENTIONS.md / ARCHITECTURE.md — Phase 1 artifacts that pre-date Vite migration), README.md:16 `--openssl-legacy-provider` mention, and a comment at netlify/functions/submit-quote/submit-quote.js:18 referring to REACT_APP_RECAPTCHA_SITE_KEY (browser-side env var renamed in Plan 04-02 but server-side comment was missed). All three are pre-existing documentation drift outside the source tree, not authorized by PLAN.md, and not regressions introduced by Phase 4. VITE-01 cleanup half closed.
+- [Phase 4] Plan 04-05 (2026-05-09): netlify.toml SPA fallback landed in one atomic commit (c830092). 8 lines appended below the existing [functions] block (1 blank + 3 ASCII-arrow comment lines + 4-line `[[redirects]] from="/*" to="/index.html" status=200` block, 2-space indented to match existing convention). Original 11 lines ([build] command/publish, [build.environment] NODE_VERSION="20", [functions] directory/node_bundler) byte-unchanged — git diff hunk shows the entire [functions] block exclusively as context, mitigating T-04-05-03. Two-layer redirect precedence preserved: public/_redirects (specific 301: /materials → /styles#materials) byte-unchanged + processed by Netlify BEFORE netlify.toml [[redirects]], so the catch-all /* rewrite cannot swallow the /materials 301 (mitigates T-04-05-01 per RESEARCH.md citation to Netlify docs rule-processing-order). Final pnpm build smoke clean: vite v7.3.3 → 644 modules in 1.49s → 24 chunks; postbuild ran (sitemap.xml = 7 URLs); build/_redirects byte-identical to public/_redirects (`diff -q` returns no output); build/index.html (3,079 B) preserves both Netlify form blocks with full Phase 2/3 field rosters intact (contact-form: bot-field/name/email/service/subject/message; shop-notify: bot-field/email — D-28 + D-23 contracts honored). Main JS bundle hash unchanged from Plan 04-04 baseline (build/assets/index-BI4RGJBk.js, 299.94 kB / 99.43 kB gzip) — netlify.toml is deploy-time config, never bundled. No deviations. T-04-05-02 mitigated: SPA fallback now explicit in source instead of depending on Netlify's auto-detection. VITE-03 in-repo half closed; deploy-preview verification half owned by Plan 04-06.
 - [Phase 4] Plan 04-03 (2026-05-09): Vitest test migration landed in one atomic commit (468e097). Three test files migrated mechanically: App.test.js (jest.mock + jest.fn → vi.* + removed the ./utilities/sanityImage mock workaround per Pitfall 8 — confirmed unnecessary), useLocalStorageState.test.jsx (2× jest.restoreAllMocks + 2× jest.spyOn → vi.*), QuoteSubmitForm.test.jsx (2× jest.fn + 1× jest.mock → vi.*; mockExecuteRecaptcha + mockUseGoogleReCaptchaState mock-prefix preserved). Five quote utility test files (formatErrors, formatQuoteText, calculatePrice, parseSvg, volumeAndBbox) UNTOUCHED — they had zero jest.* references. src/setupTests.js UNTOUCHED — @testing-library/jest-dom works under Vitest unchanged. [Rule 3 deviation] Converted `require('./useLocalStorageState').default` and `require('./QuoteSubmitForm').default` to top-level ESM `import` statements — Vitest's CJS interop does not resolve relative paths the way Jest's transformer did (PLAN.md said "Vitest supports CJS require in test files" but that's true only for npm-package paths, not relative ESM sources). Semantic equivalence preserved because vi.mock hoists above all imports identically to jest.mock, so the lazy-require pattern was already redundant. [Rule 3 deviation] Scrubbed literal `jest.mock` text from a comment in QuoteSubmitForm.test.jsx so the strict `grep -rn 'jest\.' src/` acceptance gate returns 0. Final: 8 test files / 43 tests passing under vitest run in ~1.4s; zero jest.* references in src/. Non-fatal jsdom "Not implemented: window.scrollTo" console output from ScrollToTop's useEffect — does NOT cause test failure (CRA-Jest had identical behavior); silencing it is a Plan 04-04 cleanup candidate. VITE-01 test-runner half closed.
 
 ### Pending Todos
@@ -118,8 +120,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-08T21:30:00Z
-Stopped at: Plan 04-04 complete (cleanup orphan CRA residue). src/css/main.css (1,676 lines compiled Tailwind) deleted via `git rm` in commit 76365c7; production JS bundle hash byte-identical to Plan 04-02 baseline confirms zero runtime impact. pnpm build (24 chunks, 7-URL sitemap) and pnpm test (8 files / 43 tests) both still green. Source-tree sentinel greps clean. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
+Last session: 2026-05-09T01:31:44Z
+Stopped at: Plan 04-05 complete (netlify.toml SPA fallback + final in-repo build smoke). [[redirects]] /* -> /index.html 200 appended below the existing [functions] block (8 lines added; original 11 lines byte-unchanged) in commit c830092. Final pnpm build clean — 24 chunks built in 1.49s; build/_redirects byte-identical to public/_redirects (preserves /materials -> /styles#materials 301 precedence over the catch-all rewrite); both Netlify form blocks (contact-form D-28 + shop-notify D-23) byte-preserved in build/index.html with full field rosters intact; sitemap.xml regenerated with 7 URLs. Main JS bundle hash unchanged from Plan 04-04 baseline. The in-repo Vite migration is now self-consistent. Only Plan 04-06 (autonomous: false; Netlify dashboard env var rename + 11-URL deploy-preview parity walkthrough + Netlify Forms tab confirmation + DevTools sanity) remains. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
 Resume file: None
 
 ### Performance Metrics (Phase 2)
