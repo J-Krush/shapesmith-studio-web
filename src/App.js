@@ -26,13 +26,13 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
 	// reCAPTCHA v3 site key — public, browser-safe; injected at build time by
-	// `react-scripts build` from the REACT_APP_RECAPTCHA_SITE_KEY env var (CRA
-	// contract). When unset (e.g. local dev without env vars), the provider
-	// mounts but the reCAPTCHA script never loads — `executeRecaptcha` stays
-	// undefined and QuoteSubmitForm surfaces a "spam protection isn't loaded
-	// yet" inline message instead of throwing. This keeps the build green even
-	// when owner-prep (Plan 03-03 Task 1) hasn't been completed yet.
-	const reCaptchaKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+	// Vite from the VITE_RECAPTCHA_SITE_KEY env var. When unset (e.g. local
+	// dev without env vars), the provider mounts but the reCAPTCHA script
+	// never loads — `executeRecaptcha` stays undefined and QuoteSubmitForm
+	// surfaces a "spam protection isn't loaded yet" inline message instead of
+	// throwing. This keeps the build green even when owner-prep (Plan 03-03
+	// Task 1) hasn't been completed yet.
+	const reCaptchaKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 	return (
 		<HelmetProvider>

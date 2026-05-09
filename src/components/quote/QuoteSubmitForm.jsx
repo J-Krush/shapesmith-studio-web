@@ -12,7 +12,7 @@
 //   - Token minted client-side via `useGoogleReCaptcha`'s `executeRecaptcha`.
 //   - Action namespaced as `submit_quote` so the Google admin UI shows the
 //     score distribution per action.
-//   - When REACT_APP_RECAPTCHA_SITE_KEY is unset (e.g. local dev without env
+//   - When VITE_RECAPTCHA_SITE_KEY is unset (e.g. local dev without env
 //     vars), the provider mounts but the script never loads, so
 //     `executeRecaptcha` stays `undefined` — we surface a helpful inline
 //     message instead of throwing.
