@@ -158,8 +158,8 @@ Plans:
 Plans:
 
 **Wave 1**
-- [ ] 05-01-PLAN.md — Product schema spec doc + owner-prep checkpoint (SHOP-04)
-- [ ] 05-02-PLAN.md — ImageGallery primitive extraction from ServiceGallery (SHOP-05)
+- [x] 05-01-PLAN.md — Product schema spec doc + owner-prep checkpoint (SHOP-04)
+- [x] 05-02-PLAN.md — ImageGallery primitive extraction from ServiceGallery (SHOP-05)
 
 **Wave 2** *(blocked on Wave 1)*
 - [ ] 05-03-PLAN.md — Snipcart scaffold: index.html script tags + snipcart.css cart-drawer theme + ShopContext + SingleProductContext (SHOP-05, SHOP-06)
