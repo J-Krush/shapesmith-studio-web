@@ -123,7 +123,26 @@ Plans:
   1. `pnpm build` produces a deployable bundle via Vite (not `react-scripts`); the static SPA output behaves identically to the CRA build from any user's perspective on a deploy preview
   2. All `REACT_APP_*` environment variables have been renamed to `VITE_*` with code references updated; `--openssl-legacy-provider` is no longer needed anywhere
   3. `netlify.toml` reflects the new build command and publish directory; the deploy preview confirms parity with production before merge
-**Plans**: TBD
+**Plans**: 6 plans across 6 waves
+Plans:
+
+**Wave 1**
+- [ ] 04-01-PLAN.md — Vite scaffolding: vite.config.js (JSX-in-.js loader, outDir='build', Vitest inline) + index.html move from public/ with byte-faithful Netlify form preservation (VITE-01)
+
+**Wave 2** *(blocked on Wave 1 — package.json adds Vite deps that 04-01 config needs at runtime, and src/App.js depends on Vite-shaped env vars only working once vite.config.js exists)*
+- [ ] 04-02-PLAN.md — Build-tool flip: package.json scripts/deps swap (drop react-scripts, postcss-cli, --openssl-legacy-provider, @babel/plugin-proposal-private-property-in-object; add vite/plugin-react/vitest/jsdom) + REACT_APP_RECAPTCHA_SITE_KEY → VITE_RECAPTCHA_SITE_KEY in src/App.js + comment updates in App.js + QuoteSubmitForm.jsx + first pnpm build smoke (VITE-01, VITE-02)
+
+**Wave 3** *(blocked on Wave 2 — vitest must be installed)*
+- [ ] 04-03-PLAN.md — Test-runner migration: mechanical jest.* → vi.* across all 8 test files (App.test.js + 7 quote/hook tests); remove sanityImage ESM workaround mock in App.test.js per Pitfall 8; pnpm test green (VITE-01)
+
+**Wave 4** *(blocked on Wave 3 — verify build+test still green after deletion)*
+- [ ] 04-04-PLAN.md — Cleanup: delete orphan src/css/main.css; sentinel-grep that all CRA residue (react-scripts, postcss-cli, --openssl-legacy-provider, REACT_APP_*, process.env in src/) is gone; pnpm build + pnpm test still green (VITE-01)
+
+**Wave 5** *(blocked on Wave 4 — final pnpm build verification needs cleanup applied)*
+- [ ] 04-05-PLAN.md — netlify.toml SPA fallback: append [[redirects]] /* → /index.html (200) preserving the existing 11-line build/functions block byte-identical; final local pnpm build verification (VITE-03)
+
+**Wave 6** *(blocked on Wave 5 — owner action + deploy-preview walkthrough; autonomous: false)*
+- [ ] 04-06-PLAN.md — Owner action + deploy preview: rename Netlify dashboard env var REACT_APP_RECAPTCHA_SITE_KEY → VITE_RECAPTCHA_SITE_KEY; walk deploy preview URL through 11-URL parity checklist + Netlify Forms tab confirmation + DevTools console sanity (VITE-02, VITE-03)
 **UI hint**: no
 
 ### Phase 5: Pre-Made Goods Shop
@@ -148,7 +167,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
 | 3. Auto-Pricing Quote Tool | 3/4 | In Progress |  |
-| 4. Vite Migration | 0/TBD | Not started | - |
+| 4. Vite Migration | 0/6 | Not started | - |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
 
 ---
