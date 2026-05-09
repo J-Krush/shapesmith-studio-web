@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 5 UI-SPEC approved
-last_updated: "2026-05-09T13:59:47.196Z"
-last_activity: 2026-05-09 -- Phase 05 execution started
+stopped_at: Phase 5 paused at Plan 05-08 UAT checkpoint — code complete, owner-prep + deploy-preview UAT pending
+last_updated: "2026-05-09T15:18:00.000Z"
+last_activity: 2026-05-09 -- Phase 05 plans 01-07 + 08 docs shipped; UAT pending owner action
 progress:
   total_phases: 5
   completed_phases: 3
@@ -25,10 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 
 ## Current Position
 
-Phase: 05 (pre-made-goods-shop) — EXECUTING
-Plan: 1 of 8
-Status: Executing Phase 05
-Last activity: 2026-05-09 -- Phase 05 execution started
+Phase: 05 (pre-made-goods-shop) — EXECUTING (paused at UAT)
+Plan: 8 of 8 (all code shipped; owner-prep + UAT pending)
+Status: Paused at Plan 05-08 UAT human-verify checkpoint
+Last activity: 2026-05-09 -- Phase 05 plans 01-07 + 08 docs shipped; UAT pending owner action
+
+**Resume:** Complete 05-OWNER-PREP-CHECKLIST.md sections A–E (Sanity schema apply + Snipcart account/key/webhook + Resend env-var verify), deploy preview, walk through 05-UAT.md tests 1–5 (incl. §4e price-tampering negative test). Then re-run `/gsd-execute-phase 5` with UAT results — orchestrator resumes a fresh executor to write 05-08-SUMMARY.md and finalize ROADMAP/REQUIREMENTS.
 
 Progress: [█████████░] 90%
 
@@ -70,6 +72,7 @@ Progress: [█████████░] 90%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
+- **[Phase 5] Plan 05-08 (2026-05-09):** Owner-prep + UAT artifacts shipped, plan paused at human-verify checkpoint per user decision. `05-OWNER-PREP-CHECKLIST.md` (228 lines, sections A Sanity Studio rollout / B Snipcart account+keys+webhook+shipping+2FA / C key paste in index.html / D Resend env-var verify / E deploy-preview check). `05-UAT.md` (247 lines, Tests 1-5 mapped to SHOP-03..07 with explicit pass/fail slots, Stripe `4242 4242 4242 4242` test card, **§4e price-tampering negative test** that proves the JSON crawler mitigates RESEARCH Pitfalls 1+2). 1 commit (7083ecf). Plan 05-08 SUMMARY.md NOT yet written — it's the completion marker, held until owner UAT signs off. ROADMAP/REQUIREMENTS finalization deferred to that resume point. Phase 5 stays In Progress.
 - **[Phase 5] Plan 05-07 (2026-05-09):** snipcart-order-webhook Netlify Function shipped in 4 commits (71d5de7 RED, de0359c GREEN formatOrderEmail, 89fbef7 webhook handler, aef90a0 SUMMARY). 156-LOC handler validates `x-snipcart-requesttoken` via GET to `https://app.snipcart.com/api/requestvalidation/{token}` with 5s AbortController; on timeout/non-OK → 401 (fail-closed against forged payloads during outage). Non-`order.completed` events get 200 + skip email send (defensive against dashboard misconfig). Resend send failures log + 200 to suppress retry storm — owner still gets Snipcart's default email. Missing RESEND_API_KEY logs error + still 200. 61-LOC formatOrderEmail.js is pure CommonJS (`module.exports = formatOrderEmail`) covering line items, customer name+email, shipping address, total, Snipcart-dashboard order link. Function-local package.json + pnpm-lock.yaml with `resend` dep matching Phase 3 pin. 5 new vitest cases for formatOrderEmail (60/60 total now). Deviation: extended `vite.config.js` test.include glob from `src/**` to also cover `netlify/functions/**/__tests__/` — anticipated by the plan and explicitly recommended.
 - **[Phase 5] Plan 05-05 (2026-05-09):** /shop/:slug detail page shipped in 3 commits. Task 1 (leaf components 81f8c9f): ProductHeader (font-display H1), AddToCartButton (snipcart-add-item with full data-item-* contract incl. pipe-separated categories + data-item-url → snipcart-validate-product?slug={slug}; sold-out branch returns non-button `<span>Sold out</span>` per D-16, NOT `<button disabled>` so Snipcart's selector cannot match), ProductSpecTable (Dimensions/Materials/Ships in `<dl>`, omit-empty rows, Materials anchors /styles#materials or /3d-printing#materials based on material.services, leadTime fallback chain `product.leadTime → studio-info.shippingLeadTime` via STUDIO_INFO_QUERY), StickyMobileAddToCart (md:hidden fixed footer, IntersectionObserver-driven on in-content button anchor). Task 2 (composition e5348ad): ProductInfo (right column with anchorRef plumbing), ShopSingle.jsx wraps `<ShopProvider>` + `<SingleProductProvider>`; `useRef(null)` lives in ShopSingleInner and threads to ProductInfo (anchor) + StickyMobileAddToCart (observer); /shop/:slug lazy route registered in App.js BEFORE NotFound catch-all. SEO meta uses product.name + product.description + first product image @ width(1200) with /og-default.png fallback. New ShopSingle chunk = 6.3 KB. 55/55 tests pass; both Netlify form prerenders byte-stable in build/index.html.
 - **[Phase 5] Plan 05-06 (2026-05-09):** snipcart-validate-product Netlify Function shipped in 2 commits (cc17dbb feat, 758118a SUMMARY). 149 LOC handler at netlify/functions/snipcart-validate-product/snipcart-validate-product.js, zero deps (raw HTTPS fetch against `apicdn.sanity.io/v2023-06-16/data/query/production?query=...` matching the project's existing CDN client). GET-only (POST → 405). Slug guard (`^[a-z0-9-]+$/i`, max 200) returns 400 before fetch. 404 unknown slug, 502 Sanity unreachable. Response shape `{id, name, price, url=https://shapesmith.studio/shop/{slug}, image?, description?, categories, stock=stockQuantity}` with Content-Type: application/json — matches Plan 05-05's data-item-* values exactly. 5s AbortController timeout (RESEARCH key-finding 4). Generic 4xx/5xx + status-code-only logs (info-disclosure mitigation). 6 synthesized handler invocations exercise every status path. 55/55 tests still pass; vitest scope excludes netlify/ per project precedent (Phase 3 submit-quote.js precedent + plan's TDD-skip explicit allowance). Threats covered: T-05-06-01 (price tampering — primary phase mitigation), T-05-06-02 (GROQ injection at slug boundary), T-05-06-04 (DoS gate), T-05-06-05 (info disclosure). T-05-06-06 inventory race accepted per CONTEXT D-06 with defensive `stock` field as secondary signal.
@@ -125,6 +128,8 @@ None yet.
 | Plan 03-03 Task 1 | Owner-prep: Resend domain verification + reCAPTCHA v3 registration + Netlify env vars (RESEND_API_KEY, RECAPTCHA_SECRET_KEY, REACT_APP_RECAPTCHA_SITE_KEY) | Pending owner action — re-run `/gsd-execute-phase 3` after dashboard config + redeploy | 2026-05-08 |
 | Plan 03-03 Task 4 | End-to-end smoke test (real visitor → owner inbox round-trip) | Blocked on Task 1 — cannot verify until env vars exist | 2026-05-08 |
 | Plan 05-01 Task 2 | Owner applies `schemas/product.js` per `05-PRODUCT-SCHEMA-SPEC.md` to Sanity Studio repo + `sanity deploy` + Vision verification | Pending owner action — non-blocking; Plans 05-03..07 proceed against the spec; required before Plan 05-08 deploy-preview UAT | 2026-05-09 |
+| Plan 05-08 Owner-prep | `05-OWNER-PREP-CHECKLIST.md` sections A–E: Snipcart account creation + 2FA + test-key paste into index.html + shipping rates + webhook subscription + default email enable + Resend env-var verify | Pending owner action — re-run `/gsd-execute-phase 5` after deploy-preview UAT to resume Plan 05-08 closure | 2026-05-09 |
+| Plan 05-08 UAT | `05-UAT.md` Tests 1–5 against deploy preview (incl. §4e price-tampering negative test that proves JSON crawler mitigates RESEARCH Pitfalls 1+2) | Blocked on Owner-prep — cannot run until Snipcart account + Sanity schema + deploy preview all live | 2026-05-09 |
 
 ## Session Continuity
 
