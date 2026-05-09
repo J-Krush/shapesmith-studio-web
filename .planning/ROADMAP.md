@@ -162,7 +162,7 @@ Plans:
 - [x] 05-02-PLAN.md — ImageGallery primitive extraction from ServiceGallery (SHOP-05)
 
 **Wave 2** *(blocked on Wave 1)*
-- [ ] 05-03-PLAN.md — Snipcart scaffold: index.html script tags + snipcart.css cart-drawer theme + ShopContext + SingleProductContext (SHOP-05, SHOP-06)
+- [x] 05-03-PLAN.md — Snipcart scaffold: index.html script tags + snipcart.css cart-drawer theme + ShopContext + SingleProductContext (SHOP-05, SHOP-06)
 
 **Wave 3** *(blocked on Wave 2)*
 - [ ] 05-04-PLAN.md — Catalog: Shop.jsx auto-flip, ShopComingSoon extract, ShopCatalog + ShopFilter + ProductGrid + ProductCard + SoldOutBadge + LowStockTag, UI-SPEC corrections (SHOP-05, SHOP-07)
