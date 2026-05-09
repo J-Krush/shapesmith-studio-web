@@ -142,7 +142,7 @@ Plans:
 - [x] 04-05-PLAN.md — netlify.toml SPA fallback: append [[redirects]] /* → /index.html (200) preserving the existing 11-line build/functions block byte-identical; final local pnpm build verification (VITE-03)
 
 **Wave 6** *(blocked on Wave 5 — owner action + deploy-preview walkthrough; autonomous: false)*
-- [ ] 04-06-PLAN.md — Owner action + deploy preview: rename Netlify dashboard env var REACT_APP_RECAPTCHA_SITE_KEY → VITE_RECAPTCHA_SITE_KEY; walk deploy preview URL through 11-URL parity checklist + Netlify Forms tab confirmation + DevTools console sanity (VITE-02, VITE-03)
+- [x] 04-06-PLAN.md — Owner action + deploy preview: rename Netlify dashboard env var REACT_APP_RECAPTCHA_SITE_KEY → VITE_RECAPTCHA_SITE_KEY; walk deploy preview URL through 11-URL parity checklist + Netlify Forms tab confirmation + DevTools console sanity (VITE-02, VITE-03)
 **UI hint**: no
 
 ### Phase 5: Pre-Made Goods Shop
