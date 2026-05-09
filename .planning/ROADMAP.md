@@ -127,7 +127,7 @@ Plans:
 Plans:
 
 **Wave 1**
-- [ ] 04-01-PLAN.md — Vite scaffolding: vite.config.js (JSX-in-.js loader, outDir='build', Vitest inline) + index.html move from public/ with byte-faithful Netlify form preservation (VITE-01)
+- [x] 04-01-PLAN.md — Vite scaffolding: vite.config.js (JSX-in-.js loader, outDir='build', Vitest inline) + index.html move from public/ with byte-faithful Netlify form preservation (VITE-01)
 
 **Wave 2** *(blocked on Wave 1 — package.json adds Vite deps that 04-01 config needs at runtime, and src/App.js depends on Vite-shaped env vars only working once vite.config.js exists)*
 - [ ] 04-02-PLAN.md — Build-tool flip: package.json scripts/deps swap (drop react-scripts, postcss-cli, --openssl-legacy-provider, @babel/plugin-proposal-private-property-in-object; add vite/plugin-react/vitest/jsdom) + REACT_APP_RECAPTCHA_SITE_KEY → VITE_RECAPTCHA_SITE_KEY in src/App.js + comment updates in App.js + QuoteSubmitForm.jsx + first pnpm build smoke (VITE-01, VITE-02)

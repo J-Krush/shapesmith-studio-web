@@ -99,7 +99,7 @@ Requirements for the relaunch and Bundle 1–3 buildout. Each maps to roadmap ph
 
 <!-- Bundle 1.5: between quote feature and shop. CRA exit while site is in a low-stakes window. -->
 
-- [ ] **VITE-01**: The build tool migrates from `react-scripts` to Vite with the existing static-SPA output unchanged from a user's perspective; `pnpm build` produces a deployable bundle
+- [x] **VITE-01**: The build tool migrates from `react-scripts` to Vite with the existing static-SPA output unchanged from a user's perspective; `pnpm build` produces a deployable bundle
 - [ ] **VITE-02**: All `REACT_APP_*` environment variables are renamed to `VITE_*` and code references updated
 - [ ] **VITE-03**: The Netlify build configuration (`netlify.toml`) reflects the new build command and publish directory; deploy preview verifies the migrated site behaves identically to the CRA build
 
@@ -200,7 +200,7 @@ Populated by the roadmapper on 2026-05-02. Maps every v1 requirement to exactly 
 | QTE-08 | Phase 3 | Pending |
 | QTE-09 | Phase 3 | Pending |
 | QTE-10 | Phase 3 | Complete |
-| VITE-01 | Phase 4 | Pending |
+| VITE-01 | Phase 4 | Complete |
 | VITE-02 | Phase 4 | Pending |
 | VITE-03 | Phase 4 | Pending |
 | SHOP-03 | Phase 5 | Pending |
