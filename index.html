@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <link rel="icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Theme color matches primary-dark token (Plan 02-04 / D-19 belt-and-suspenders for crawlers without JS) -->
     <meta name="theme-color" content="#291c30" />
@@ -18,21 +18,12 @@
     <meta property="og:description" content="Custom laser cutting and 3D printing." />
     <meta property="og:image" content="/og-default.png" />
     <meta property="og:type" content="website" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <link rel="manifest" href="/manifest.json" />
     <title>Shapesmith Studio</title>
 
   </head>
@@ -71,6 +62,7 @@
       <input type="email" name="email" />
       <input type="submit" value="Submit">
     </form>
+    <script type="module" src="/src/index.js"></script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
