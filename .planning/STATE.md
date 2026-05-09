@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Plan 04-05 complete (netlify.toml SPA fallback + final in-repo build smoke). [[redirects]] /* -> /index.html 200 appended below the existing [functions] block (8 lines added; original 11 lines byte-unchanged) in commit c830092. Final pnpm build clean — 24 chunks built in 1.49s; build/_redirects byte-identical to public/_redirects (preserves /materials -> /styles#materials 301 precedence over the catch-all rewrite); both Netlify form blocks (contact-form D-28 + shop-notify D-23) byte-preserved in build/index.html with full field rosters intact; sitemap.xml regenerated with 7 URLs. Main JS bundle hash unchanged from Plan 04-04 baseline (netlify.toml is deploy-time config, not bundled). The in-repo Vite migration is now self-consistent. Only Plan 04-06 (autonomous: false; Netlify dashboard env var rename REACT_APP_RECAPTCHA_SITE_KEY -> VITE_RECAPTCHA_SITE_KEY + 11-URL deploy-preview parity walkthrough + Netlify Forms tab confirmation + DevTools sanity) remains to close Phase 4. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
-last_updated: "2026-05-09T01:31:44Z"
+stopped_at: Phase 5 context gathered
+last_updated: "2026-05-09T03:11:28.934Z"
 last_activity: 2026-05-09
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 21
-  completed_plans: 19
-  percent: 90
+  completed_plans: 20
+  percent: 95
 ---
 
 # Project State
@@ -120,9 +120,9 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-09T01:31:44Z
-Stopped at: Plan 04-05 complete (netlify.toml SPA fallback + final in-repo build smoke). [[redirects]] /* -> /index.html 200 appended below the existing [functions] block (8 lines added; original 11 lines byte-unchanged) in commit c830092. Final pnpm build clean — 24 chunks built in 1.49s; build/_redirects byte-identical to public/_redirects (preserves /materials -> /styles#materials 301 precedence over the catch-all rewrite); both Netlify form blocks (contact-form D-28 + shop-notify D-23) byte-preserved in build/index.html with full field rosters intact; sitemap.xml regenerated with 7 URLs. Main JS bundle hash unchanged from Plan 04-04 baseline. The in-repo Vite migration is now self-consistent. Only Plan 04-06 (autonomous: false; Netlify dashboard env var rename + 11-URL deploy-preview parity walkthrough + Netlify Forms tab confirmation + DevTools sanity) remains. Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
-Resume file: None
+Last session: 2026-05-09T03:11:28.924Z
+Stopped at: Phase 5 context gathered
+Resume file: .planning/phases/05-pre-made-goods-shop/05-CONTEXT.md
 
 ### Performance Metrics (Phase 2)
 
