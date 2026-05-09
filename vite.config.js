@@ -22,6 +22,13 @@ export default defineConfig({
 		globals: true,
 		environment: 'jsdom',
 		setupFiles: './src/setupTests.js',
-		include: ['src/**/*.{test,spec}.{js,jsx}'],
+		include: [
+			'src/**/*.{test,spec}.{js,jsx}',
+			// Plan 05-07: Snipcart order webhook formatter unit test lives next to
+			// the Function under netlify/functions/**/__tests__/ so the helper and
+			// its test stay colocated. Vitest needs an explicit glob to reach
+			// outside src/.
+			'netlify/functions/**/__tests__/*.{test,spec}.{js,jsx}',
+		],
 	},
 });
