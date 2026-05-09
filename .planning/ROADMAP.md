@@ -172,7 +172,7 @@ Plans:
 - [x] 05-06-PLAN.md — JSON crawler Function: snipcart-validate-product (SHOP-06, SHOP-07)
 
 **Wave 5** *(blocked on Wave 4)*
-- [ ] 05-07-PLAN.md — Order webhook Function: snipcart-order-webhook + formatOrderEmail (SHOP-06)
+- [x] 05-07-PLAN.md — Order webhook Function: snipcart-order-webhook + formatOrderEmail (SHOP-06)
 
 **Wave 6** *(blocked on Wave 5 — owner action + UAT; autonomous: false)*
 - [ ] 05-08-PLAN.md — Owner-prep checklist + UAT script + ROADMAP/REQUIREMENTS finalization (SHOP-03, SHOP-04, SHOP-05, SHOP-06, SHOP-07)
