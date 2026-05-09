@@ -165,7 +165,7 @@ Plans:
 - [x] 05-03-PLAN.md — Snipcart scaffold: index.html script tags + snipcart.css cart-drawer theme + ShopContext + SingleProductContext (SHOP-05, SHOP-06)
 
 **Wave 3** *(blocked on Wave 2)*
-- [ ] 05-04-PLAN.md — Catalog: Shop.jsx auto-flip, ShopComingSoon extract, ShopCatalog + ShopFilter + ProductGrid + ProductCard + SoldOutBadge + LowStockTag, UI-SPEC corrections (SHOP-05, SHOP-07)
+- [x] 05-04-PLAN.md — Catalog: Shop.jsx auto-flip, ShopComingSoon extract, ShopCatalog + ShopFilter + ProductGrid + ProductCard + SoldOutBadge + LowStockTag, UI-SPEC corrections (SHOP-05, SHOP-07)
 
 **Wave 4** *(blocked on Waves 1–3; Plans 05 + 06 ship in parallel — zero file overlap)*
 - [ ] 05-05-PLAN.md — Detail: ShopSingle.jsx + ProductHeader + ProductInfo + ProductSpecTable + AddToCartButton + StickyMobileAddToCart + /shop/:slug route (SHOP-05, SHOP-06, SHOP-07)
