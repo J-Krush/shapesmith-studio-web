@@ -259,23 +259,23 @@ Already specified above. Summary:
 
 | Snipcart class | Override |
 |---------------|----------|
-| `:root` (Snipcart-side) | Define CSS custom props the rest of the file references: `--snipcart-color-primary: #348bd8` (accent), `--snipcart-color-primary-dark: #3c6eb1` (accent-highlight), `--snipcart-color-default: #f6f7f8` (ternary-light), `--snipcart-color-alt: #94989c` (ternary-section-dark), `--snipcart-color-icon: #f6f7f8`, `--snipcart-bgcolor-default: #1E3851` (ternary-dark), `--snipcart-bgcolor-alt: #102D44` (secondary-dark), `--snipcart-bgcolor-modal: #291c30` (primary-dark), `--snipcart-font-default: 'GeneralSans-Regular', sans-serif`, `--snipcart-font-medium: 'GeneralSans-Medium', sans-serif` |
-| `.snipcart-cart` | Background `var(--snipcart-bgcolor-default)`; text color `var(--snipcart-color-default)`; font-family inherits from `:root`. |
-| `.snipcart-cart-header` (drawer top bar) | `bg-secondary-dark` equivalent; heading uses `font-display` family + `font-black` style (color `var(--snipcart-color-default)`) to match site H1 cadence. |
-| `.snipcart-cart__close-button` | Color `var(--snipcart-color-default)`; hover color `var(--snipcart-color-primary)`. |
-| `.snipcart-item-line` (cart row) | `border-bottom: 1px solid var(--snipcart-bgcolor-modal)`; `padding: 16px 0`. Hover background `var(--snipcart-color-alt)/10`. |
+| `#snipcart` (Snipcart-side scope) | Define CSS custom props on the `#snipcart` selector. Variable names per docs.snipcart.com/v3/themes/default/reference (verified 2026-05-08): the Snipcart-published names have NO vendor prefix (an earlier draft of this spec used a `snipcart-` prefixed form; corrected here). Use: `--color-default: #f6f7f8` (ternary-light, body text); `--color-alt: #94989c` (ternary-section-dark, secondary text); `--bgColor-default: #1E3851` (ternary-dark, drawer surface); `--bgColor-alt: #102D44` (secondary-dark, header + summary fees); `--bgColor-modal: #291c30` (primary-dark, overlay backdrop); `--color-buttonPrimary: #ffffff` + `--bgColor-buttonPrimary: #348bd8` (Checkout, accent); `--color-buttonPrimary-hover: #ffffff` + `--bgColor-buttonPrimary-hover: #3c6eb1` (accent-highlight); `--color-buttonSecondary: #f6f7f8` + `--bgColor-buttonSecondary: transparent` + `--borderColor-buttonSecondary: #94989c` (Continue shopping); `--color-input: #f6f7f8` + `--bgColor-input: #291c30` + `--borderColor-input: #94989c`; `--color-link: #348bd8` + `--color-link-hover: #3c6eb1`; `--bgColor-modalVeil: rgba(41, 28, 48, 0.85)` (matches the existing lightbox `bg-black/70` density). Font-family is set as a regular CSS rule on `#snipcart`, not via a variable (Snipcart doesn't expose a `--font-default` variable). The full source-of-truth file is `src/css/snipcart.css` shipped in Plan 05-03. |
+| `.snipcart-cart` | Background `var(--bgColor-default)`; text color `var(--color-default)`; font-family inherits from `#snipcart` font-family rule. |
+| `.snipcart-cart-header` (drawer top bar) | `bg-secondary-dark` equivalent; heading uses `font-display` family + `font-black` style (color `var(--color-default)`) to match site H1 cadence. |
+| `.snipcart-cart__close-button` | Color `var(--color-default)`; hover color `var(--color-link)`. |
+| `.snipcart-item-line` (cart row) | `border-bottom: 1px solid var(--bgColor-modal)`; `padding: 16px 0`. Hover background `var(--color-alt)/10`. |
 | `.snipcart-item-line__product-information` | Name uses `font-general-medium`, price uses `font-general-regular`. |
-| `.snipcart-item-quantity__quantity` (stepper input) | Background `var(--snipcart-bgcolor-modal)`; border `1px solid var(--snipcart-color-alt)`; text color `var(--snipcart-color-default)`. |
-| `.snipcart__icon--blue`, `.snipcart__icon--gray` (built-in SVG fills) | `color: var(--snipcart-color-default) !important` (Snipcart inline-SVG specificity requires `!important`) |
-| `.snipcart-summary-fees` | Background `var(--snipcart-bgcolor-alt)`; padding 24px; rounded top corners only. |
-| `.snipcart-summary-fees__amount` | Color `var(--snipcart-color-default)`; font-weight 500. |
-| `.snipcart-cart__footer` | Background `var(--snipcart-bgcolor-default)`. |
-| `.snipcart-button-primary` (Checkout button) | Background `var(--snipcart-color-primary)`; hover `var(--snipcart-color-primary-dark)`; text `#fff`; font-family `var(--snipcart-font-medium)`; border-radius 6px (matches site button radius `rounded-md`). |
-| `.snipcart-button-primary:disabled` | Background `var(--snipcart-color-alt)`; cursor `not-allowed`. |
-| `.snipcart-button-secondary` (Continue shopping) | Background `transparent`; border `1px solid var(--snipcart-color-alt)`; color `var(--snipcart-color-default)`; hover background `var(--snipcart-bgcolor-alt)`. |
-| `.snipcart-empty-cart` | Center text, `color: var(--snipcart-color-alt)`; the in-cart "Continue shopping" link uses `--snipcart-color-primary`. |
+| `.snipcart-item-quantity__quantity` (stepper input) | Background `var(--bgColor-input)`; border `1px solid var(--borderColor-input)`; text color `var(--color-input)`. |
+| `.snipcart__icon--blue`, `.snipcart__icon--gray` (built-in SVG fills) | `color: var(--color-default) !important` (Snipcart inline-SVG specificity requires `!important`) |
+| `.snipcart-summary-fees` | Background `var(--bgColor-alt)`; padding 24px; rounded top corners only. |
+| `.snipcart-summary-fees__amount` | Color `var(--color-default)`; font-weight 500. |
+| `.snipcart-cart__footer` | Background `var(--bgColor-default)`. |
+| `.snipcart-button-primary` (Checkout button) | Background `var(--bgColor-buttonPrimary)`; hover `var(--bgColor-buttonPrimary-hover)`; text `var(--color-buttonPrimary)`; border-radius 6px (matches site button radius `rounded-md`). |
+| `.snipcart-button-primary:disabled` | Background `var(--color-alt)`; cursor `not-allowed`. |
+| `.snipcart-button-secondary` (Continue shopping) | Background `var(--bgColor-buttonSecondary)`; border `1px solid var(--borderColor-buttonSecondary)`; color `var(--color-buttonSecondary)`; hover background `var(--bgColor-alt)`. |
+| `.snipcart-empty-cart` | Center text, `color: var(--color-alt)`; the in-cart "Continue shopping" link uses `var(--color-link)`. |
 | `.snipcart-add-item` (in-page Add-to-Cart button — applied via Tailwind utilities NOT this stylesheet) | Tailwind: `bg-accent hover:bg-accent-highlight text-white font-general-medium px-5 py-2.5 rounded-md duration-300 disabled:opacity-50 disabled:cursor-not-allowed`. We do NOT override this in `snipcart.css` because it's our own button on our page. |
-| `.snipcart-modal` (modal that wraps drawer + checkout) | Backdrop `rgba(41, 28, 48, 0.85)` (= primary-dark @ 85% opacity, matches existing lightbox `bg-black/70` density). |
+| `.snipcart-modal` (modal that wraps drawer + checkout) | Backdrop `var(--bgColor-modalVeil)` (= primary-dark @ 85% opacity, matches existing lightbox `bg-black/70` density). |
 
 **Out of scope for Phase 5 cart drawer styling:**
 - Snipcart's hosted checkout pages (D-14: stay near-default).
@@ -312,6 +312,12 @@ Same composition on mobile and desktop. Pills wrap on narrow viewports if user-z
 
 ### 8. Add-to-Cart button — detail page (in-content variant)
 
+> **Separator note (corrected):** `data-item-categories` uses the pipe `|` separator
+> per `docs.snipcart.com/v3/setup/products`. An earlier draft of this section used
+> a comma — that has been corrected. With pipe, `["laser", "print"]` becomes the
+> attribute value `"laser|print"` and Snipcart's category analytics see two
+> distinct categories (otherwise it'd see one category named `"laser,print"`).
+
 ```
 <button
   className="snipcart-add-item
@@ -326,7 +332,7 @@ Same composition on mobile and desktop. Pills wrap on narrow viewports if user-z
   data-item-url={`https://shapesmith.studio/shop/${slug}`}
   data-item-image={imageCDN}
   data-item-description={description}
-  data-item-categories={processes.join(',')}
+  data-item-categories={processes.join('|')}
   data-item-max-quantity={stockQuantity}
   data-item-stackable={stockQuantity > 1 ? 'auto' : 'never'}
 >
@@ -455,6 +461,15 @@ These are restated for executor convenience — every item is sourced from CONTE
 9. **Snipcart custom CSS scope = drawer + Add-to-Cart button only.** Checkout pages stay near-default.
 10. **`ShopContext` is its own context.** Do NOT branch `ServicesContext` (Phase 2 D-04 hard rule).
 11. **Test mode first, then live mode.** All wiring + visual work happens against Snipcart test-mode public key; switching to live mode is owner-prep + env-var swap, not a code change.
+
+---
+
+## Patches Log
+
+| Date | Section | Change | Source |
+|------|---------|--------|--------|
+| 2026-05-09 | §6 | Corrected Snipcart CSS variable names — removed the erroneous vendor prefix, listed official names from docs.snipcart.com/v3/themes/default/reference. | RESEARCH.md §"Pattern 6: Snipcart Cart-Drawer Theme via CSS Variables"; Plan 05-04. |
+| 2026-05-09 | §8 | Changed `data-item-categories` separator from comma to pipe (`\|`). | RESEARCH.md §"Pitfall 7"; PATTERNS.md §"Cross-Cutting Deviations" item 1; Plan 05-04. |
 
 ---
 
