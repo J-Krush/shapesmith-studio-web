@@ -136,7 +136,7 @@ Plans:
 - [x] 04-03-PLAN.md — Test-runner migration: mechanical jest.* → vi.* across all 8 test files (App.test.js + 7 quote/hook tests); remove sanityImage ESM workaround mock in App.test.js per Pitfall 8; pnpm test green (VITE-01)
 
 **Wave 4** *(blocked on Wave 3 — verify build+test still green after deletion)*
-- [ ] 04-04-PLAN.md — Cleanup: delete orphan src/css/main.css; sentinel-grep that all CRA residue (react-scripts, postcss-cli, --openssl-legacy-provider, REACT_APP_*, process.env in src/) is gone; pnpm build + pnpm test still green (VITE-01)
+- [x] 04-04-PLAN.md — Cleanup: delete orphan src/css/main.css; sentinel-grep that all CRA residue (react-scripts, postcss-cli, --openssl-legacy-provider, REACT_APP_*, process.env in src/) is gone; pnpm build + pnpm test still green (VITE-01)
 
 **Wave 5** *(blocked on Wave 4 — final pnpm build verification needs cleanup applied)*
 - [ ] 04-05-PLAN.md — netlify.toml SPA fallback: append [[redirects]] /* → /index.html (200) preserving the existing 11-line build/functions block byte-identical; final local pnpm build verification (VITE-03)
@@ -167,7 +167,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation — refactor + env pinning | 6/6 | Complete | 2026-05-04 |
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
 | 3. Auto-Pricing Quote Tool | 3/4 | In Progress |  |
-| 4. Vite Migration | 3/6 | In Progress |  |
+| 4. Vite Migration | 4/6 | In Progress |  |
 | 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
 
 ---
