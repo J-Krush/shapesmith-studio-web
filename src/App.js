@@ -19,6 +19,7 @@ const Projects = lazy(() => import('./pages/Projects'));
 const ProjectSingle = lazy(() => import('./pages/ProjectSingle.jsx'));
 const Quote = lazy(() => import('./pages/Quote'));
 const Shop = lazy(() => import('./pages/Shop'));
+const ShopSingle = lazy(() => import('./pages/ShopSingle.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 
@@ -75,6 +76,11 @@ function App() {
 								    legacy "Shop Coming Soon!" stub; Plan 02-05 replaces with the
 								    Coming Soon page + shop-notify form per D-23. */}
 								<Route path="/shop" element={<Shop />} />
+								{/* /shop/:slug — product detail page (Plan 05-05).
+								    MUST be registered AFTER /shop and BEFORE the catch-all
+								    NotFound route below. ShopSingle owns its own ShopProvider
+								    + SingleProductProvider stack. */}
+								<Route path="/shop/:slug" element={<ShopSingle />} />
 								{/* /quote is the auto-pricing quote tool stub (Plan 03-01).
 								    Lazy-loaded chunk; Three.js parsers are dynamically imported
 								    inside QuoteTabs only after a file is dropped. */}
