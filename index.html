@@ -62,6 +62,19 @@
       <input type="email" name="email" />
       <input type="submit" value="Submit">
     </form>
+    <!-- Snipcart cart drawer mount + public API key (Phase 5 D-14, RESEARCH Pattern 1).
+         The data-api-key is intentionally public — Snipcart's "public API key" is
+         browser-exposed by design (verified docs.snipcart.com/v3/setup/installation).
+         Test-mode key is checked in for local dev + deploy previews. The live-key
+         swap on launch is a single-edit change here, documented in Plan 08
+         owner-prep checklist.
+         Version pin: v3.7.1 (verified 2026-05-09 via cdn.snipcart.com 200 response;
+         re-verify on annual revisit per Pitfall 6 — older CDN versions can be retired). -->
+    <div hidden id="snipcart" data-api-key="REPLACE_WITH_SNIPCART_TEST_PUBLIC_KEY"></div>
+    <link rel="preconnect" href="https://app.snipcart.com" />
+    <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css" />
+    <script async src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
     <script type="module" src="/src/index.js"></script>
     <!--
       This HTML file is a template.
