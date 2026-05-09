@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './css/snipcart.css';   // Phase 5 — Snipcart cart drawer dark-theme overrides
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
