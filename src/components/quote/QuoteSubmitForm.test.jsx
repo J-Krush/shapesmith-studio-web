@@ -5,23 +5,25 @@
 // to https://www.google.com/recaptcha/...). The component only consumes the
 // `executeRecaptcha` callback returned by the hook.
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
 
 // Default mock — token mint resolves with a fake token. Individual tests
 // override the hook's `executeRecaptcha` reference (notably setting it to
 // undefined to simulate the "script hasn't loaded yet" state) without
-// re-mocking the module — `jest.resetModules` would also reset React, breaking hooks.
+// re-mocking the module — `vi.resetModules` would also reset React, breaking hooks.
 //
-// Names must be prefixed with `mock` so Jest's mock-factory hoist allows the
+// Names must be prefixed with `mock` so Vitest's mock-factory hoist allows the
 // closure to reference them before they're initialized at file-evaluation time.
-const mockExecuteRecaptcha = jest.fn(() => Promise.resolve('FAKE_TOKEN_VALUE'));
+const mockExecuteRecaptcha = vi.fn(() => Promise.resolve('FAKE_TOKEN_VALUE'));
 const mockUseGoogleReCaptchaState = { executeRecaptcha: mockExecuteRecaptcha };
-jest.mock('react-google-recaptcha-v3', () => ({
+vi.mock('react-google-recaptcha-v3', () => ({
 	useGoogleReCaptcha: () => mockUseGoogleReCaptchaState,
 	GoogleReCaptchaProvider: ({ children }) => children,
 }));
 
-// Imported AFTER the mock so the real module never resolves.
-const QuoteSubmitForm = require('./QuoteSubmitForm').default;
+// `vi.mock` is hoisted above this import, so the real
+// `react-google-recaptcha-v3` module is never resolved.
+import QuoteSubmitForm from './QuoteSubmitForm';
 
 const BASE_PAYLOAD = {
 	service: 'print',
@@ -49,7 +51,7 @@ beforeEach(() => {
 	mockExecuteRecaptcha.mockClear();
 	mockExecuteRecaptcha.mockImplementation(() => Promise.resolve('FAKE_TOKEN_VALUE'));
 	mockUseGoogleReCaptchaState.executeRecaptcha = mockExecuteRecaptcha;
-	global.fetch = jest.fn();
+	global.fetch = vi.fn();
 });
 
 afterEach(() => {

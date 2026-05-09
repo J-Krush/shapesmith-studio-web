@@ -10,19 +10,21 @@
 //   4. Removes the key on null
 //   5. Fails silently on localStorage.setItem throwing (e.g. QuotaExceededError)
 import { renderHook, act } from '@testing-library/react';
+import { vi } from 'vitest';
+import useLocalStorageState from './useLocalStorageState';
 
 const KEY = 'shapesmith-quote-v1';
 
-const importHook = () => require('./useLocalStorageState').default;
+const importHook = () => useLocalStorageState;
 
 beforeEach(() => {
 	window.localStorage.clear();
-	jest.restoreAllMocks();
+	vi.restoreAllMocks();
 });
 
 afterEach(() => {
 	window.localStorage.clear();
-	jest.restoreAllMocks();
+	vi.restoreAllMocks();
 });
 
 test('initial read returns initialValue when key is absent', () => {
@@ -93,7 +95,7 @@ test('setValue(undefined) removes the key from localStorage', () => {
 });
 
 test('fails silently when localStorage.setItem throws QuotaExceededError', () => {
-	const setItemSpy = jest
+	const setItemSpy = vi
 		.spyOn(Storage.prototype, 'setItem')
 		.mockImplementation(() => {
 			const err = new Error('QuotaExceededError');
@@ -120,7 +122,7 @@ test('fails silently when localStorage.setItem throws QuotaExceededError', () =>
 });
 
 test('fails silently when localStorage.getItem throws (disabled storage / Safari private mode)', () => {
-	jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+	vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
 		throw new Error('SecurityError: localStorage disabled');
 	});
 	const useLocalStorageState = importHook();
