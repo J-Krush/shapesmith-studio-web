@@ -641,32 +641,39 @@ The other 7 test files require similar `jest.fn()` → `vi.fn()` and `jest.mock(
 
 **User confirmation needed for:** A1 (which Vite major version), A4 (whether to fix the `@tailwindcss/forms` plugin bug as a Phase 4 side-effect or defer), A5 (whether to pre-emptively add `define: { 'process.env': '{}' }` or defer until verification surfaces a real need).
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+All five questions are resolved by the Phase 4 plans (04-01..04-06). Resolutions inline below.
 
 1. **Vite 7 vs Vite 8 — owner preference?**
    - What we know: Vite 7 (current 7.3.3) is conservative; Vite 8 (current 8.0.11, GA'd 2026-03-12) is faster but two months mature.
    - What's unclear: Owner's risk appetite for a "no user-visible change" phase.
    - Recommendation: Default to Vite 7. Surface Vite 8 as a deferred follow-up if the owner wants the perf wins later.
+   - **RESOLVED:** Vite 7 chosen. Pinned in Plan 04-02 package.json devDeps (`vite: ^7.3.3`). Vite 8 deferred as a v2 follow-up.
 
 2. **Does the owner have any local `.env.local` files with `REACT_APP_*` vars beyond `REACT_APP_RECAPTCHA_SITE_KEY`?**
    - What we know: Only one `process.env.REACT_APP_*` reference in source. No `.env*` files are committed. `.env.local` is gitignored.
    - What's unclear: Whether the owner has personal/local env vars set that would need parallel renames.
    - Recommendation: The plan should include a one-line owner-facing note: "If you have a local `.env.local` with `REACT_APP_RECAPTCHA_SITE_KEY=...`, rename the key to `VITE_RECAPTCHA_SITE_KEY=...`. The value is unchanged."
+   - **RESOLVED:** Plan 04-06 includes the owner-facing note covering the `.env.local` rename instruction in the Netlify dashboard env var rename checkpoint.
 
 3. **Should the `@tailwindcss/forms` plugin bug be fixed in this phase?**
    - What we know: `tailwind.config.js` line 61 has the plugin name as a string instead of `require('@tailwindcss/forms')`. This is a silent no-op in Tailwind v3.
    - What's unclear: Whether activating the plugin would change any visual output.
    - Recommendation: **Defer** — this is a pre-existing bug and the Phase 4 success criteria explicitly demand "behaves identically to the CRA build from any user's perspective." Fixing this could change form-element rendering and violate the criterion. File a follow-up issue.
+   - **RESOLVED:** Deferred. Plan 04-04 explicitly does not touch `tailwind.config.js`; the deferred follow-up is documented in the 04-04 SUMMARY notes per the "no user-visible change" criterion.
 
 4. **Should `web-vitals` be removed entirely?**
    - What we know: It's wired up in `reportWebVitals.js` but called as `reportWebVitals()` with no callback (verified `src/index.js` line 17), making it a no-op. The whole module is dead code.
    - What's unclear: Whether the owner intends to wire it up later (e.g. to Plausible/Datadog).
    - Recommendation: Out of scope for Phase 4. If owner wants, file as a v2 cleanup.
+   - **RESOLVED:** Out of scope. No Phase 4 plan touches `web-vitals` or `reportWebVitals.js`. Filed as v2 cleanup candidate.
 
 5. **Plan 03-03 deferred Task 1 + Task 4 — does Phase 4 unblock or block them?**
    - What we know: Plan 03-03 Tasks 1 + 4 are deferred pending owner-prep (Resend domain verify, reCAPTCHA registration, Netlify env var population including `REACT_APP_RECAPTCHA_SITE_KEY`).
    - What's unclear: Should Phase 4 wait for owner to complete Plan 03-03 owner-prep first (so the env var rename happens once), or proceed independently?
    - Recommendation: **Phase 4 proceeds independently.** The owner-prep is value-decoupled from the build-tool migration. When the owner *does* set the dashboard env var (whether before, during, or after Phase 4), they set it as `VITE_RECAPTCHA_SITE_KEY` not `REACT_APP_RECAPTCHA_SITE_KEY`. Phase 4 plan should call this out so the owner doesn't accidentally use the old name.
+   - **RESOLVED:** Phase 4 proceeds independently. Plan 04-06 owner-action checkpoint instructs the owner to set the dashboard env var as `VITE_RECAPTCHA_SITE_KEY` directly — unifying the deferred Plan 03-03 Task 1 owner-prep with this rename. The "skipped (will set under new name later)" resume option in Plan 04-06 covers the case where the owner has not yet completed reCAPTCHA registration.
 
 ## Environment Availability
 
