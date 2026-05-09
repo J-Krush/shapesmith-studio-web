@@ -1,110 +1,33 @@
-import { useState } from 'react';
+import { lazy, Suspense } from 'react';
+import { ShopProvider, useShop } from '../context/ShopContext';
 import SEOHead from '../components/shared/SEOHead';
-import encodeFormData from '../utilities/encodeFormData';
 
-// /shop Coming Soon page (D-23).
-// Email-capture form posts to a SEPARATE Netlify form `shop-notify` (NOT contact-form).
-// Honeypot uses off-screen positioning per D-26 (sophisticated bots skip
-// CSS-hidden fields that use the display property, so we avoid that approach).
-const Shop = () => {
-	const [email, setEmail] = useState('');
-	const [bot, setBot] = useState('');
-	const [submitted, setSubmitted] = useState(false);
-	const [error, setError] = useState(null);
+// Plan 05-04 — /shop router branch.
+// Branches between the empty-state Coming Soon page (Phase 2 D-23 byte-stable)
+// and the catalog grid (Phase 5 SHOP-05). SEOHead mounts at the route level
+// so both branches inherit the same title/description/og:image (UI-SPEC §9).
+const ShopComingSoon = lazy(() => import('../components/shop/ShopComingSoon'));
+const ShopCatalog = lazy(() => import('../components/shop/ShopCatalog'));
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setError(null);
-		fetch('/', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: encodeFormData({
-				'form-name': 'shop-notify',
-				email,
-				'bot-field': bot,
-			}),
-		})
-			.then(() => setSubmitted(true))
-			.catch((err) => {
-				console.error('Shop notify submit failed:', err);
-				setError('Something went wrong. Please try again or contact us directly.');
-			});
-	};
-
-	return (
-		<>
-			<SEOHead
-				title="Shop — coming soon"
-				description="Pre-made laser-cut and 3D-printed pieces, ready to take home."
-				ogUrl="https://shapesmith.studio/shop"
-				ogImage={{ url: '/og-default.png', altText: 'Shapesmith Studio' }}
-			/>
-			<section className="py-12 sm:py-24 mt-12 sm:mt-24">
-				<div className="container mx-auto text-center max-w-xl px-4">
-					<h1 className="font-display font-black text-3xl sm:text-4xl text-primary-dark dark:text-primary-light mb-6">
-						Shop — coming soon
-					</h1>
-					<p className="text-lg text-ternary-dark dark:text-ternary-light mb-8">
-						Pre-made laser-cut and 3D-printed pieces, ready to take home — coming soon.
-					</p>
-					{submitted ? (
-						<p className="text-lg text-primary-dark dark:text-primary-light">
-							Thanks — we&rsquo;ll let you know.
-						</p>
-					) : (
-						<form
-							name="shop-notify"
-							method="POST"
-							data-netlify="true"
-							data-netlify-honeypot="bot-field"
-							onSubmit={handleSubmit}
-						>
-							<input type="hidden" name="form-name" value="shop-notify" />
-							{/* CSS-hidden honeypot per D-26 (off-screen positioning). */}
-							<div
-								className="absolute left-[-10000px] top-auto w-px h-px overflow-hidden"
-								aria-hidden="true"
-							>
-								<label htmlFor="shop-bot-field">
-									Don&rsquo;t fill this out if you&rsquo;re human:
-								</label>
-								<input
-									id="shop-bot-field"
-									name="bot-field"
-									type="text"
-									tabIndex={-1}
-									autoComplete="off"
-									value={bot}
-									onChange={(e) => setBot(e.target.value)}
-								/>
-							</div>
-							<input
-								type="email"
-								name="email"
-								required
-								placeholder="you@example.com"
-								aria-label="Email"
-								className="w-full max-w-sm px-5 py-2.5 rounded-md mb-4 border border-gray-300 dark:border-primary-dark border-opacity-50 text-primary-dark dark:text-secondary-light bg-ternary-light dark:bg-ternary-dark"
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-							/>
-							<div>
-								<button
-									type="submit"
-									className="font-general-medium px-5 py-2.5 text-white bg-accent hover:bg-accent-highlight focus:ring-1 focus:ring-accent rounded-md duration-500"
-								>
-									Notify me when it launches
-								</button>
-							</div>
-							{error && (
-								<p className="mt-4 text-sm text-red-400">{error}</p>
-							)}
-						</form>
-					)}
-				</div>
-			</section>
-		</>
-	);
+const ShopRouter = () => {
+	const { products, loading } = useShop();
+	// Site convention (UI-SPEC §10): render null while data resolves — no spinner, no skeleton.
+	if (loading) return null;
+	return products.length === 0 ? <ShopComingSoon /> : <ShopCatalog products={products} />;
 };
+
+const Shop = () => (
+	<ShopProvider>
+		<SEOHead
+			title="Shop"
+			description="Pre-made laser-cut and 3D-printed pieces from Shapesmith Studio, ready to take home."
+			ogUrl="https://shapesmith.studio/shop"
+			ogImage={{ url: '/og-default.png', altText: 'Shapesmith Studio' }}
+		/>
+		<Suspense fallback={null}>
+			<ShopRouter />
+		</Suspense>
+	</ShopProvider>
+);
 
 export default Shop;
