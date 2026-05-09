@@ -154,7 +154,28 @@ Plans:
   2. The owner can add `product` documents in Sanity Studio per the finalized schema spec — the schema and admin UX support the chosen platform without ongoing developer involvement to publish a product
   3. A visitor can browse `/shop`, see a grid of pre-made goods (laser-cut + 3D-printed), click into `/shop/:slug` for detail, and complete a purchase end-to-end through the chosen platform's checkout
   4. The owner receives orders with all info needed to fulfill and ship; inventory state (sold-out, low stock) is reflected accurately in the storefront
-**Plans**: TBD
+**Plans:** 8 plans across 6 waves
+Plans:
+
+**Wave 1**
+- [ ] 05-01-PLAN.md — Product schema spec doc + owner-prep checkpoint (SHOP-04)
+- [ ] 05-02-PLAN.md — ImageGallery primitive extraction from ServiceGallery (SHOP-05)
+
+**Wave 2** *(blocked on Wave 1)*
+- [ ] 05-03-PLAN.md — Snipcart scaffold: index.html script tags + snipcart.css cart-drawer theme + ShopContext + SingleProductContext (SHOP-05, SHOP-06)
+
+**Wave 3** *(blocked on Wave 2)*
+- [ ] 05-04-PLAN.md — Catalog: Shop.jsx auto-flip, ShopComingSoon extract, ShopCatalog + ShopFilter + ProductGrid + ProductCard + SoldOutBadge + LowStockTag, UI-SPEC corrections (SHOP-05, SHOP-07)
+
+**Wave 4** *(blocked on Waves 1–3; Plans 05 + 06 ship in parallel — zero file overlap)*
+- [ ] 05-05-PLAN.md — Detail: ShopSingle.jsx + ProductHeader + ProductInfo + ProductSpecTable + AddToCartButton + StickyMobileAddToCart + /shop/:slug route (SHOP-05, SHOP-06, SHOP-07)
+- [ ] 05-06-PLAN.md — JSON crawler Function: snipcart-validate-product (SHOP-06, SHOP-07)
+
+**Wave 5** *(blocked on Wave 4)*
+- [ ] 05-07-PLAN.md — Order webhook Function: snipcart-order-webhook + formatOrderEmail (SHOP-06)
+
+**Wave 6** *(blocked on Wave 5 — owner action + UAT; autonomous: false)*
+- [ ] 05-08-PLAN.md — Owner-prep checklist + UAT script + ROADMAP/REQUIREMENTS finalization (SHOP-03, SHOP-04, SHOP-05, SHOP-06, SHOP-07)
 **UI hint**: yes
 
 ## Progress
@@ -168,7 +189,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Bundle 1 Relaunch — 3D printing + spruce + content + SEO + shop stub | 5/5 | Complete | 2026-05-06 |
 | 3. Auto-Pricing Quote Tool | 3/4 | In Progress |  |
 | 4. Vite Migration | 5/6 | In Progress |  |
-| 5. Pre-Made Goods Shop | 0/TBD | Not started | - |
+| 5. Pre-Made Goods Shop | 0/8 | Not started | - |
 
 ---
 *Roadmap created: 2026-05-02*
