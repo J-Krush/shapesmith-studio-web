@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Plan 03-04 complete (QTE-10 shipped). Phase 3 frontend done — 10/10 QTE requirements landed in code. Plan 03-03 Task 1 (Resend/reCAPTCHA/Netlify env-var owner-prep) + Task 4 (real-send verification) remain DEFERRED at user request — pending owner action.
-last_updated: "2026-05-09T01:07:40.416Z"
+stopped_at: Plan 04-02 complete (build-tool flip). Vite is now the build tool — pnpm build runs vite v7.3.3 and produces a deployable bundle in build/; react-scripts/postcss-cli/--openssl-legacy-provider/REACT_APP_* are gone. Tests temporarily broken (still on jest.* API → Plan 04-03 owns the rewrite). Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
+last_updated: "2026-05-09T01:09:24Z"
 last_activity: 2026-05-09
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 21
-  completed_plans: 15
-  percent: 71
+  completed_plans: 16
+  percent: 76
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 04 (vite-migration) — EXECUTING
-Plan: 2 of 6
+Plan: 3 of 6
 Status: Ready to execute
 Last activity: 2026-05-09
 
-Progress: [███████░░░] 71%
+Progress: [████████░░] 76%
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [███████░░░] 71%
 | Phase 03 P03-02 | ~3.5m | 2 tasks | 6 files |
 | Phase 03 P04 | 4m | 1 tasks | 5 files |
 | Phase 04 P01 | 12 min | 2 tasks | 2 files |
+| Phase 04 P02 | ~5 min | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,7 @@ Recent decisions affecting current work:
 - [Phase 3]: Plan 03-03 (2026-05-08): **PARTIAL ship — Tasks 2 + 3 (frontend + Function code) shipped; Tasks 1 + 4 DEFERRED at user request.** Tasks 2-3 land the Netlify Function (submit-quote handler, formatQuoteText helper, function-local resend dep, netlify.toml [functions] block) and the QuoteSubmitForm + GoogleReCaptchaProvider wiring (replaces Plan 03-01's disabled placeholder CTA). Task 1 (owner-prep — Resend domain verification, reCAPTCHA v3 site registration, Netlify env-var population: RESEND_API_KEY, RECAPTCHA_SECRET_KEY, REACT_APP_RECAPTCHA_SITE_KEY) and Task 4 (real-send end-to-end smoke test in owner inbox) DEFERRED — owner will complete owner-prep and re-run /gsd-execute-phase 3 to finish Plan 03-03 + close Phase 3. Plan 03-03 stays in-progress; SUMMARY.md NOT created (it's the completion marker); ROADMAP plan-progress NOT advanced. Frontend gracefully degrades when env vars are unset (provider mounts, script never loads, executeRecaptcha is undefined, button shows "spam protection isn't loaded yet" inline message — never throws). pnpm build is clean (35/35 tests, +2.1 KB main chunk). Commits: 91e2373 (Task 2 RED), 0432361 (Task 2 GREEN), 4a8cfdf (Task 3 RED), 1f737cc (Task 3 GREEN).
 - [Phase ?]: Plan 03-04 (2026-05-08): localStorage persistence shipped — useLocalStorageState hook + QuoteRestoreBanner + storage-precedence pre-fill cascade. Combined storage shape ({tab, materialId, quantity}) at versioned key shapesmith-quote-v1. setQuoteState(null) auto-clear-on-submit via QuoteSubmitForm.onSubmitted. QuotaExceededError + Safari private mode fail silently — UI keeps working in-memory. Main chunk +3 B gzip. QTE-10 closed; Phase 3 frontend complete (10/10 QTE requirements landed in code; Plan 03-03 Task 1 owner-prep + Task 4 real-send verification remain deferred).
 - [Phase ?]: [Phase 4] Plan 04-01 (2026-05-08): Vite scaffolding landed at repo root WITHOUT flipping the build switch. vite.config.js (ESM, Vite 7 + Vitest 4 inline, build.outDir='build', JSX-in-.js loader override pair, jsdom test env) + index.html (moved from public/ via git mv at 80% similarity, 3 %PUBLIC_URL% tokens replaced with absolute / paths, explicit <script type='module' src='/src/index.js'> tag added). Both Netlify form blocks (contact-form D-28, shop-notify D-23) preserved byte-identical — diff hunks show forms as context-only with zero +/- lines (Pitfall 2 mitigated). package.json untouched (Plan 04-02 owns flip). Deviation: deleted CRA %PUBLIC_URL% explanatory comment block in index.html — plan said don't delete but plan's verify gate required zero %PUBLIC_URL% hits (comment text contained 2). Aligns with RESEARCH.md Step 4 canonical post-migration HTML.
+- [Phase ?]: [Phase 4] Plan 04-02 (2026-05-08): Build-tool flip landed atomically in three commits. package.json swap (ae42791): drop react-scripts/postcss-cli/@babel/plugin-proposal-private-property-in-object/--openssl-legacy-provider; add vite ^7.3.3 + @vitejs/plugin-react ^5 + vitest ^4.1.5 + jsdom ^25; new scripts dev/start/build/preview/postbuild/test/test:watch (eject + build:css gone). pnpm install regenerated lockfile (-1009/+65 packages). Env-var rename (9c91c5d): src/App.js line 35 process.env.REACT_APP_RECAPTCHA_SITE_KEY → import.meta.env.VITE_RECAPTCHA_SITE_KEY + comment block reword (CRA contract → Vite contract); QuoteSubmitForm.jsx line 15 doc-comment aligned. Server-side env vars (RESEND_API_KEY, RECAPTCHA_SECRET_KEY) intentionally untouched (no REACT_APP_ prefix; out of scope). Build verification (fe327d8 empty commit): pnpm build → vite v7.3.3 → 644 modules in 1.86s → build/index.html (3.08 kB) + 23 JS chunks + 1 CSS chunk + sitemap.xml (7 URLs); both Netlify forms byte-preserved in output (grep counts pass); zero %PUBLIC_URL% in output; <script type="module"> entry honored. Non-fatal PostCSS warning surfaced for src/css/tailwind.css line 5 (@import-after-@tailwind ordering — pre-existing CSS authoring issue, deferred to Plan 04-04 cleanup or follow-up). No deviations. Tests still on jest.* API → Plan 04-03 owns rewrite. VITE-01 + VITE-02 closed.
 
 ### Pending Todos
 
@@ -112,8 +114,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-09T01:07:34.408Z
-Stopped at: Plan 03-04 complete (QTE-10 shipped). Phase 3 frontend done — 10/10 QTE requirements landed in code. Plan 03-03 Task 1 (Resend/reCAPTCHA/Netlify env-var owner-prep) + Task 4 (real-send verification) remain DEFERRED at user request — pending owner action.
+Last session: 2026-05-09T01:09:24Z
+Stopped at: Plan 04-02 complete (build-tool flip). Vite is now the build tool — pnpm build runs vite v7.3.3 and produces a deployable bundle in build/; react-scripts/postcss-cli/--openssl-legacy-provider/REACT_APP_* are gone. Tests temporarily broken (still on jest.* API → Plan 04-03 owns the rewrite). Plan 03-03 Task 1 + Task 4 remain DEFERRED at user request.
 Resume file: None
 
 ### Performance Metrics (Phase 2)
