@@ -51,6 +51,17 @@ const SLUG_REGEX = /^[a-z0-9-]+$/i;
 const SLUG_MAX_LEN = 200;
 const FETCH_TIMEOUT_MS = 5000; // Pitfall 4 — Netlify sync function ceiling is 10s.
 
+// CORS — Snipcart's checkout iframe (app.snipcart.com) makes browser-side XHRs
+// against this endpoint during payment, in addition to the server-side crawl.
+// Endpoint exposes the same public product data the catalog already serves, so
+// '*' is acceptable; tighten to 'https://app.snipcart.com' if Snipcart ever
+// documents a single canonical origin.
+const CORS_HEADERS = {
+	'Access-Control-Allow-Origin': '*',
+	'Access-Control-Allow-Methods': 'GET, OPTIONS',
+	'Access-Control-Allow-Headers': 'Content-Type',
+};
+
 // AbortController + setTimeout because Node 20's native fetch does not honor
 // a per-call timeout option. Mirrors the Phase 3 submit-quote helper.
 const fetchWithTimeout = async (url, options = {}) => {
@@ -64,13 +75,16 @@ const fetchWithTimeout = async (url, options = {}) => {
 };
 
 exports.handler = async (event) => {
+	if (event.httpMethod === 'OPTIONS') {
+		return { statusCode: 204, headers: CORS_HEADERS, body: '' };
+	}
 	if (event.httpMethod !== 'GET') {
-		return { statusCode: 405, body: 'Method not allowed' };
+		return { statusCode: 405, headers: CORS_HEADERS, body: 'Method not allowed' };
 	}
 
 	const slug = event.queryStringParameters?.slug;
 	if (!slug || slug.length > SLUG_MAX_LEN || !SLUG_REGEX.test(slug)) {
-		return { statusCode: 400, body: 'Missing or invalid slug' };
+		return { statusCode: 400, headers: CORS_HEADERS, body: 'Missing or invalid slug' };
 	}
 
 	// Build a parameterized GROQ query. The query string is fixed; the slug binds
@@ -101,19 +115,19 @@ exports.handler = async (event) => {
 			// Log status code only — never the response body, never the slug.
 			// (T-05-06-05 information-disclosure mitigation.)
 			console.error('Sanity fetch non-OK:', res.status);
-			return { statusCode: 502, body: 'Sanity fetch failed' };
+			return { statusCode: 502, headers: CORS_HEADERS, body: 'Sanity fetch failed' };
 		}
 		const json = await res.json();
 		result = json.result;
 	} catch (e) {
 		// AbortError, network error, JSON parse error all funnel here.
 		console.error('Sanity fetch error:', e?.name || 'unknown');
-		return { statusCode: 502, body: 'Sanity unreachable' };
+		return { statusCode: 502, headers: CORS_HEADERS, body: 'Sanity unreachable' };
 	}
 
 	if (!result) {
 		// Product was unpublished after the customer added it to cart — refuse the order.
-		return { statusCode: 404, body: 'Product not found' };
+		return { statusCode: 404, headers: CORS_HEADERS, body: 'Product not found' };
 	}
 
 	// Reconstruct the URL the buy button sent. Snipcart compares its request URL
@@ -144,7 +158,7 @@ exports.handler = async (event) => {
 
 	return {
 		statusCode: 200,
-		headers: { 'Content-Type': 'application/json' },
+		headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
 		body: JSON.stringify(responseBody),
 	};
 };
