@@ -158,6 +158,10 @@ exports.handler = async (event) => {
 		// (RESEARCH Pitfall 5; CONTEXT D-06 accepted trade-off).
 		// Primary guard remains data-item-max-quantity on the AddToCartButton.
 		stock: result.stockQuantity,
+		// Weight echo — AddToCartButton emits data-item-weight from the same
+		// Sanity field; mismatch here would fail Snipcart's optional-field
+		// comparison and reject the order at validation time.
+		weight: result.weight ?? 0,
 	};
 	if (result.image) {
 		responseBody.image = result.image;
