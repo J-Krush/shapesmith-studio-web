@@ -132,13 +132,20 @@ exports.handler = async (event) => {
 
 	// Reconstruct the URL the buy button sent. Snipcart compares its request URL
 	// to this `url` field and rejects the order if they differ. We must echo
-	// back exactly what AddToCartButton (Plan 05-05) emits.
-	// Prefer Netlify's `URL` env var (per-deploy primary URL); fall back to the
-	// request host (covers preview deploys that hit a non-primary domain); final
-	// fallback is the production domain.
-	const baseUrl =
-		process.env.URL ||
-		(event.headers?.host ? `https://${event.headers.host}` : 'https://shapesmith.studio');
+	// back EXACTLY what AddToCartButton (Plan 05-05) emitted — and since the
+	// button uses window.location.origin, the source of truth is whichever
+	// hostname the customer is actually browsing (prod, deploy preview, or
+	// branch deploy).
+	//
+	// The incoming request's Host header is that hostname by definition: it's
+	// the URL Snipcart's crawler just visited (or that the checkout iframe is
+	// XHR'ing). process.env.URL is Netlify's PRODUCTION domain in every
+	// context, so preferring it breaks deploy-preview URL matching. The env
+	// vars stay as a fallback for invocations without a Host header.
+	const host = event.headers?.host;
+	const baseUrl = host
+		? `https://${host}`
+		: process.env.DEPLOY_PRIME_URL || process.env.URL || 'https://shapesmith.studio';
 	const productUrl = `${baseUrl}/.netlify/functions/snipcart-validate-product?slug=${slug}`;
 
 	const responseBody = {
