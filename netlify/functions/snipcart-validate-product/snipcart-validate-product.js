@@ -85,7 +85,7 @@ exports.handler = async (event) => {
 			price,
 			description,
 			stockQuantity,
-			"image": images[0].asset->url
+			"image": images[0].asset.asset->url
 		}`
 	);
 	const slugParam = encodeURIComponent(JSON.stringify(slug));

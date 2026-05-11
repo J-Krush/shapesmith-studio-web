@@ -26,7 +26,7 @@ const PRODUCTS_QUERY = `*[_type == "product" && !(_id in path("drafts.**"))]
     images[]{
       altText,
       caption,
-      asset->{ _id, url, altText }
+      "asset": asset.asset->{ _id, url, altText }
     },
     seo{ metaTitle, metaDescription, ogImage{ asset->{ _id, url, altText } } }
   }`;
