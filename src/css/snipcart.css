@@ -1,10 +1,11 @@
 /* src/css/snipcart.css — Phase 5 cart-drawer dark-theme overrides.
-   SCOPE: cart drawer + Add-to-Cart button only (CONTEXT D-14).
-   Checkout pages stay near-default Snipcart styling.
+   SCOPE: cart drawer only (CONTEXT D-14). Selector .snipcart-cart targets the
+   drawer view; checkout (.snipcart-checkout) inherits Snipcart's default light
+   theme so dropdowns and informational banners remain readable on light backgrounds.
    Variable names per docs.snipcart.com/v3/themes/default/reference (verified 2026-05-09).
 */
 
-#snipcart {
+#snipcart .snipcart-cart {
   /* ─── Global ─── */
   --color-default: #f6f7f8;          /* ternary-light — body text inside the cart */
   --color-alt: #94989c;              /* ternary-section-dark — secondary text (timestamps, sub-totals labels) */
