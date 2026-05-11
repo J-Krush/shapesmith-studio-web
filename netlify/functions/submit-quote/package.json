@@ -1,7 +1,0 @@
-{
-  "name": "submit-quote",
-  "private": true,
-  "dependencies": {
-    "resend": "^6.12.3"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "name": "snipcart-order-webhook",
-  "private": true,
-  "dependencies": {
-    "resend": "^6.12.3"
-  }
-}
