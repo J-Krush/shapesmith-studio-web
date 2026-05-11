@@ -85,6 +85,7 @@ exports.handler = async (event) => {
 			price,
 			description,
 			stockQuantity,
+			weight,
 			"image": images[0].asset.asset->url
 		}`
 	);

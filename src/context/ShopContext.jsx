@@ -18,6 +18,7 @@ const PRODUCTS_QUERY = `*[_type == "product" && !(_id in path("drafts.**"))]
     body,
     price,
     stockQuantity,
+    weight,
     featured,
     dimensions,
     leadTime,

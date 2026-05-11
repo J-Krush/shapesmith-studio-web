@@ -18,7 +18,7 @@
 import { urlAt } from '../../utilities/sanityImage';
 
 const AddToCartButton = ({ product, variant = 'detail' }) => {
-	const { slug, name, price, description, stockQuantity, processes, images } = product;
+	const { slug, name, price, description, stockQuantity, weight, processes, images } = product;
 	const isSoldOut = stockQuantity === 0;
 
 	if (isSoldOut) {
@@ -71,6 +71,7 @@ const AddToCartButton = ({ product, variant = 'detail' }) => {
 			data-item-description={description ?? ''}
 			data-item-categories={processes?.join('|') ?? ''}
 			data-item-max-quantity={stockQuantity}
+			data-item-weight={weight ?? 0}
 			data-item-stackable={stockQuantity > 1 ? 'auto' : 'never'}
 		>
 			Add to Cart
