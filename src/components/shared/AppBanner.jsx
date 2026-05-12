@@ -50,8 +50,8 @@ const AppBanner = () => {
 					{HERO_COPY.subhead}
 				</p>
 
-				<div className="flex flex-col sm:flex-row gap-6 w-full max-w-4xl mb-10">
-					{SERVICES.map((s) => {
+				<div className="flex flex-col sm:flex-row sm:justify-center gap-6 w-full max-w-4xl mb-10">
+					{SERVICES.filter((s) => !s.hidden).map((s) => {
 						const card = SERVICE_CARDS[s.key];
 						return (
 							<Link

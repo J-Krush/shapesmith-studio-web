@@ -14,7 +14,7 @@ import logoDark from '../../assets/logo-flower-of-life-dark.png';
 // and renders the legacy stub until Plan 02-05 ships the Coming Soon page.
 const NAV_ITEMS = [
 	{ to: '/', label: 'Home', match: '/' },
-	...SERVICES.map((s) => ({
+	...SERVICES.filter((s) => !s.hidden).map((s) => ({
 		to: `/${s.urlSegment}`,
 		// Pretty-print the laser nav label per UI-SPEC §"Nav refresh"
 		// ("styles" → "Laser Cutting"); print already uses display casing.
@@ -22,10 +22,11 @@ const NAV_ITEMS = [
 		match: `/${s.urlSegment}`,
 	})),
 	{ to: '/about', label: 'About', match: '/about' },
-	{ to: '/shop', label: 'Shop', match: '/shop' },
-	// Plan 03-01 / D-06: top-level "Get a Quote" CTA in the nav. Active-state
-	// border-b-2 border-accent applies automatically via navLinkClasses.
-	{ to: '/quote', label: 'Get a Quote', match: '/quote' },
+	// Temporarily hidden while /shop (Snipcart) and /quote (auto-pricing tool)
+	// are still in test. Routes stay registered in App.js so direct URLs work.
+	// Restore when ready to launch.
+	// { to: '/shop', label: 'Shop', match: '/shop' },
+	// { to: '/quote', label: 'Get a Quote', match: '/quote' },
 ];
 
 const AppHeader = () => {
