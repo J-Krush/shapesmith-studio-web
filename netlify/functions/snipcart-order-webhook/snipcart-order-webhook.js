@@ -151,9 +151,11 @@ exports.handler = async (event) => {
 	try {
 		const result = await Promise.race([
 			resend.emails.send({
-				// Verified sender domain (Phase 3 owner-prep). Envelope-from is
-				// hardcoded so visitor input never enters the From header.
-				from: 'Shapesmith Studio <orders@shapesmith.studio>',
+				// Sender uses the mail.shapesmith.studio transactional subdomain to
+				// avoid an SPF conflict with the Proton-managed apex shapesmith.studio
+				// (apex is reserved for Proton-handled inbound mail — owner inbox).
+				// Envelope-from is hardcoded so visitor input never enters the From header.
+				from: 'Shapesmith Studio <orders@mail.shapesmith.studio>',
 				to: ['jkrush@shapesmith.studio'],
 				// Reply-to lets the owner respond to the buyer with one click.
 				// Optional-chained because we do not trust payload shape blindly.
