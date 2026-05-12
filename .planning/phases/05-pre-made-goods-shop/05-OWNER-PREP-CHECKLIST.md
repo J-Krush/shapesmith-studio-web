@@ -118,7 +118,14 @@ If any of those are missing, the schema field references are likely off — rech
 - [ ] Copy the **test-mode public API key** to your clipboard. (You'll paste this in section C.)
 - [ ] Note the **live-mode public API key** for later — DO NOT use it until UAT passes (section F).
 
-> **Public vs. secret keys:** Snipcart's "public API key" is browser-exposed by design — committing it in `index.html` is intentional and safe. Phase 5 does NOT require a secret API key (RESEARCH §"Environment Availability" — A3 confirmed the webhook-validation endpoint is unauthenticated).
+> **Public vs. secret keys:** Snipcart's "public API key" is browser-exposed
+> by design — committing it in `index.html` is intentional and safe.
+> Phase 5 ALSO requires the **test-mode secret API key** stored as the
+> Netlify env var `SNIPCART_SECRET_API_KEY` — Snipcart's request-validation
+> endpoint requires HTTP Basic auth per Snipcart support thread #169. The
+> earlier RESEARCH §"Environment Availability" note (A3) that called this
+> endpoint unauthenticated was incorrect; it was corrected in quick task
+> 260512-j2a (2026-05-12).
 
 ### B.5 Configure shipping rates (CONTEXT D-04)
 
@@ -176,8 +183,11 @@ Snipcart Dashboard → **Webhooks → Add endpoint**.
 - [ ] Netlify Dashboard → site → **Site Settings → Build & Deploy → Environment**.
 - [ ] Confirm `RESEND_API_KEY` is **set** (it should already exist from Phase 3 owner-prep, Plan 03-03).
   - If missing: copy it from Resend Dashboard → API Keys, then add it as a Netlify env var. Trigger a redeploy after adding.
-- [ ] Confirm there are **no other env vars required for Phase 5**. Specifically, the following are NOT needed:
-  - `SNIPCART_API_SECRET` — RESEARCH A3 confirmed the webhook-validation endpoint is unauthenticated.
+- [ ] Confirm `SNIPCART_SECRET_API_KEY` is set (test-mode secret key during UAT).
+  - From Snipcart Dashboard → **Account → API Keys**, copy the **secret API key** (NOT the public key — the public key is already in `index.html`).
+  - Required by `netlify/functions/snipcart-order-webhook/snipcart-order-webhook.js` for HTTP Basic auth against Snipcart's request-validation endpoint. Missing this yields 502 "Webhook validation not configured" in Function logs.
+  - Live-mode swap: re-paste the **live** secret key when flipping to production in §F.
+- [ ] Confirm there are **no other env vars required for Phase 5**. Specifically, the following is NOT needed:
   - `VITE_SNIPCART_PUBLIC_KEY` — Phase 5 hardcoded the test key in `index.html` instead (RESEARCH Open Question 2 resolved).
 
 ---
@@ -216,7 +226,13 @@ If `/shop` shows the **Coming Soon** page even though section A says you publish
 
 - [ ] Snipcart Dashboard → **Webhooks**. Confirm the order webhook URL points at the production URL: `https://shapesmith.studio/.netlify/functions/snipcart-order-webhook`. (If you used the deploy-preview URL during UAT, swap it back now.)
 
-### F.3 Production deploy verification
+### F.3 Netlify env vars — swap Snipcart secret key to live mode
+
+- [ ] Netlify Dashboard → site → **Site Settings → Build & Deploy → Environment** → edit `SNIPCART_SECRET_API_KEY`.
+- [ ] Replace the test-mode secret key with the **live-mode secret API key** from Snipcart Dashboard → Account → API Keys.
+- [ ] Trigger a redeploy so the Function picks up the new value.
+
+### F.4 Production deploy verification
 
 - [ ] After the PR merges and Netlify deploys to production, open `https://shapesmith.studio/shop`. Confirm catalog renders.
 - [ ] Run a real **$1 test purchase** with the owner's own card on a low-priced test product (e.g. set `stockQuantity = 1` on a $1 placeholder product). Verify:
@@ -225,7 +241,7 @@ If `/shop` shows the **Coming Soon** page even though section A says you publish
   - You can refund the test order from the Snipcart dashboard.
 - [ ] After the live test purchase, raise the placeholder product's `stockQuantity` back / unpublish it.
 
-### F.4 Set up your fulfillment workflow
+### F.5 Set up your fulfillment workflow
 
 - [ ] USPS Click-N-Ship: print labels for orders. (CONTEXT D-03 — manual fulfillment, ~10 min per order.)
 - [ ] Email tracking links to customers manually after dropoff/pickup. (Snipcart's customer-facing email contains the order confirmation; you supply the tracking number out-of-band.)
