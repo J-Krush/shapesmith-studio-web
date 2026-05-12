@@ -1,32 +1,25 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import sanityClient from '../../utilities/sanityClient';
+import useSanityQuery from '../../hooks/useSanityQuery';
 
 const Collaborations = () => {
 
-	const [collaborationData, setCollaborationData] = useState();
+	const { data } = useSanityQuery(
+		`*[_type == "collaboration"]{
+			_id,
+			title,
+			description,
+			images[]{
+				altText,
+				asset->{
+					_id,
+					url,
+				},
+			}
+		  }
+		  `
+	);
 
-	useEffect(() => {
-		sanityClient.fetch(
-			`*[_type == "collaboration"]{
-				_id,
-				title,
-				description,
-				images[]{
-					altText,
-					asset->{
-						_id,
-						url,
-					},
-				}
-			  }
-			  `
-		)
-		.then((data) => {
-			setCollaborationData(data[0]);
-		})
-		.catch(console.error);
-	}, []);
+	const collaborationData = data?.[0];
 
 	return (
 		<section className="py-5 sm:py-10 mt-5 sm:mt-10 bg-secondary-section-light dark:bg-secondary-section-dark">

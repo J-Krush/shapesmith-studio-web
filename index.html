@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Theme color matches primary-dark token (Plan 02-04 / D-19 belt-and-suspenders for crawlers without JS) -->
+    <meta name="theme-color" content="#291c30" />
+    <meta
+      name="description"
+      content="Shapesmith Studio — custom laser cutting and 3D printing for local hobbyists and small businesses."
+    />
+    <!--
+      Static og: defaults for crawlers without JS (D-19 / Plan 02-04 RESEARCH §Pattern 4 SPA crawler caveat).
+      react-helmet-async overrides these per-route at runtime for clients that execute JS.
+    -->
+    <meta property="og:title" content="Shapesmith Studio" />
+    <meta property="og:description" content="Custom laser cutting and 3D printing." />
+    <meta property="og:image" content="/og-default.png" />
+    <meta property="og:type" content="website" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="/manifest.json" />
+    <title>Shapesmith Studio</title>
+
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <!--
+      Netlify deploy-time form prerender (D-28).
+      Every field on the visible React form must appear here, and vice versa
+      — drift = silent submission drop. See `CONTACT-FORM CONTRACT` comment
+      at the top of `src/components/contact/ContactForm.jsx`.
+    -->
+    <form
+      name="contact-form"
+      netlify
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="service" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+      <input type="submit" value="Submit">
+    </form>
+    <!-- /shop notify-me email-capture form (D-23) — separate from contact-form. -->
+    <form
+      name="shop-notify"
+      netlify
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="text" name="bot-field" />
+      <input type="email" name="email" />
+      <input type="submit" value="Submit">
+    </form>
+    <!-- Snipcart cart drawer mount + public API key (Phase 5 D-14, RESEARCH Pattern 1).
+         The data-api-key is intentionally public — Snipcart's "public API key" is
+         browser-exposed by design (verified docs.snipcart.com/v3/setup/installation).
+         Test-mode key is checked in for local dev + deploy previews. The live-key
+         swap on launch is a single-edit change here, documented in Plan 08
+         owner-prep checklist.
+         Version pin: v3.7.1 (verified 2026-05-09 via cdn.snipcart.com 200 response;
+         re-verify on annual revisit per Pitfall 6 — older CDN versions can be retired). -->
+    <div hidden id="snipcart" data-api-key="ODA4NTViMTctZDJmYi00Y2FkLWJjOTktY2FmMjQ4MjdiMGIzNjM5MTQwMTc1Mzg0ODE4NzUw"></div>
+    <link rel="preconnect" href="https://app.snipcart.com" />
+    <link rel="preconnect" href="https://cdn.snipcart.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.css" />
+    <script async src="https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js"></script>
+    <script type="module" src="/src/index.js"></script>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

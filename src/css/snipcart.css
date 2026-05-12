@@ -1,0 +1,75 @@
+/* src/css/snipcart.css — Phase 5 cart-drawer dark-theme overrides.
+   SCOPE: cart drawer only (CONTEXT D-14). Selector .snipcart-cart targets the
+   drawer view; checkout (.snipcart-checkout) inherits Snipcart's default light
+   theme so dropdowns and informational banners remain readable on light backgrounds.
+   Variable names per docs.snipcart.com/v3/themes/default/reference (verified 2026-05-09).
+*/
+
+#snipcart .snipcart-cart {
+  /* ─── Global ─── */
+  --color-default: #f6f7f8;          /* ternary-light — body text inside the cart */
+  --color-alt: #94989c;              /* ternary-section-dark — secondary text (timestamps, sub-totals labels) */
+  --color-icon: #f6f7f8;             /* SVG icon fill */
+  --color-success: #22c55e;
+  --color-error: #f87171;
+  --color-info: #348bd8;             /* accent */
+  --bgColor-default: #1E3851;        /* ternary-dark — primary drawer surface */
+  --bgColor-alt: #102D44;            /* secondary-dark — header + summary fees block */
+  --bgColor-modal: #291c30;          /* primary-dark — overlay backdrop */
+  --bgColor-modalVeil: rgba(41, 28, 48, 0.85);
+
+  /* ─── Buttons (Primary = Checkout / Place Order in drawer) ─── */
+  --color-buttonPrimary: #ffffff;
+  --bgColor-buttonPrimary: #348bd8;             /* accent */
+  --borderColor-buttonPrimary: transparent;
+
+  --color-buttonPrimary-hover: #ffffff;
+  --bgColor-buttonPrimary-hover: #3c6eb1;       /* accent-highlight */
+  --borderColor-buttonPrimary-hover: transparent;
+
+  --color-buttonPrimary-active: #ffffff;
+  --bgColor-buttonPrimary-active: #3c6eb1;
+
+  --color-buttonPrimary-focus: #ffffff;
+  --bgColor-buttonPrimary-focus: #348bd8;
+  --shadow-buttonPrimary-focus: 0 0 0 2px rgba(52, 139, 216, 0.4);
+
+  --color-buttonPrimary-disabled: #f6f7f8;
+  --bgColor-buttonPrimary-disabled: #94989c;
+
+  /* ─── Buttons (Secondary = Continue shopping) ─── */
+  --color-buttonSecondary: #f6f7f8;
+  --bgColor-buttonSecondary: transparent;
+  --borderColor-buttonSecondary: #94989c;
+  --color-buttonSecondary-hover: #f6f7f8;
+  --bgColor-buttonSecondary-hover: #102D44;
+  --borderColor-buttonSecondary-hover: #94989c;
+
+  /* ─── Inputs (cart-side qty stepper, coupon code) ─── */
+  --color-input: #f6f7f8;
+  --bgColor-input: #291c30;
+  --borderColor-input: #94989c;
+  --color-inputLabel: #94989c;
+  --color-inputIcon: #f6f7f8;
+
+  /* ─── Links inside cart ─── */
+  --color-link: #348bd8;
+  --color-link-hover: #3c6eb1;
+
+  /* Font family — match the rest of the site. */
+  font-family: 'GeneralSans-Regular', sans-serif;
+}
+
+/* ─── Element-level overrides where CSS variables don't reach ─── */
+/* Snipcart's heading element doesn't use a variable for font-family; override directly. */
+#snipcart .snipcart-cart-header h1,
+#snipcart .snipcart-cart-header h2 {
+  font-family: 'Proxima Nova', 'GeneralSans-Regular', sans-serif;
+  font-weight: 900;
+}
+
+/* SVG icons that Snipcart inlines with hard-coded fills require !important to override. */
+#snipcart .snipcart__icon--blue,
+#snipcart .snipcart__icon--gray {
+  color: var(--color-default) !important;
+}

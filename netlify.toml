@@ -1,0 +1,18 @@
+[build]
+  command = "pnpm build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# SPA fallback for React Router. Processes after public/_redirects, so the
+# /materials -> /styles#materials 301 in _redirects continues to win for that
+# specific path; everything else gets the index.html rewrite.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

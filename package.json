@@ -2,29 +2,37 @@
   "name": "shapesmith-studio-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.0.0",
   "dependencies": {
     "@sanity/client": "^6.1.7",
+    "@sanity/image-url": "^2.1.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^10.12.16",
-    "postcss-cli": "^10.1.0",
     "react": "^18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha-v3": "^1.11.0",
+    "react-helmet-async": "^2.0.5",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.12.0",
-    "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
-    "styled-components": "^6.0.0-rc.3",
+    "resend": "^6.12.3",
+    "three": "^0.184.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start --openssl-legacy-provider",
-    "build": "react-scripts build --openssl-legacy-provider",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:css": "postcss src/css/tailwind.css -o src/css/main.css"
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "postbuild": "node scripts/generate-sitemap.cjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "eslintConfig": {
     "extends": [
@@ -45,11 +53,14 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/dom": "^9.3.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.10",
+    "jsdom": "^25.0.0",
     "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "vite": "^7.3.3",
+    "vitest": "^4.1.5"
   }
 }

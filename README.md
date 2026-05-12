@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Shapesmith Studio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The web presence for **Shapesmith Studio** — a one-person creative studio
+offering laser cutting and 3D printing services to local hobbyists and
+small businesses. The site shows what the studio can make, lets people
+see materials and example styles, and routes them into a contact / quote
+flow. It is a marketing surface and lead-generation tool, not a
+transactional storefront yet.
 
-## Available Scripts
+## Tech stack
 
-In the project directory, you can run:
+Create React App 5 + React 18 + JavaScript (no TypeScript). Tailwind
+CSS for styling, Sanity for CMS-backed content (anonymous CDN reads),
+and Netlify for hosting + Forms. Per-route SEO + sitemap come from
+`react-helmet-async` and a postbuild Node script. The build flag
+`--openssl-legacy-provider` is the implicit Node-version pin for
+Node 17+; Node 20 LTS + pnpm 9 are the committed runtime via `.nvmrc`
+and `package.json#packageManager`.
 
-### `npm start`
+## Quickstart
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Prereqs:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node 20 (use `nvm use` if you have nvm — `.nvmrc` selects 20)
+- pnpm 9 (`corepack enable pnpm` if needed)
 
-### `npm test`
+Local dev:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+pnpm install
+pnpm start            # dev server on http://localhost:3000
+```
 
-### `npm run build`
+Production build:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+pnpm build            # outputs build/ — also writes build/sitemap.xml via postbuild
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Run the smoke test:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+pnpm test
+```
 
-### `npm run eject`
+## Content updates (Sanity Studio)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Owner content lives in Sanity, not in this repo. Edits propagate to
+production via Sanity's CDN within ~1 minute — no app deploy required.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Schemas in use (see
+`.planning/phases/02-bundle-1-relaunch-3d-printing-spruce-content-seo-shop-stub/02-SCHEMA-SPEC.md`
+for the canonical spec):
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **`studio-info`** (singleton) — studio-wide facts: serviceArea,
+  pickupAvailability, `responseTimePromise` (rendered on the contact
+  page), address, social links, openingHours, makesOffer (services
+  list), and the homepage `LocalBusiness` JSON-LD field bundle.
+- **`laser-style`** / **`print-style`** — one document per service
+  style; mirror schemas covering title, description, slug, listImage,
+  detailImages, preferredMaterials, considerations, turnaround,
+  wontMakeScope (portable text), and a per-doc `seo` block
+  (`metaTitle`, `metaDescription`, `ogImage`).
+- **`material`** — material entries with a `processes` reference array
+  tagging each material with the laser operations it applies to, and a
+  `services` string array (`laser`, `print`, or both) for the in-page
+  Materials filter.
+- **`faq`** — per-service FAQ items (5–8 per service is the target);
+  fields: question, answer (portable text), service (reference array),
+  order.
+- **`process`** — supporting enum doc with two entries: `key: "laser"`
+  and `key: "print"`. Drives the references on `material.processes` and
+  `faq.service`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Common content updates:
 
-## Learn More
+- **Add a new style.** Create a new `laser-style` or `print-style`
+  document, fill in title + slug + description + images, optionally
+  fill the `seo` block. Visible immediately on `/styles` or
+  `/3d-printing`.
+- **Update the response-time promise.** Edit the singleton `studio-info`
+  document. The promise displays on the contact page beneath the
+  submit button.
+- **Add an FAQ entry.** Create a new `faq` document, tag it with the
+  `process` reference(s) for the relevant service(s).
+- **Update studio facts (address, social links, opening hours).** Edit
+  the singleton `studio-info` document. The homepage `LocalBusiness`
+  JSON-LD picks up the change on the next page load.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deploy
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Hosted on Netlify. `netlify.toml` (committed) drives the build:
 
-### Code Splitting
+- `pnpm build` runs the CRA build to `build/`.
+- `postbuild` runs `node scripts/generate-sitemap.cjs`, writing
+  `build/sitemap.xml` from a static route list + a Sanity slug query.
+- Netlify scans `build/index.html` for `<form name="..." netlify ...>`
+  blocks at deploy time; both `contact-form` and `shop-notify` are
+  declared via the hidden-form prerender in `public/index.html`.
+- `public/_redirects` ships a real 301 from `/materials` to
+  `/styles#materials` for direct hits + crawlers; React Router's
+  `<Navigate>` handles SPA hops.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Form submissions land in the Netlify Forms dashboard.
 
-### Analyzing the Bundle Size
+## Project context
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `.planning/PROJECT.md` — project core value, constraints, and
+  decision log.
+- `.planning/ROADMAP.md` — phase plan.
+- `.planning/REQUIREMENTS.md` — requirement-by-requirement breakdown.

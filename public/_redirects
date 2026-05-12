@@ -1,0 +1,7 @@
+# public/_redirects — Netlify reads this verbatim at deploy time.
+# /materials is replaced by an in-page section on /styles per CONTEXT.md D-17.
+# Both this file AND the React Router <Navigate> redirect in App.js are needed:
+#   - This file: real 301 status code for direct hits + crawlers + link previews
+#     so search engines update their index. Open-redirect risk is nil — target is internal.
+#   - App.js Navigate: client-side hops within the SPA after JS loads.
+/materials  /styles#materials  301

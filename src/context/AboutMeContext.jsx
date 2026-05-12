@@ -1,40 +1,32 @@
-import { useState, useEffect, createContext } from 'react';
-import sanityClient from '../utilities/sanityClient';
-// import { aboutMeData } from '../data/aboutMeData';
+import { createContext } from 'react';
+import useSanityQuery from '../hooks/useSanityQuery';
 
 const AboutMeContext = createContext();
 
 export const AboutMeProvider = ({ children }) => {
-	const [aboutMe, setAboutMe] = useState();
+	const { data } = useSanityQuery(
+		`*[_type == "profile"]{
+			_id,
+			title,
+			description,
+			images[]{
+				altText,
+				asset->{
+					_id,
+					url,
+				},
+			}
+		  }
+		  `
+	);
 
-	useEffect(() => {
-		sanityClient.fetch(
-			`*[_type == "profile"]{
-				_id,
-				title,
-				description,
-				images[]{
-					altText,
-					asset->{
-						_id,
-						url,
-					},
-				}
-			  }
-			  `
-		)
-		.then((data) => {
-			setAboutMe(data[0]);
-		})
-		.catch(console.error);
-	}, []);
-
+	const aboutMe = data?.[0];
 
 	return (
 		<AboutMeContext.Provider
 			value={{
 				aboutMe,
-				setAboutMe,
+				setAboutMe: () => {}, // legacy no-op
 			}}
 		>
 			{children}

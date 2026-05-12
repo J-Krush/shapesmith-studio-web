@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import { FiScissors, FiZap } from 'react-icons/fi';
+import SanityImage from '../components/shared/SanityImage';
 
+// `image` is now a Sanity source object (e.g., `{ altText, asset: { _id, url, altText } }`)
+// — NOT a string URL — so SanityImage can render responsive srcSet + Placeholder fallback.
+// Callers must pass the whole `listImage` object, not `listImage.asset.url`.
 const MaterialSingle = ({ title, image, description, altImages, materialThickness, processes, disclaimer }) => {
 
 	return (
@@ -16,10 +20,13 @@ const MaterialSingle = ({ title, image, description, altImages, materialThicknes
 
 		<div className="block sm:flex sm:gap-10 mt-10 sm:mt-20">
 			<div className="w-full sm:w-1/4 mb-7 sm:mb-0">
-				<img
-					src={image}
-					className="rounded-xl border-none"
-					alt={title}
+				<SanityImage
+					source={image}
+					alt={image?.altText ?? title}
+					sizes="(max-width: 640px) 100vw, 25vw"
+					loading="lazy"
+					className="rounded-xl border-none w-full"
+					placeholderCaption={`${title} photo coming soon`}
 				/>
 			</div>
 
@@ -59,7 +66,7 @@ const MaterialSingle = ({ title, image, description, altImages, materialThicknes
 							alt={title}
 						/>
 					</div>
-					
+
 				</div>
 				<div className="px-4 py-6">
 						<p className="font-display font-medium text-xl md:text-xl text-ternary-dark dark:text-ternary-light mb-2">
