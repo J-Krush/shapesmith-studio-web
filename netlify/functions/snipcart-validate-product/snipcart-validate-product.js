@@ -158,19 +158,10 @@ exports.handler = async (event) => {
 		// (RESEARCH Pitfall 5; CONTEXT D-06 accepted trade-off).
 		// Primary guard remains data-item-max-quantity on the AddToCartButton.
 		stock: result.stockQuantity,
-		// Dimensions — Snipcart REQUIRES weight to be nested inside a `dimensions`
-		// object, NOT returned at top level. When data-item-weight is set on the
-		// cart button, Snipcart compares the cart's dimension-set vs the JSON
-		// response's dimension-set; a top-level `weight` field reads as "no
-		// dimensions object present" and triggers an InvalidDimensions failure,
-		// surfaced opaquely as a 500 with empty body at
-		// app.snipcart.com/api/cart/<id>/pay during checkout. Confirmed by
-		// Snipcart staff in support thread #454:
-		// https://support.snipcart.com/t/adding-data-item-weight-causes-product-crawling-error/454
-		// Length/width/height are independent attributes (used for volumetric
-		// shipping); the studio doesn't track package dimensions, so weight-only
-		// is correct here.
-		dimensions: { weight: result.weight ?? 0 },
+		// Weight echo — AddToCartButton emits data-item-weight from the same
+		// Sanity field; mismatch here would fail Snipcart's optional-field
+		// comparison and reject the order at validation time.
+		weight: result.weight ?? 0,
 	};
 	if (result.image) {
 		responseBody.image = result.image;
