@@ -99,9 +99,11 @@ exports.handler = async (event) => {
 	try {
 		await Promise.race([
 			resend.emails.send({
-				// Verified sender domain required (Pitfall 8 + owner-prep checkpoint).
+				// Sender uses the mail.shapesmith.studio transactional subdomain to
+				// avoid an SPF conflict with the Proton-managed apex shapesmith.studio
+				// (apex is reserved for Proton-handled inbound mail — owner inbox).
 				// Envelope-from is hardcoded — visitor input only enters reply_to.
-				from: 'Shapesmith Studio <quotes@shapesmith.studio>',
+				from: 'Shapesmith Studio <quotes@mail.shapesmith.studio>',
 				to: ['jkrush@shapesmith.studio'],
 				reply_to: payload.email,
 				subject: `[Quote] ${payload.service} — ${safeName}`,
