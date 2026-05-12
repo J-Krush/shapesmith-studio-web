@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 5 paused at Plan 05-08 UAT checkpoint — code complete, owner-prep + deploy-preview UAT pending
-last_updated: "2026-05-12T13:20:00.000Z"
-last_activity: 2026-05-12 - Completed quick task 260512-cur: Hide WIP entry points (Shop, 3D Printing, Get a Quote nav, 3D Printing home banner card)
+last_updated: "2026-05-12T17:45:00.000Z"
+last_activity: 2026-05-12 - Completed quick task 260512-j2a: Fix Snipcart webhook 401 by adding HTTP Basic auth to validation API call
 progress:
   total_phases: 5
   completed_phases: 3
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 Phase: 05 (pre-made-goods-shop) — EXECUTING (paused at UAT)
 Plan: 8 of 8 (all code shipped; owner-prep + UAT pending)
 Status: Paused at Plan 05-08 UAT human-verify checkpoint
-Last activity: 2026-05-12 - Completed quick task 260512-cur: Hide WIP entry points (Shop, 3D Printing, Get a Quote nav, 3D Printing home banner card)
+Last activity: 2026-05-12 - Completed quick task 260512-j2a: Fix Snipcart webhook 401 by adding HTTP Basic auth to validation API call
 
 **Resume:** Complete 05-OWNER-PREP-CHECKLIST.md sections A–E (Sanity schema apply + Snipcart account/key/webhook + Resend env-var verify), deploy preview, walk through 05-UAT.md tests 1–5 (incl. §4e price-tampering negative test). Then re-run `/gsd-execute-phase 5` with UAT results — orchestrator resumes a fresh executor to write 05-08-SUMMARY.md and finalize ROADMAP/REQUIREMENTS.
 
@@ -126,6 +126,8 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260512-cur | Hide WIP entry points (Shop, 3D Printing, Get a Quote nav, 3D Printing home banner card) | 2026-05-12 | 1266381 | [260512-cur-hide-wip-entry-points-shop-3d-printing-g](./quick/260512-cur-hide-wip-entry-points-shop-3d-printing-g/) |
+| 260512-fkf | Fix Snipcart InvalidDimensions: nest weight under dimensions object in validation response | 2026-05-12 | 479dedc | (squashed via PR; superseded by fix on master) |
+| 260512-j2a | Fix Snipcart webhook 401 by adding HTTP Basic auth (secret API key) to validation API call | 2026-05-12 | 79d0762 | [260512-j2a-fix-snipcart-webhook-401-by-adding-http-](./quick/260512-j2a-fix-snipcart-webhook-401-by-adding-http-/) |
 
 ## Deferred Items
 

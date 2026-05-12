@@ -31,6 +31,13 @@
 // Env vars (server-only):
 //   - RESEND_API_KEY  — Existing Phase 3 env var, reused. Verified present in
 //                       Plan 08 owner-prep before deploy.
+//   - SNIPCART_SECRET_API_KEY  — Secret API key from Snipcart Dashboard
+//                                (Account → API Keys). Used as HTTP Basic-auth
+//                                username (empty password) when calling
+//                                Snipcart's request-validation endpoint.
+//                                Snipcart support thread #169 confirms this
+//                                endpoint requires Basic auth (the public
+//                                Snipcart docs incorrectly imply it's open).
 //   - URL             — Netlify-injected per-deploy primary URL (read indirectly
 //                       via the dashboard link; not used here directly).
 //
@@ -76,9 +83,27 @@ exports.handler = async (event) => {
 	if (!token) {
 		return { statusCode: 401, body: 'Missing webhook token' };
 	}
+
+	// Snipcart's request-validation endpoint requires HTTP Basic auth — the
+	// secret API key is the username, password is empty. Confirmed via Snipcart
+	// support thread #169 (https://support.snipcart.com/t/webhook-request-validation-fails/169).
+	// Without this, the endpoint returns 401, which our handler would interpret
+	// as a forged token and reject every legitimate webhook delivery.
+	//
+	// Fail-loud on missing config: return 502 with a body distinct from the
+	// forged-token 401 ('Invalid webhook token') so the owner can grep Netlify
+	// logs and distinguish missing-config from forged-payload.
+	const snipcartSecretKey = process.env.SNIPCART_SECRET_API_KEY;
+	if (!snipcartSecretKey) {
+		console.error('SNIPCART_SECRET_API_KEY not configured');
+		return { statusCode: 502, body: 'Webhook validation not configured' };
+	}
+	const basicAuth = Buffer.from(`${snipcartSecretKey}:`).toString('base64');
+
 	try {
 		const verifyRes = await fetchWithTimeout(
 			`https://app.snipcart.com/api/requestvalidation/${encodeURIComponent(token)}`,
+			{ headers: { Authorization: `Basic ${basicAuth}`, Accept: 'application/json' } },
 		);
 		if (!verifyRes.ok) {
 			// Log the status only — never the token (information disclosure
