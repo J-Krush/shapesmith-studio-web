@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 5 paused at Plan 05-08 UAT checkpoint — code complete, owner-prep + deploy-preview UAT pending
-last_updated: "2026-05-09T15:18:00.000Z"
-last_activity: 2026-05-09 -- Phase 05 plans 01-07 + 08 docs shipped; UAT pending owner action
+last_updated: "2026-05-12T13:20:00.000Z"
+last_activity: 2026-05-12 - Completed quick task 260512-cur: Hide WIP entry points (Shop, 3D Printing, Get a Quote nav, 3D Printing home banner card)
 progress:
   total_phases: 5
   completed_phases: 3
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 Phase: 05 (pre-made-goods-shop) — EXECUTING (paused at UAT)
 Plan: 8 of 8 (all code shipped; owner-prep + UAT pending)
 Status: Paused at Plan 05-08 UAT human-verify checkpoint
-Last activity: 2026-05-09 -- Phase 05 plans 01-07 + 08 docs shipped; UAT pending owner action
+Last activity: 2026-05-12 - Completed quick task 260512-cur: Hide WIP entry points (Shop, 3D Printing, Get a Quote nav, 3D Printing home banner card)
 
 **Resume:** Complete 05-OWNER-PREP-CHECKLIST.md sections A–E (Sanity schema apply + Snipcart account/key/webhook + Resend env-var verify), deploy preview, walk through 05-UAT.md tests 1–5 (incl. §4e price-tampering negative test). Then re-run `/gsd-execute-phase 5` with UAT results — orchestrator resumes a fresh executor to write 05-08-SUMMARY.md and finalize ROADMAP/REQUIREMENTS.
 
@@ -120,6 +120,12 @@ None yet.
 - ✅ `material.processes` shape confirmed via Plan 02-01 Task 4 checkpoint (laser-operation values; NOT service tags). Adopting new `material.services` field — see Decisions above.
 - Schedule a real-photo session for the new H2D so Phase 2 doesn't ship with placeholder blocks for hero imagery (still pending; not blocking — `Placeholder` component degrades gracefully per D-11)
 - Owner applies the updated schemas in `02-SCHEMA-SPEC.md` to Sanity Studio per the §8 rollout checklist before Wave 2 components render against real Sanity data (loading/empty states render fine while owner is mid-rollout — no execution ordering constraint)
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260512-cur | Hide WIP entry points (Shop, 3D Printing, Get a Quote nav, 3D Printing home banner card) | 2026-05-12 | 1266381 | [260512-cur-hide-wip-entry-points-shop-3d-printing-g](./quick/260512-cur-hide-wip-entry-points-shop-3d-printing-g/) |
 
 ## Deferred Items
 
