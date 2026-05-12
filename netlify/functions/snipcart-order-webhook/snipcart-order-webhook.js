@@ -136,8 +136,20 @@ exports.handler = async (event) => {
 	}
 
 	// 3. Send custom-formatted owner email via Resend.
+	//
+	// Two-path error handling — Resend SDK v6 (`resend ^6.12.3`) does NOT throw on
+	// API failure. `resend.emails.send(...)` resolves with `{ data, error }`:
+	//   - Success:     { data: { id }, error: null }
+	//   - API failure: { data: null,   error: { name, message } }  ← caught below
+	//                  by inspecting `result?.error` AFTER the await.
+	//   - Thrown:      Promise.race timeout, missing SDK module, network reset, etc.
+	//                  ← caught by the existing try/catch as before.
+	//
+	// Both paths return 200 — PATTERNS.md deviation 9: returning non-2xx would
+	// trigger Snipcart's retry storm. We log explicitly so the owner can grep
+	// Netlify Function logs and tell the three outcomes apart.
 	try {
-		await Promise.race([
+		const result = await Promise.race([
 			resend.emails.send({
 				// Verified sender domain (Phase 3 owner-prep). Envelope-from is
 				// hardcoded so visitor input never enters the From header.
@@ -153,6 +165,32 @@ exports.handler = async (event) => {
 				setTimeout(() => reject(new Error('Resend timeout')), FETCH_TIMEOUT_MS),
 			),
 		]);
+
+		// Resend SDK v6 resolved-error path: the await did NOT throw, but the API
+		// returned an error object (invalid API key, unverified sender domain,
+		// recipient rejected, rate limit, etc.). The current contract is to log +
+		// return 200 — same shape as the thrown-exception path below — so Snipcart
+		// does not retry.
+		if (result?.error) {
+			console.error(
+				'Resend API returned error:',
+				result.error?.message || result.error?.name || 'unknown',
+			);
+			console.error(
+				'Order received but custom email failed — see Snipcart dashboard:',
+				payload.content?.invoiceNumber ?? 'unknown',
+			);
+			return { statusCode: 200, body: 'OK (email send failed; logged)' };
+		}
+
+		// Success-path traceability: log the message id + invoice so the owner can
+		// correlate a delivered Resend email with the corresponding Snipcart order.
+		console.log(
+			'Resend send accepted, message id:',
+			result?.data?.id ?? 'unknown',
+			'invoice:',
+			payload.content?.invoiceNumber ?? 'unknown',
+		);
 	} catch (e) {
 		// Critical deviation from submit-quote.js: this Function returns 200 even
 		// when Resend fails. Snipcart retries on non-2xx responses, which would
