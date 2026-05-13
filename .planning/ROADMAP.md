@@ -17,6 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 3: Auto-Pricing Quote Tool** - File upload → ballpark estimate → manual confirmation gate
 - [ ] **Phase 4: Vite Migration** - Exit Create React App between revenue features, no user-visible change
 - [ ] **Phase 5: Pre-Made Goods Shop** - Catalog + checkout for finished pieces; platform decided in discovery
+- [ ] **Phase 6: Polish — nav consolidation, 3D printing filaments, material-aware estimator** - Polish pass before marketing rollout; nav restructure, filament catalog with cost tracking, quote tool → estimator with price ranges
 
 ## Phase Details
 
@@ -190,6 +191,16 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Auto-Pricing Quote Tool | 3/4 | In Progress |  |
 | 4. Vite Migration | 5/6 | In Progress |  |
 | 5. Pre-Made Goods Shop | 0/8 | Not started | - |
+
+### Phase 6: Polish: nav consolidation, 3D printing filaments, and material-aware estimator
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 5
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 6 to break down)
 
 ---
 *Roadmap created: 2026-05-02*
